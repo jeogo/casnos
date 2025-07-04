@@ -14,7 +14,6 @@ export interface VideoPlayerConfig {
 export class VideoPlayer {
   private static instance: VideoPlayer
   private config: VideoPlayerConfig
-  private currentVideo: HTMLVideoElement | null = null
 
   private constructor() {
     this.config = {
@@ -76,7 +75,6 @@ export class VideoPlayer {
 
       // إنشاء عنصر فيديو جديد
       const video = this.createVideoElement()
-      this.currentVideo = video
 
       // إعدادات الفيديو: تشغيل تلقائي، حلقة لا نهائية، مكتوم
       video.src = videoUrl
@@ -129,7 +127,6 @@ export class VideoPlayer {
     if (existingVideo) {
       existingVideo.remove()
     }
-    this.currentVideo = null
   }
 
   /**
