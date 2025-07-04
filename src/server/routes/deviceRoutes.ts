@@ -8,7 +8,6 @@ import {
   createDevice,
   updateDevice,
   updateDeviceStatus,
-  heartbeat,
   deleteDevice,
   getAllDevicePrinters,
   getDevicePrintersByDevice,
@@ -29,7 +28,6 @@ router.post('/', createDevice)
 router.post('/register', createDevice) // Add register endpoint that uses createDevice
 router.put('/:id', updateDevice)
 router.patch('/:deviceId/status', updateDeviceStatus)
-router.post('/:deviceId/heartbeat', heartbeat)
 router.delete('/:id', deleteDevice)
 
 // Device Printer Management Routes

@@ -1,16 +1,12 @@
 import { Request, Response } from 'express'
-import { deviceOperations, devicePrinterOperations } from '../db/database'
+import { deviceOperations, devicePrinterOperations } from '../db/operations'
 // logger removed
 import {
   CreateDeviceRequest,
   UpdateDeviceRequest,
-  CreateDevicePrinterRequest,
-  UpdateDevicePrinterRequest,
-  Device,
-  DevicePrinter,
   DatabaseDevice,
   DatabaseDevicePrinter
-} from '../types'
+} from '../types/device'
 
 // Device Management Controllers
 
@@ -130,12 +126,12 @@ export const getOnlineDevices = async (req: Request, res: Response): Promise<voi
 export const getDevicesByType = async (req: Request, res: Response): Promise<void> => {
   try {
     const { type } = req.params
-    const validTypes = ['display', 'customer', 'employee']
+    const validTypes = ['display', 'customer', 'window']
 
     if (!type || !validTypes.includes(type)) {
       res.status(400).json({
         success: false,
-        message: 'Invalid device type. Must be one of: display, customer, employee'
+        message: 'Invalid device type. Must be one of: display, customer, window'
       })
       return
     }
@@ -184,22 +180,15 @@ export const createDevice = async (req: Request, res: Response): Promise<void> =
       return
     }
 
-    // Prepare device data, omitting undefined optional fields
+    // Prepare device data
     const deviceCreateData: DatabaseDevice = {
       device_id: deviceData.device_id,
       name: deviceData.name,
       ip_address: deviceData.ip_address,
-      port: deviceData.port || 3001,
       device_type: deviceData.device_type,
-      status: 'offline' // Default status
-    }
-
-    if (deviceData.capabilities) {
-      deviceCreateData.capabilities = JSON.stringify(deviceData.capabilities)
-    }
-
-    if (deviceData.metadata) {
-      deviceCreateData.metadata = JSON.stringify(deviceData.metadata)
+      status: 'offline', // Default status
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
     }
 
     const device = deviceOperations.create(deviceCreateData)
@@ -255,11 +244,8 @@ export const updateDevice = async (req: Request, res: Response): Promise<void> =
 
     if (updateData.name !== undefined) deviceUpdateData.name = updateData.name
     if (updateData.ip_address !== undefined) deviceUpdateData.ip_address = updateData.ip_address
-    if (updateData.port !== undefined) deviceUpdateData.port = updateData.port
     if (updateData.device_type !== undefined) deviceUpdateData.device_type = updateData.device_type
     if (updateData.status !== undefined) deviceUpdateData.status = updateData.status
-    if (updateData.capabilities !== undefined) deviceUpdateData.capabilities = JSON.stringify(updateData.capabilities)
-    if (updateData.metadata !== undefined) deviceUpdateData.metadata = JSON.stringify(updateData.metadata)
 
     const updatedDevice = deviceOperations.update(deviceId, deviceUpdateData)
 
@@ -326,41 +312,6 @@ export const updateDeviceStatus = async (req: Request, res: Response): Promise<v
     res.status(500).json({
       success: false,
       message: 'Failed to update device status'
-    })
-  }
-}
-
-export const heartbeat = async (req: Request, res: Response): Promise<void> => {
-  try {
-    const { deviceId } = req.params
-
-    if (!deviceId) {
-      res.status(400).json({
-        success: false,
-        message: 'Device ID is required'
-      })
-      return
-    }
-
-    const updatedDevice = deviceOperations.updateLastSeen(deviceId)
-    if (!updatedDevice) {
-      res.status(404).json({
-        success: false,
-        message: 'Device not found'
-      })
-      return
-    }
-
-    res.json({
-      success: true,
-      data: { last_seen: updatedDevice.last_seen },
-      message: 'Heartbeat received'
-    })
-  } catch (error) {
-    // logger removed
-    res.status(500).json({
-      success: false,
-      message: 'Failed to process heartbeat'
     })
   }
 }
@@ -435,12 +386,8 @@ export const getDevicePrintersByDevice = async (req: Request, res: Response): Pr
       res.status(400).json({ success: false, message: 'Device ID is required' })
       return
     }
-    const deviceIdNum = parseInt(deviceId, 10)
-    if (isNaN(deviceIdNum)) {
-      res.status(400).json({ success: false, message: 'Invalid device ID' })
-      return
-    }
-    const printers = devicePrinterOperations.getByDeviceId(deviceIdNum)
+
+    const printers = devicePrinterOperations.getByDeviceId(deviceId)
     res.json({ success: true, data: printers, message: 'Device printers retrieved successfully' })
   } catch (error) {
     // logger removed
@@ -455,40 +402,46 @@ export const createDevicePrinter = async (req: Request, res: Response): Promise<
       res.status(400).json({ success: false, message: 'Device ID is required' })
       return
     }
-    const deviceIdNum = parseInt(deviceId, 10)
+
     const printerData = req.body
-    if (isNaN(deviceIdNum)) {
-      res.status(400).json({ success: false, message: 'Invalid device ID' })
-      return
-    }
+
     // Validate required fields
     if (!printerData.printer_id || !printerData.printer_name) {
       res.status(400).json({ success: false, message: 'Missing required fields: printer_id, printer_name' })
       return
     }
-    // Check if device exists
-    const device = deviceOperations.getById(deviceIdNum)
+
+    // Check if device exists by device_id (string)
+    const device = deviceOperations.getByDeviceId(deviceId)
     if (!device) {
       res.status(404).json({ success: false, message: 'Device not found' })
       return
     }
+
     // Check if printer already exists for this device
     const existingPrinter = devicePrinterOperations.getByPrinterId(printerData.printer_id)
     if (existingPrinter) {
       res.status(409).json({ success: false, message: 'Printer with this printer_id already exists' })
       return
     }
-    // Prepare printer data (only allowed fields)
-    const printerCreateData = {
-      device_id: deviceIdNum,
+
+    // Prepare printer data (only allowed fields that exist in schema)
+    const printerCreateData: DatabaseDevicePrinter = {
+      device_id: deviceId, // Use string device_id
       printer_id: printerData.printer_id,
-      printer_name: printerData.printer_name
+      printer_name: printerData.printer_name,
+      is_default: printerData.is_default || false
     }
+
     const printer = devicePrinterOperations.create(printerCreateData)
     res.status(201).json({ success: true, data: printer, message: 'Device printer created successfully' })
   } catch (error) {
-    // logger removed
-    res.status(500).json({ success: false, message: 'Failed to create device printer' })
+    console.error('Device printer creation error:', error)
+    res.status(500).json({
+      success: false,
+      message: 'Failed to create device printer',
+      error: error instanceof Error ? error.message : 'Unknown error'
+    })
   }
 }
 

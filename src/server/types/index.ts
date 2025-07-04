@@ -7,45 +7,26 @@ export interface Ticket {
   id: number
   ticket_number: string
   service_id: number
-  service_name: string
   status: 'pending' | 'called' | 'served'
   print_status: 'pending' | 'printing' | 'printed' | 'print_failed'
   created_at: string
   called_at: string | null
-  window_label: string | null
-  printer_id: string | null
-  target_device: string | null
+  window_id?: number
   position?: number
 }
 
 export interface Window {
   id: number
-  label: string
   active: boolean
-}
-
-export interface Employee {
-  id: number
-  window_number: string
-  device_id?: string
-  service_id: number | null
-  service_name: string | null
-  is_active: boolean
-  created_at: string
-  updated_at: string
 }
 
 export interface CreateTicketRequest {
   service_id: number
-  printer_id?: string
-  target_device?: string
 }
 
 // New interface for network printing
 export interface CreateNetworkPrintTicketRequest {
   service_id: number
-  printer_id: string
-  target_device: string
   ticketData: {
     service_name: string
     company_name: string
@@ -56,7 +37,7 @@ export interface CreateNetworkPrintTicketRequest {
 
 export interface CallTicketRequest {
   ticket_id: number
-  window_label: string
+  window_id: number
 }
 
 export interface CreateServiceRequest {
@@ -64,13 +45,9 @@ export interface CreateServiceRequest {
 }
 
 export interface CreateWindowRequest {
-  label: string
   active?: boolean
 }
 
-export interface AssignWindowServicesRequest {
-  service_ids: number[]
-}
 
 export interface DatabaseService {
   name: string
@@ -78,24 +55,13 @@ export interface DatabaseService {
 
 export interface DatabaseTicket {
   service_id: number
-  service_name: string
-  status: 'pending' | 'called' | 'served'
+  status?: 'pending' | 'called' | 'served'
   print_status?: 'pending' | 'printing' | 'printed' | 'print_failed'
-  printer_id?: string | null
-  target_device?: string | null
+  window_id?: number
 }
 
 export interface DatabaseWindow {
-  label: string
-  active?: boolean
-}
-
-export interface DatabaseEmployee {
-  window_number: string
-  device_id?: string
-  service_id?: number | null
-  service_name?: string | null
-  is_active?: boolean
+  active?: boolean // Using shorter name to match DB schema
 }
 
 // Re-export device types for convenience

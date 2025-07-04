@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import CustomerScreen from './screens/CustomerScreen';
 import DisplayScreen from './screens/DisplayScreen';
-import EmployeeScreen from './screens/EmployeeScreen';
+import WindowScreen from './screens/WindowScreen';
 import AdminScreen from './screens/AdminScreen';
 
 function App(): React.JSX.Element {
-  const [activeScreen, setActiveScreen] = useState<'customer' | 'display' | 'employee' | 'admin'>('customer');
+  const [activeScreen, setActiveScreen] = useState<'customer' | 'display' | 'window' | 'admin'>('customer');
 
   useEffect(() => {
     // Check URL parameters to determine which screen to show
@@ -14,8 +14,8 @@ function App(): React.JSX.Element {
 
     if (screenParam === 'display') {
       setActiveScreen('display');
-    } else if (screenParam === 'employee') {
-      setActiveScreen('employee');
+    } else if (screenParam === 'window' || screenParam === 'employee') {
+      setActiveScreen('window');
     } else if (screenParam === 'admin') {
       setActiveScreen('admin');
     } else {
@@ -28,7 +28,7 @@ function App(): React.JSX.Element {
       {/* Show the appropriate screen based on URL parameters */}
       {activeScreen === 'customer' && <CustomerScreen />}
       {activeScreen === 'display' && <DisplayScreen />}
-      {activeScreen === 'employee' && <EmployeeScreen />}
+      {activeScreen === 'window' && <WindowScreen />}
       {activeScreen === 'admin' && <AdminScreen />}
     </div>
   );

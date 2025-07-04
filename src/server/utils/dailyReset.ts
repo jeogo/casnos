@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { getDatabase } from '../db/database';
+import { getDatabase } from '../db/connection';
 // logger removed
 
 /**

@@ -16,11 +16,11 @@ import {
   focusDisplayWindow
 } from './displayWindow'
 import {
-  createEmployeeWindow,
-  getEmployeeWindow,
-  closeEmployeeWindow,
-  focusEmployeeWindow
-} from './employeeWindow'
+  createWindowWindow,
+  getWindowWindow,
+  closeWindowWindow,
+  focusWindowWindow
+} from './windowWindow'
 import {
   createAdminWindow,
   getAdminWindow,
@@ -28,7 +28,7 @@ import {
   focusAdminWindow
 } from './adminWindow'
 
-export type WindowType = 'customer' | 'display' | 'employee' | 'admin'
+export type WindowType = 'customer' | 'display' | 'window' | 'admin'
 
 /**
  * إنشاء جميع النوافذ
@@ -40,7 +40,7 @@ export function createAllWindows(): void {
   // إنشاء النوافذ الأربع
   createCustomerWindow()
   createDisplayWindow()
-  createEmployeeWindow()
+  createWindowWindow()
   createAdminWindow()
 
   console.log('[WINDOW-MANAGER] ✅ All windows created successfully')
@@ -56,8 +56,8 @@ export function getWindow(type: WindowType): BrowserWindow | null {
       return getCustomerWindow()
     case 'display':
       return getDisplayWindow()
-    case 'employee':
-      return getEmployeeWindow()
+    case 'window':
+      return getWindowWindow()
     case 'admin':
       return getAdminWindow()
     default:
@@ -78,8 +78,8 @@ export function closeWindow(type: WindowType): void {
     case 'display':
       closeDisplayWindow()
       break
-    case 'employee':
-      closeEmployeeWindow()
+    case 'window':
+      closeWindowWindow()
       break
     case 'admin':
       closeAdminWindow()
@@ -101,8 +101,8 @@ export function focusWindow(type: WindowType): void {
     case 'display':
       focusDisplayWindow()
       break
-    case 'employee':
-      focusEmployeeWindow()
+    case 'window':
+      focusWindowWindow()
       break
     case 'admin':
       focusAdminWindow()
@@ -121,7 +121,7 @@ export function closeAllWindows(): void {
 
   closeCustomerWindow()
   closeDisplayWindow()
-  closeEmployeeWindow()
+  closeWindowWindow()
   closeAdminWindow()
 
   console.log('[WINDOW-MANAGER] ✅ All windows closed')
@@ -132,7 +132,7 @@ export function closeAllWindows(): void {
  * Check if any windows are open
  */
 export function hasOpenWindows(): boolean {
-  return !!(getCustomerWindow() || getDisplayWindow() || getEmployeeWindow() || getAdminWindow())
+  return !!(getCustomerWindow() || getDisplayWindow() || getWindowWindow() || getAdminWindow())
 }
 
 /**
@@ -143,7 +143,7 @@ export function getOpenWindowsCount(): number {
   let count = 0
   if (getCustomerWindow()) count++
   if (getDisplayWindow()) count++
-  if (getEmployeeWindow()) count++
+  if (getWindowWindow()) count++
   if (getAdminWindow()) count++
   return count
 }
@@ -157,7 +157,7 @@ export function getOpenWindowTypes(): WindowType[] {
 
   if (getCustomerWindow()) openTypes.push('customer')
   if (getDisplayWindow()) openTypes.push('display')
-  if (getEmployeeWindow()) openTypes.push('employee')
+  if (getWindowWindow()) openTypes.push('window')
   if (getAdminWindow()) openTypes.push('admin')
 
   return openTypes
@@ -186,8 +186,8 @@ export function createOptimizedSingleWindow(type: WindowType): BrowserWindow | n
     case 'display':
       window = createDisplayWindow()
       break
-    case 'employee':
-      window = createEmployeeWindow()
+    case 'window':
+      window = createWindowWindow()
       break
     case 'admin':
       window = createAdminWindow()
@@ -219,8 +219,8 @@ export function createSingleWindow(type: WindowType): BrowserWindow | null {
       return createCustomerWindow()
     case 'display':
       return createDisplayWindow()
-    case 'employee':
-      return createEmployeeWindow()
+    case 'window':
+      return createWindowWindow()
     case 'admin':
       return createAdminWindow()
     default:

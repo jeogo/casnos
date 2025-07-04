@@ -32,6 +32,7 @@ export class AudioService {
    */
   private checkVoiceFiles(): void {
     const requiredFiles = [
+      'ting.mp3',
       'ticket.mp3',
       'please_go_to.mp3',
       'number_1.mp3',
@@ -95,6 +96,9 @@ export class AudioService {
    */
   private buildAnnouncementSequence(ticketNumber: string, windowNumber: string): string[] {
     const sequence: string[] = []
+
+    // 🔔 صوت التنبيه أولاً
+    sequence.push('ting.mp3')
 
     // "التذكرة"
     sequence.push('ticket.mp3')

@@ -8,9 +8,12 @@ import {
   getTicketsByService,
   updateTicketStatus,
   deleteTicket,
-  createNetworkPrintTicket,
-  updatePrintStatus,
-  getStatistics
+  getStatistics,
+  getQueueStatus,
+  getRecentTickets,
+  getSystemStats,
+  callNextTicket,
+  updatePrintStatus
 } from '../controllers/ticketController'
 
 const router = Router()
@@ -18,14 +21,32 @@ const router = Router()
 // POST /api/tickets - Create a new ticket
 router.post('/', createTicket)
 
-// 🚀 NEW: POST /api/tickets/network-print - Create ticket with network printing
-router.post('/network-print', createNetworkPrintTicket)
-
-// 🔄 NEW: PUT /api/tickets/:id/print-status - Update print status
-router.put('/:id/print-status', updatePrintStatus)
-
 // POST /api/tickets/call - Call a ticket
 router.post('/call', callTicket)
+
+// POST /api/tickets/call-next - Call next ticket in queue
+router.post('/call-next', callNextTicket)
+
+// POST /api/tickets/reset - Reset all tickets (admin only)
+router.post('/reset', (req, res) => {
+  try {
+    const { ticketOperations } = require('../db')
+    const deletedCount = ticketOperations.deleteAll()
+
+    res.json({
+      success: true,
+      message: 'All tickets reset successfully',
+      deletedCount,
+      timestamp: new Date().toISOString()
+    })
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      error: 'Failed to reset tickets',
+      timestamp: new Date().toISOString()
+    })
+  }
+})
 
 // PATCH /api/tickets/:id/call - Call a specific ticket (RESTful approach)
 router.patch('/:id/call', (req, res, next) => {
@@ -43,6 +64,9 @@ router.get('/statistics', getStatistics)
 // GET /api/tickets/pending - Get pending tickets
 router.get('/pending', getPendingTickets)
 
+// GET /api/tickets/recent - Get recent tickets
+router.get('/recent', getRecentTickets)
+
 // GET /api/tickets/service/:serviceId - Get tickets by service
 router.get('/service/:serviceId', getTicketsByService)
 
@@ -52,8 +76,17 @@ router.get('/:id', getTicketById)
 // PATCH /api/tickets/:id - Update ticket status (RESTful approach)
 router.patch('/:id', updateTicketStatus)
 
+// PUT /api/tickets/:id/serve - Mark ticket as served
+router.put('/:id/serve', (req, res, next) => {
+  req.body.status = 'served'
+  updateTicketStatus(req, res, next)
+})
+
 // PUT /api/tickets/:id/status - Update ticket status
 router.put('/:id/status', updateTicketStatus)
+
+// PUT /api/tickets/:id/print-status - Update print status
+router.put('/:id/print-status', updatePrintStatus)
 
 // DELETE /api/tickets/:id - Delete ticket
 router.delete('/:id', deleteTicket)

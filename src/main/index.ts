@@ -1,16 +1,13 @@
 import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 
-// 🪟 استيراد مدير النوافذ - Window Manager
+// Window management
 import { createAllWindows, createOptimizedSingleWindow, WindowType } from './windows'
 
-// 🔧 استيراد معالجات IPC المحسنة - Import optimized IPC handlers
-import { registerOptimizedIPCHandlers, startOptimizedServerInfoSync } from './handlers'
+// Essential handlers only
+import { registerEssentialHandlers } from './handlers'
 
-// 🌐 استيراد خدمة اكتشاف الخادم - Import UDP discovery service
-import { initializeUDPDiscovery, cleanupUDPDiscovery } from './services/udpDiscoveryService'
-
-// 🎯 استيراد تحسين الأداء - Import performance optimization
+// Performance optimization
 import { getScreenConfig, setupMemoryOptimization, logOptimizationStatus } from './config/screenOptimization'
 
 // Get screen mode from environment variable
@@ -19,43 +16,43 @@ const SCREEN_MODE = process.env.SCREEN_MODE as WindowType | undefined
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
   // Default open or close DevTools by F12 in development
-  // and ignore CommandOrControl + R in production.
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  // 🎯 إعداد التحسين المخصص للشاشة - Setup screen-specific optimization
-  const config = getScreenConfig(SCREEN_MODE)
-  setupMemoryOptimization(config)
-  logOptimizationStatus(SCREEN_MODE || 'all', config)
+  try {
+    console.log('🚀 Starting CASNOS Electron App initialization...')
 
-  // 🔧 تسجيل معالجات IPC المحسنة - Register optimized IPC handlers
-  registerOptimizedIPCHandlers(SCREEN_MODE)
+    // 1. Setup optimization first
+    const config = getScreenConfig(SCREEN_MODE)
+    setupMemoryOptimization(config)
+    logOptimizationStatus(SCREEN_MODE || 'all', config)
+    console.log('✅ Memory optimization configured')
 
-  // 🪟 إنشاء النوافذ حسب الوضع - Create windows based on mode
-  if (SCREEN_MODE) {
-    // Starting in specific screen mode
-    createOptimizedSingleWindow(SCREEN_MODE)
-  } else {
-    // Starting in all screens mode
-    createAllWindows()
-  }
+    // 2. Register essential IPC handlers only
+    registerEssentialHandlers()
+    console.log('✅ Essential IPC handlers registered')
 
-  // 🌐 تهيئة اكتشاف الخادم مع التحسين - Initialize optimized UDP discovery
-  setTimeout(() => {
-    if (config.udpDiscovery) {
-      initializeUDPDiscovery()
-      startOptimizedServerInfoSync(SCREEN_MODE) // Start optimized server info sync
-      // UDP discovery initialized for screen
+    // 3. Create windows
+    if (SCREEN_MODE) {
+      console.log(`📱 Creating optimized window for screen: ${SCREEN_MODE}`)
+      createOptimizedSingleWindow(SCREEN_MODE)
     } else {
-      // UDP discovery skipped for screen (optimization)
+      console.log('📱 Creating all windows...')
+      createAllWindows()
     }
-  }, 1000) // Wait 1 second for everything to be ready
+
+    console.log('🎉 CASNOS Electron App initialized in static mode!')
+
+  } catch (error) {
+    console.error('❌ Failed to initialize Electron app:', error)
+    app.quit()
+  }
 
   app.on('activate', function () {
     // On macOS it's common to re-create a window in the app when the
@@ -74,9 +71,6 @@ app.whenReady().then(() => {
 // for applications and their menu bar to stay active until the user quits
 // explicitly with Cmd + Q.
 app.on('window-all-closed', () => {
-  // 🌐 تنظيف موارد UDP - Clean up UDP resources
-  cleanupUDPDiscovery()
-
   if (process.platform !== 'darwin') {
     app.quit()
   }

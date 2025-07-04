@@ -187,12 +187,7 @@ def check_missing_files():
     print("تم استكمال الملفات المفقودة.")
     return True
 
-def test_pronunciation():
-    print("\n=== اختبار نطق بعض الأرقام ===")
-    for num in [1, 10, 20, 99, 100, 101, 250, 999, 1000]:
-        text = f"الرقم {get_arabic_number_text(num)}"
-        synthesize_elevenlabs(text, f"test_{num}.mp3")
-    return True
+
 
 if __name__ == "__main__":
     print("\n=== برنامج توليد الأصوات العربية ===")

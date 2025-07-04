@@ -45,41 +45,25 @@ export class SumatraPDFManager {
    * Initialize SumatraPDF and settings paths
    */
   private initializePaths(): void {
-    // Find SumatraPDF executable
     const possibleSumatraPaths = [
       // Production path (when app is packaged)
       path.join(process.resourcesPath, 'assets', 'SumatraPDF.exe'),
       // Development paths
       path.join(process.cwd(), 'resources', 'assets', 'SumatraPDF.exe'),
-      path.join(__dirname, '../../../resources/assets/SumatraPDF.exe'),
-      path.join(__dirname, '../../resources/assets/SumatraPDF.exe'),
-      // Additional paths
-      path.join(__dirname, '../resources/assets/SumatraPDF.exe'),
-      path.join(process.cwd(), 'build', 'resources', 'assets', 'SumatraPDF.exe')
+      path.join(__dirname, '../../../resources/assets/SumatraPDF.exe')
     ];
 
     console.log('[SumatraPDF] 🔍 Searching for SumatraPDF.exe...');
     for (const testPath of possibleSumatraPaths) {
-      try {
-        console.log(`[SumatraPDF] 🔍 Checking: ${testPath}`);
-        if (fs.existsSync(testPath)) {
-          this.sumatraPath = path.resolve(testPath); // Use absolute path
-          console.log(`[SumatraPDF] ✅ Found executable at: ${this.sumatraPath}`);
-          break;
-        }
-      } catch (error) {
-        console.warn(`[SumatraPDF] ⚠️ Error checking path ${testPath}:`, error);
+      if (fs.existsSync(testPath)) {
+        this.sumatraPath = path.resolve(testPath);
+        console.log(`[SumatraPDF] ✅ Found at: ${this.sumatraPath}`);
+        break;
       }
     }
 
-    // Skip settings file for now - it's causing command parsing issues
-    this.settingsPath = null;
-
     if (!this.sumatraPath) {
-      console.error('[SumatraPDF] ❌ SumatraPDF executable not found in any expected locations');
-      console.log('[SumatraPDF] 📂 Tried paths:', possibleSumatraPaths);
-    } else {
-      console.log(`[SumatraPDF] 🎯 Using executable: ${this.sumatraPath}`);
+      console.warn('[SumatraPDF] ❌ SumatraPDF not found - will use fallback printing');
     }
   }
 
@@ -253,56 +237,7 @@ export class SumatraPDFManager {
     }
   }
 
-  /**
-   * Test SumatraPDF functionality
-   */
-  async testPrint(): Promise<SumatraPrintResult> {
-    const testMessage = `[SumatraPDF] 🧪 Testing print functionality...
-    - Executable: ${this.sumatraPath || 'Not found'}
-    - Settings: ${this.settingsPath || 'Not found'}
-    - Available: ${this.isAvailable()}`;
 
-    console.log(testMessage);
-
-    if (!this.isAvailable()) {
-      return {
-        success: false,
-        message: 'SumatraPDF is not available for testing',
-        method: 'failed',
-        error: 'NOT_AVAILABLE'
-      };
-    }
-
-    // Test if we can execute SumatraPDF with help command
-    try {
-      const command = `"${this.sumatraPath}" -h`;
-      console.log(`[SumatraPDF] 🧪 Testing with command: ${command}`);
-
-      const { stdout, stderr } = await execAsync(command, {
-        timeout: 5000,
-        encoding: 'utf8',
-        windowsHide: true
-      });
-
-      console.log(`[SumatraPDF] 📄 Test output: ${stdout || stderr || 'No output'}`);
-
-      return {
-        success: true,
-        message: '✅ SumatraPDF is ready for printing',
-        method: 'SumatraPDF',
-        command
-      };
-    } catch (error) {
-      console.warn('[SumatraPDF] ⚠️ Test command failed, but executable exists:', error);
-
-      // Even if help command fails, if the executable exists it might still work for printing
-      return {
-        success: true,
-        message: '⚠️ SumatraPDF executable found but test command failed - may still work for printing',
-        method: 'SumatraPDF'
-      };
-    }
-  }
 
   /**
    * Get detailed diagnostic information

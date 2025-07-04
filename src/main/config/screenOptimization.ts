@@ -48,8 +48,8 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     garbageCollectionInterval: 60000 // 1 minute
   },
 
-  // 👨‍💼 Employee Screen - Needs minimal services
-  employee: {
+  // 🪟 Window Screen - Needs minimal services
+  window: {
     networkHandlers: true,
     udpDiscovery: true,
     printHandlers: false, // Usually not needed

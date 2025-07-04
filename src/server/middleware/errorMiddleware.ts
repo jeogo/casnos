@@ -15,7 +15,14 @@ export const errorHandler = (
   let error = { ...err }
   error.message = err.message
 
-  // تم حذف السجل - لا داعي للطباعة هنا
+  // Log the error for debugging
+  console.error('❌ API Error:', {
+    message: err.message,
+    stack: err.stack,
+    url: req.url,
+    method: req.method,
+    body: req.body
+  })
 
   // Default safe error response
   let message = 'An error occurred while processing your request'

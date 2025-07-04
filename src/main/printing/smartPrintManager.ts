@@ -283,24 +283,7 @@ export class SmartPrintManager {
     }
   }
 
-  /**
-   * 🧪 اختبار نظام الطباعة الذكي
-   * Test smart printing system
-   */
-  async testSmartPrinting(): Promise<SmartPrintResult> {
-    const testTicket: SmartPrintTicketData = {
-      ticket_number: `TEST-${Date.now().toString().slice(-6)}`,
-      service_name: 'اختبار النظام الذكي',
-      created_at: new Date().toISOString(),
-      service_id: 1,
-      printer_id: 'test-printer',
-      company_name: 'نظام إدارة الطوابير - اختبار',
-      position: 1,
-      print_source: 'customer'
-    };
 
-    return await this.createAndPrintTicket(testTicket);
-  }
 
   /**
    * 🧹 تنظيف الموارد

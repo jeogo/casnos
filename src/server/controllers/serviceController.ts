@@ -1,8 +1,7 @@
 import { Request, Response } from 'express'
-import { serviceOperations } from '../db/database'
+import { serviceOperations } from '../db'
 import { CreateServiceRequest } from '../types'
 import { asyncHandler, createError } from '../middleware/errorMiddleware'
-import { getSocketIO } from '../utils/socketInstance'
 
 export const getAllServices = asyncHandler(async (req: Request, res: Response) => {
   const services = serviceOperations.getAll()
@@ -63,13 +62,6 @@ export const createService = asyncHandler(async (req: Request, res: Response): P
       name: name.trim()
     })
 
-    // 🔥 Emit real-time event to all connected clients
-    const io = getSocketIO()
-    if (io) {
-      io.emit('service:created', newService)
-      // Service created event broadcasted
-    }
-
     res.status(201).json({
       success: true,
       data: newService
@@ -126,13 +118,6 @@ export const updateService = asyncHandler(async (req: Request, res: Response) =>
       throw createError('Service not found', 404)
     }
 
-    // 🔥 Emit real-time event to all connected clients
-    const io = getSocketIO()
-    if (io) {
-      io.emit('service:updated', updatedService)
-      // Service updated event broadcasted
-    }
-
     res.json({
       success: true,
       data: updatedService
@@ -152,24 +137,10 @@ export const deleteService = asyncHandler(async (req: Request, res: Response) =>
     throw createError('Invalid service ID', 400)
   }
 
-  // Get service details before deletion for the event
-  const serviceToDelete = serviceOperations.getById(serviceId)
-
   const deleted = serviceOperations.delete(serviceId)
 
   if (!deleted) {
     throw createError('Service not found', 404)
-  }
-
-  // 🔥 Emit real-time event to all connected clients
-  const io = getSocketIO()
-  if (io) {
-    io.emit('service:deleted', {
-      id: serviceId,
-      name: serviceToDelete?.name || 'Unknown Service',
-      timestamp: new Date().toISOString()
-    })
-    // Service deleted event broadcasted
   }
 
   res.json({

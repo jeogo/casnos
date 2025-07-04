@@ -178,45 +178,7 @@ export class PuppeteerPDFGenerator {
     }
   }
 
-  /**
-   * اختبار إنتاج PDF
-   * Test PDF generation
-   */
-  async testPDFGeneration(): Promise<{ success: boolean; path?: string; message: string }> {
-    try {
-      const testTicketData: TicketData = {
-        ticket_number: `TEST-${Date.now()}`,
-        service_name: 'اختبار إنتاج PDF',
-        created_at: new Date().toISOString(),
-        printer_id: 'test-printer',
-        company_name: 'نظام إدارة الطوابير',
-        position: 1
-      };
 
-      const storageManager = PDFStorageManager.getInstance();
-      const testPath = storageManager.getTestPath(`test-pdf-${Date.now()}.pdf`);
-
-      const result = await this.generateTicketPDF(testTicketData, testPath);
-
-      if (result) {
-        return {
-          success: true,
-          path: result,
-          message: 'PDF test generation successful'
-        };
-      } else {
-        return {
-          success: false,
-          message: 'PDF test generation failed'
-        };
-      }
-    } catch (error) {
-      return {
-        success: false,
-        message: `PDF test error: ${error instanceof Error ? error.message : 'Unknown error'}`
-      };
-    }
-  }
 }
 
 export default PuppeteerPDFGenerator;

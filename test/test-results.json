@@ -1,0 +1,83 @@
+{
+  "timestamp": "2025-07-03T20:50:29.923Z",
+  "results": {
+    "total": 18,
+    "passed": 17,
+    "failed": 1,
+    "results": [
+      {
+        "status": "passed",
+        "message": "GET /api/devices - Retrieved all devices"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/devices/online - Retrieved online devices"
+      },
+      {
+        "status": "passed",
+        "message": "POST /api/devices - Created new device"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/devices/:id - Retrieved device by ID"
+      },
+      {
+        "status": "passed",
+        "message": "PUT /api/devices/:id - Updated device"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/devices/printers/all - Retrieved all device printers"
+      },
+      {
+        "status": "failed",
+        "message": "Device printer endpoints test failed",
+        "error": "Request failed with status code 500"
+      },
+      {
+        "status": "passed",
+        "message": "DELETE /api/devices/:id - Deleted device"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/services - Retrieved all services"
+      },
+      {
+        "status": "passed",
+        "message": "POST /api/services - Created new service"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/services/:id - Retrieved service by ID"
+      },
+      {
+        "status": "passed",
+        "message": "POST /api/tickets - Created new ticket"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/tickets - Retrieved all tickets"
+      },
+      {
+        "status": "passed",
+        "message": "POST /api/windows - Created new window"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/windows - Retrieved all windows"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/reset/status - Retrieved reset status"
+      },
+      {
+        "status": "passed",
+        "message": "GET /api/reset/statistics - Retrieved reset statistics"
+      },
+      {
+        "status": "passed",
+        "message": "PUT /api/reset/config - Updated reset configuration"
+      }
+    ]
+  }
+}

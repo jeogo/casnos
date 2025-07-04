@@ -5,7 +5,7 @@ export interface DeviceInfo {
   device_id: string
   name: string
   ip_address: string
-  device_type: 'display' | 'customer' | 'employee'
+  device_type: 'display' | 'customer' | 'window'
   mac_address?: string
 }
 
@@ -16,7 +16,7 @@ export interface DeviceInfo {
 export const DEVICE_STORAGE_KEYS = {
   DISPLAY: 'display-device-id',
   CUSTOMER: 'customer-device-id',
-  EMPLOYEE: 'device-unique-id' // Keep existing key for compatibility
+  WINDOW: 'device-unique-id' // Keep existing key for compatibility
 } as const;
 
 /**
@@ -26,7 +26,7 @@ export const DEVICE_STORAGE_KEYS = {
 export const DEVICE_NAMES = {
   display: 'شاشة العرض',
   customer: 'شاشة العملاء',
-  employee: 'شباك الموظف'
+  window: 'شباك النافذة'
 } as const;
 
 /**
@@ -36,12 +36,12 @@ export const DEVICE_NAMES = {
 export const DEVICE_IDS = {
   display: 'display-casnos-001',
   customer: 'customer-casnos-001',
-  employee: (windowNumber: string) => `employee-casnos-${windowNumber.toLowerCase().replace(/\s+/g, '-')}`
+  window: (windowNumber: string) => `window-casnos-${windowNumber.toLowerCase().replace(/\s+/g, '-')}`
 } as const;
 
 /**
- * الحصول على عنوان IP الجهاز تلقائياً - IPv4 ONLY (NO LOCALHOST)
- * Get device IP address automatically - IPv4 ONLY (NO LOCALHOST)
+ * الحصول على عنوان IP الجهاز تلقائياً - IPv4 ONLY
+ * Get device IP address automatically - IPv4 ONLY
  */
 export async function getDeviceIP(): Promise<string> {
   try {
@@ -73,12 +73,11 @@ export async function getDeviceIP(): Promise<string> {
       return hostname;
     }
 
-    // If we can't get a real IP, generate a default network IP
-    // أفضل من استخدام localhost
-    return '192.168.1.100';  // Default network IP instead of localhost
+    // Must return a valid network IP - never localhost or default fallback
+    throw new Error('Cannot determine device IP address - no valid network IP found');
   } catch (err) {
-    console.warn('[DEVICE-INFO] Could not determine IP, using default network IP (NOT localhost)');
-    return '192.168.1.100';  // Network IP instead of localhost
+    console.error('[DEVICE-INFO] Could not determine IP address:', err);
+    throw new Error('Cannot determine device IP address - no valid network IP found');
   }
 }
 
@@ -136,7 +135,7 @@ export function createDeviceId(deviceType: string, macAddress?: string, storageK
  * Get complete device information for registration
  */
 export async function getDeviceInfo(
-  deviceType: 'display' | 'customer' | 'employee',
+  deviceType: 'display' | 'customer' | 'window',
   deviceName: string,
   customDeviceId?: string
 ): Promise<DeviceInfo> {
@@ -156,13 +155,8 @@ export async function getDeviceInfo(
   } catch (error) {
     console.error('[DEVICE-INFO] Error getting device info:', error);
 
-    // Return minimal info as fallback with network IP (never localhost)
-    return {
-      device_id: customDeviceId || `${deviceType}-casnos-fallback`,
-      name: deviceName,
-      ip_address: '192.168.1.100', // Network IP instead of localhost
-      device_type: deviceType
-    };
+    // No fallback IP - must have real network IP
+    throw new Error('Cannot create device info without valid network IP address');
   }
 }
 
@@ -176,7 +170,7 @@ export function validateDeviceInfo(deviceInfo: DeviceInfo): boolean {
     deviceInfo.name &&
     deviceInfo.ip_address &&
     deviceInfo.device_type &&
-    ['display', 'customer', 'employee'].includes(deviceInfo.device_type)
+    ['display', 'customer', 'window'].includes(deviceInfo.device_type)
   );
 }
 
@@ -185,13 +179,13 @@ export function validateDeviceInfo(deviceInfo: DeviceInfo): boolean {
  * Get persistent device ID from localStorage or create new one (backward compatibility)
  */
 export async function getPersistentDeviceId(
-  deviceType: 'display' | 'customer' | 'employee'
+  deviceType: 'display' | 'customer' | 'window'
 ): Promise<string> {
   const storageKey = (() => {
     switch (deviceType) {
       case 'display': return DEVICE_STORAGE_KEYS.DISPLAY;
       case 'customer': return DEVICE_STORAGE_KEYS.CUSTOMER;
-      case 'employee': return DEVICE_STORAGE_KEYS.EMPLOYEE;
+      case 'window': return DEVICE_STORAGE_KEYS.WINDOW;
       default: return 'device-id';
     }
   })();

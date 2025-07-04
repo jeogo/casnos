@@ -4,7 +4,7 @@
 // تصدير جميع وحدات النوافذ الفردية
 export * from './customerWindow'
 export * from './displayWindow'
-export * from './employeeWindow'
+export * from './windowWindow'
 export * from './adminWindow'
 
 // تصدير مدير النوافذ
