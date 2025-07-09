@@ -1,6 +1,5 @@
-import { ElectronAPI } from '@electron-toolkit/preload'
+import { ElectronAPI } from '@electron-toolkit/pre' ;
 
-// Basic interfaces for ticket and print data
 export interface TicketData {
   ticket_number: string;
   service_name: string;
@@ -21,7 +20,10 @@ export interface CASNOSApi {
   discoverServerUdp: () => Promise<{ ip: string; port: number } | null>
   getServerInfo: () => Promise<{ ip: string; port: number } | null>
   updateServerInfo: (serverInfo: { ip: string; port: number }) => Promise<{ success: boolean }>
-  getDeviceNetworkInfo: () => Promise<{ ipAddress: string; timestamp: string }>
+  getDeviceNetworkInfo: () => Promise<{
+    ip: string; ipAddress: string; timestamp: string
+}>
+  getMachineId: () => Promise<{ machineId: string }>
   connectToServer: (ip: string, port: number) => Promise<{ success: boolean; connected: boolean; server?: { ip: string; port: number }; error?: string }>
   getServerStatus: () => Promise<{ success: boolean; status: string; health?: any; error?: string }>
   getConnectionStatus: () => Promise<{ success: boolean; connected: boolean; server: { ip: string | null; port: number } }>
@@ -32,17 +34,44 @@ export interface CASNOSApi {
   generatePDF: (ticketData: TicketData, outputPath?: string) => Promise<PrintResult>;
   smartPrintTicket: (ticketData: TicketData, preferences?: any) => Promise<PrintResult>;
 
+  // 🆕 تسجيل الطابعات وإدارتها
+  getDeviceRegisteredPrinters: (deviceId: string) => Promise<{ success: boolean; printers: any[]; message: string }>;
+  getAllRegisteredPrinters: () => Promise<{ success: boolean; printers: any[]; message: string }>;
+
+  // 🆕 تسجيل الطابعات تلقائياً في قاعدة البيانات
+  registerLocalPrintersToDatabase: (deviceId: string) => Promise<{ success: boolean; message: string; registered: number }>;
+
   // 🔊 Audio functionality
   audioPlayAnnouncement: (ticketNumber: string, windowLabel: string) => Promise<{ success: boolean; message: string }>;
   audioSetEnabled: (enabled: boolean) => Promise<{ success: boolean; message: string }>;
   audioIsEnabled: () => Promise<{ success: boolean; enabled: boolean }>
   audioTest: () => Promise<{ success: boolean; message: string }>
+videoPlay: (filePath?: string) => Promise<{ success: boolean; message: string }>;
+  videoLoop: (filePath?: string) => Promise<{ success: boolean; message: string }>;
+  videoTest: () => Promise<{ success: boolean; message: string }>;
+  videoPlayFirstAvailable: () => Promise<{ success: boolean; message: string }>;
+  videoGetFirstAvailable: () => Promise<{ success: boolean; video: string | null; message: string }>;
+  videoGetMostRecent: () => Promise<{ success: boolean; video: string | null; message: string }>;
+  videoPlayMostRecent: () => Promise<{ success: boolean; message: string }>;
+  videoGetAvailableVideos: () => Promise<{ success: boolean; videos: string[] }>;
+  videoSelectNewVideo: () => Promise<{ success: boolean; filePath?: string; message: string }>;
+  videoSetNewDefault: (sourceFilePath: string) => Promise<{ success: boolean; filePath?: string; fileName?: string; message: string }>;// Basic interfaces for ticket and print data
+  // � Video functionality (enhanced with auto-detection)
+  videoPlay: (filePath?: string) => Promise<{ success: boolean; message: string }>;
+  videoLoop: (filePath?: string) => Promise<{ success: boolean; message: string }>;
+  videoTest: () => Promise<{ success: boolean; message: string }>;
+  videoPlayFirstAvailable: () => Promise<{ success: boolean; message: string }>;
+  videoGetFirstAvailable: () => Promise<{ success: boolean; video: string | null; message: string }>;
+  videoGetMostRecent: () => Promise<{ success: boolean; video: string | null; message: string }>;
+  videoPlayMostRecent: () => Promise<{ success: boolean; message: string }>;
+  videoGetAvailableVideos: () => Promise<{ success: boolean; videos: string[] }>;
 
-  // 📁 Resources
+  // �📁 Resources
   getLogoPath: () => Promise<string | null>;
 
   // 🎫 Tickets API
-  createTicket: (serviceId: number) => Promise<any>
+  createTicket: (serviceId: number, printType?: 'local' | 'network') => Promise<any>
+  callNextTicketForWindow: (windowId: number, serviceId?: number, currentTicketId?: number) => Promise<any>
   getTickets: () => Promise<any>
   getTicketById: (ticketId: number) => Promise<any>
   callTicket: (ticketId: number, windowId: string) => Promise<any>
@@ -68,20 +97,18 @@ export interface CASNOSApi {
   getWindows: () => Promise<any>
   getWindowById: (windowId: number) => Promise<any>
   createWindow: (active?: boolean) => Promise<any>
-  updateWindow: (windowId: number, active?: boolean) => Promise<any>
+  updateWindow: (windowId: number, serviceId?: number, active?: boolean) => Promise<any>
   deleteWindow: (windowId: number) => Promise<any>
   getActiveWindows: () => Promise<any>
   createWindowWithAutoNumber: () => Promise<any>
+  assignServiceToWindow: (windowId: number, serviceId: number) => Promise<any>
+  removeServiceFromWindow: (windowId: number) => Promise<any>
 
-  // 👥 Employees API
-  getEmployees: () => Promise<any>
-  getActiveEmployees: () => Promise<any>
-  getEmployeeByWindow: (windowNumber: string) => Promise<any>
-  createEmployeeWindow: (windowNumber: string, deviceId?: string, serviceId?: number) => Promise<any>
-  assignServiceToEmployee: (windowNumber: string, serviceId: number) => Promise<any>
-  removeServiceFromEmployee: (windowNumber: string) => Promise<any>
-  getNextWindowNumber: () => Promise<any>
-  initializeEmployeeSession: (data: any) => Promise<any>
+  // 🪟 Window-Device API
+  registerDeviceWindow: (deviceId: string, serviceId?: number) => Promise<any>
+  getWindowByDeviceId: (deviceId: string) => Promise<any>
+  activateDeviceWindow: (deviceId: string) => Promise<any>
+  deactivateDeviceWindow: (deviceId: string) => Promise<any>
 
   // 🖥️ Devices API
   getDevices: () => Promise<any>
@@ -94,7 +121,21 @@ export interface CASNOSApi {
   getOnlineDevices: () => Promise<any>
   getDevicesByType: (type: string) => Promise<any>
 
-  // 🔌 Socket Connection Management
+  // �️ Device Printers API
+  getDevicePrinters: () => Promise<any>
+  getDevicePrintersByDevice: (deviceId: string) => Promise<any>
+  createDevicePrinter: (printerData: any) => Promise<any>
+  updateDevicePrinter: (printerId: number, printerData: any) => Promise<any>
+  deleteDevicePrinter: (printerId: number) => Promise<any>
+  forceDeletePrinter: (printerId: number) => Promise<any>
+
+  // 🔄 Daily Reset API
+  getDailyResetStatus: () => Promise<any>
+  getDailyResetStatistics: () => Promise<any>
+  forceDailyReset: () => Promise<any>
+  updateDailyResetConfig: (config: any) => Promise<any>
+
+  // �🔌 Socket Connection Management
   connectSocket: (serverUrl: string, deviceInfo?: any) => Promise<{ success: boolean; connected: boolean }>
   disconnectSocket: () => Promise<{ success: boolean; connected: boolean }>
   isSocketConnected: () => Promise<{ success: boolean; connected: boolean; socketId?: string | null }>
@@ -118,9 +159,26 @@ export interface CASNOSApi {
   getSystemHealth: () => Promise<any>
   getNetworkInfo: () => Promise<any>
   requestNotificationPermission: () => Promise<{ success: boolean; permission: string }>
+  closeWindow: (windowType: string) => Promise<{ success: boolean; message: string }>
+
+  // 💾 Persistent Storage Methods
+  persistentSaveScreenData: (screenType: string, deviceId: string, data: any) => Promise<{ success: boolean; error?: string }>
+  persistentGetScreenData: (screenType: string, deviceId: string) => Promise<{ success: boolean; data?: any; error?: string }>
+  persistentRecoverDeviceData: (deviceId: string) => Promise<{ success: boolean; data?: any; error?: string }>
+  persistentSaveQueueData: (deviceId: string, queueData: any) => Promise<{ success: boolean; error?: string }>
+  persistentSaveWindowData: (deviceId: string, windowData: any, selectedService?: any) => Promise<{ success: boolean; error?: string }>
+  persistentSaveAudioQueue: (deviceId: string, audioQueue: any[], currentAudioCall?: any) => Promise<{ success: boolean; error?: string }>
+  persistentGetStorageStats: () => Promise<{ success: boolean; stats?: any; error?: string }>
 
   // 🎫 Legacy - Ticket creation
   createRealTicket: (serviceId: number, printerId: string) => Promise<{ success: boolean; ticket?: any; error?: string }>;
+
+  // 🪟 Window Control - التحكم في النافذة العائمة
+  windowResize: (width: number, height: number) => void;
+  windowSetPosition: (x: number, y: number) => void;
+  windowClose: () => void;
+  windowMinimize: () => void;
+  windowMaximize: () => void;
 }
 
 declare global {

@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "screenType": "admin",
+  "embeddedServer": {
+    "enabled": false,
+    "port": 3001,
+    "host": "0.0.0.0",
+    "autoConnect": true
+  },
+  "features": {
+    "audio": false,
+    "video": false,
+    "printing": true,
+    "udpDiscovery": true,
+    "realTimeUpdates": true,
+    "socketIO": true,
+    "windowManagement": true
+  },
+  "performance": {
+    "maxMemoryUsage": 256,
+    "garbageCollectionInterval": 60000,
+    "serverSyncInterval": 5000,
+    "enableDevTools": false
+  },
+  "paths": {
+    "fontsPath": "fonts/"
+  }
+}

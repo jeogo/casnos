@@ -43,19 +43,14 @@ export function handleTicketEvents(socket: Socket): void {
         action: 'new_ticket',
         ticket,
         timestamp: new Date().toISOString()
-      });
-
-      // تحديث قوائل الانتظار
+      });      // تحديث قوائل الانتظار
       emitToAll('queue:update', {
         pending: ticketOperations.getPendingTickets().length,
         total: ticketOperations.getAll().length,
         timestamp: new Date().toISOString()
       });
 
-      console.log(`✅ Ticket created: ${ticket.ticket_number} for service ${service.name}`);
-
     } catch (error) {
-      console.error('Error creating ticket:', error);
       socket.emit('ticket:error', { message: 'Failed to create ticket' });
     }
   });
@@ -63,7 +58,7 @@ export function handleTicketEvents(socket: Socket): void {
   // 2. استدعاء تذكرة
   socket.on('ticket:call', async (data) => {
     try {
-      const { ticketId, windowId, employeeId } = data;
+      const { ticketId, windowId } = data;
 
       // تحديث حالة التذكرة
       const ticket = ticketOperations.updateStatus(ticketId, 'called', windowId);
@@ -88,7 +83,6 @@ export function handleTicketEvents(socket: Socket): void {
       socket.emit('ticket:called-success', { ticket });
 
     } catch (error) {
-      console.error('Error calling ticket:', error);
       socket.emit('ticket:error', { message: 'Failed to call ticket' });
     }
   });
@@ -96,7 +90,7 @@ export function handleTicketEvents(socket: Socket): void {
   // 3. إنهاء خدمة وطلب التالية
   socket.on('ticket:serve-and-next', async (data) => {
     try {
-      const { currentTicketId, windowId, serviceId, employeeId } = data;
+      const { currentTicketId, windowId, serviceId } = data;
 
       // إنهاء الخدمة الحالية
       if (currentTicketId) {
@@ -141,7 +135,6 @@ export function handleTicketEvents(socket: Socket): void {
       }
 
     } catch (error) {
-      console.error('Error in serve and next:', error);
       socket.emit('ticket:error', { message: 'Failed to process serve and next' });
     }
   });
@@ -149,7 +142,7 @@ export function handleTicketEvents(socket: Socket): void {
   // 4. استدعاء التذكرة التالية
   socket.on('ticket:call-next', async (data) => {
     try {
-      const { window_label, employee_id } = data;
+      const { window_label } = data;
 
       // الحصول على التذكرة التالية
       const pendingTickets = ticketOperations.getPendingTickets();
@@ -200,8 +193,6 @@ export function handleTicketEvents(socket: Socket): void {
           total: ticketOperations.getAll().length,
           timestamp: new Date().toISOString()
         });
-
-        console.log(`📢 Ticket called: ${calledTicket.ticket_number} → ${window_label}`);
       } else {
         socket.emit('ticket:called', {
           success: false,
@@ -210,7 +201,6 @@ export function handleTicketEvents(socket: Socket): void {
       }
 
     } catch (error) {
-      console.error('Error calling next ticket:', error);
       socket.emit('ticket:called', {
         success: false,
         message: 'Failed to call next ticket'
@@ -221,7 +211,7 @@ export function handleTicketEvents(socket: Socket): void {
   // 5. إنهاء خدمة التذكرة
   socket.on('ticket:serve', async (data) => {
     try {
-      const { ticket_id, window_label, employee_id } = data;
+      const { ticket_id, window_label } = data;
 
       // تحديث حالة التذكرة إلى مُقدمة
       const servedTicket = ticketOperations.updateStatus(ticket_id, 'served', window_label);
@@ -247,8 +237,6 @@ export function handleTicketEvents(socket: Socket): void {
           total: ticketOperations.getAll().length,
           timestamp: new Date().toISOString()
         });
-
-        console.log(`✅ Ticket served: ${servedTicket.ticket_number}`);
       } else {
         socket.emit('ticket:served', {
           success: false,
@@ -257,7 +245,6 @@ export function handleTicketEvents(socket: Socket): void {
       }
 
     } catch (error) {
-      console.error('Error serving ticket:', error);
       socket.emit('ticket:served', {
         success: false,
         message: 'Failed to serve ticket'

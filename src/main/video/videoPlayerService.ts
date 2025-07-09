@@ -2,6 +2,7 @@
 import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { existsSync } from 'fs'
+import { ResourcePathManager } from '../utils/resourcePathManager'
 
 /**
  * خدمة مشغل الفيديو للإعلانات في شاشة العرض
@@ -16,8 +17,9 @@ export class VideoPlayerService {
   private isPlaying: boolean = false
 
   private constructor() {
-    // تحديد مسار ملفات الفيديو
-    this.videoBasePath = join(__dirname, '../../resources/assets')
+    // Use ResourcePathManager for video path
+    const resourceManager = ResourcePathManager.getInstance()
+    this.videoBasePath = resourceManager.getVideoPath()
     this.checkVideoFiles()
   }
 
@@ -29,42 +31,81 @@ export class VideoPlayerService {
   }
 
   /**
-   * التحقق من وجود ملفات الفيديو (mp4 فقط)
+   * التحقق من وجود ملفات الفيديو (أي ملف mp4 في مجلد video)
    */
   private checkVideoFiles(): void {
-    const mp4Files = ['sample-ad.mp4']
+    try {
+      const fs = require('fs')
+      const mp4Files = fs.readdirSync(this.videoBasePath)
+        .filter((file: string) => file.endsWith('.mp4'))
 
-    const missingFiles = mp4Files.filter(file =>
-      !existsSync(join(this.videoBasePath, file))
-    )
-
-    if (missingFiles.length > 0) {
-      console.warn('[VIDEO-SERVICE] ⚠️ Missing MP4 files:', missingFiles)
-    } else {
-      console.log('[VIDEO-SERVICE] ✅ All MP4 files found')
+      if (mp4Files.length === 0) {
+        console.warn('[VIDEO-SERVICE] ⚠️ No MP4 files found in video directory:', this.videoBasePath)
+      } else {
+        console.log('[VIDEO-SERVICE] ✅ Found MP4 files:', mp4Files)
+      }
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] ❌ Error checking video directory:', error)
     }
   }
 
   /**
-   * تشغيل فيديو mp4 في حلقة مكتومة
+   * الحصول على أول ملف فيديو متوفر
+   */
+  getFirstAvailableVideo(): string | null {
+    try {
+      const availableVideos = this.getAvailableVideos()
+      return availableVideos.length > 0 ? availableVideos[0] : null
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] ❌ Error getting first available video:', error)
+      return null
+    }
+  }
+
+  /**
+   * تشغيل أول فيديو متوفر في حلقة مكتومة
+   */
+  async playFirstAvailableVideo(): Promise<boolean> {
+    const firstVideo = this.getFirstAvailableVideo()
+    if (!firstVideo) {
+      console.error('[VIDEO-SERVICE] ❌ No videos available to play')
+      return false
+    }
+
+    console.log(`[VIDEO-SERVICE] 🎬 Playing first available video: ${firstVideo}`)
+    return await this.playMp4Loop(firstVideo)
+  }
+  /**
+   * تشغيل فيديو mp4 في حلقة مكتومة (محسن للاستخدام التلقائي)
    * Play MP4 video in muted infinite loop
    */
-  async playMp4Loop(videoFileName: string = 'sample-ad.mp4'): Promise<boolean> {
+  async playMp4Loop(videoFileName?: string): Promise<boolean> {
     if (!this.isEnabled) {
       console.log('[VIDEO-SERVICE] Video player disabled')
       return false
     }
 
+    // إذا لم يتم تحديد ملف، استخدم أول ملف متوفر
+    let targetVideo = videoFileName
+    if (!targetVideo) {
+      const firstAvailable = this.getFirstAvailableVideo()
+      if (!firstAvailable) {
+        console.error('[VIDEO-SERVICE] ❌ No MP4 files available')
+        return false
+      }
+      targetVideo = firstAvailable
+    }
+
     // التأكد أنه ملف mp4
-    if (!videoFileName.endsWith('.mp4')) {
+    if (!targetVideo.endsWith('.mp4')) {
       console.error('[VIDEO-SERVICE] ❌ Only MP4 files supported')
       return false
     }
 
     try {
-      console.log(`[VIDEO-SERVICE] 🎬 Playing MP4 in loop: ${videoFileName}`)
+      console.log(`[VIDEO-SERVICE] 🎬 Playing MP4 in loop: ${targetVideo}`)
 
-      const videoPath = join(this.videoBasePath, videoFileName)
+      const videoPath = join(this.videoBasePath, targetVideo)
       if (!existsSync(videoPath)) {
         console.error(`[VIDEO-SERVICE] ❌ MP4 file not found: ${videoPath}`)
         return false
@@ -72,8 +113,8 @@ export class VideoPlayerService {
 
       // إرسال أمر تشغيل حلقة مكتومة إلى شاشة العرض
       this.sendToDisplayScreen('play-mp4-loop', {
-        videoPath: videoFileName,
-        videoUrl: `./resources/assets/${videoFileName}`,
+        videoPath: targetVideo,
+        videoUrl: `./resources/video/${targetVideo}`, // تحديث المسار
         muted: true,
         volume: 0,
         autoplay: true,
@@ -81,8 +122,8 @@ export class VideoPlayerService {
         timestamp: Date.now()
       })
 
-      this.currentVideo = videoFileName
-      console.log(`[VIDEO-SERVICE] ✅ MP4 loop command sent: ${videoFileName}`)
+      this.currentVideo = targetVideo
+      console.log(`[VIDEO-SERVICE] ✅ MP4 loop command sent: ${targetVideo}`)
       return true
 
     } catch (error) {
@@ -124,7 +165,7 @@ export class VideoPlayerService {
 
       // إرسال قائمة التشغيل إلى شاشة العرض (مكتومة الصوت)
       this.sendToDisplayScreen('play-playlist', {
-        playlist: validFiles.map(file => `./resources/assets/${file}`),
+        playlist: validFiles.map(file => `./resources/video/${file}`), // تحديث المسار
         currentIndex: 0,
         muted: true,
         volume: 0,
@@ -165,11 +206,11 @@ export class VideoPlayerService {
   }
 
   /**
-   * تشغيل الإعلان التجريبي - سهل الاستخدام
+   * تشغيل الإعلان التجريبي - سهل الاستخدام (محسن للاستخدام التلقائي)
    * Play sample ad - easy to use
    */
   async playSampleAd(): Promise<boolean> {
-    return await this.playMp4Loop('sample-ad.mp4')
+    return await this.playFirstAvailableVideo()
   }
 
   /**
@@ -177,7 +218,7 @@ export class VideoPlayerService {
    * Loop the sample advertisement continuously
    */
   async loopSampleAd(): Promise<boolean> {
-    return await this.playVideoLoop('sample-ad.mp4', -1)
+    return await this.playFirstAvailableVideo()
   }
 
   /**
@@ -201,7 +242,7 @@ export class VideoPlayerService {
 
       this.sendToDisplayScreen('play-video-loop', {
         videoPath: videoFileName,
-        videoUrl: `./resources/assets/${videoFileName}`,
+        videoUrl: `./resources/video/${videoFileName}`, // تحديث المسار
         loopCount: loopCount,
         muted: true,
         volume: 0,
@@ -300,6 +341,77 @@ export class VideoPlayerService {
       console.error('[VIDEO-SERVICE] Error reading video directory:', error)
       return ['sample-ad.mp4'] // fallback
     }
+  }
+
+  /**
+   * الحصول على مجلد الفيديوهات
+   */
+  getVideoFolder(): string {
+    return this.videoBasePath
+  }
+
+  /**
+   * تحديث قائمة الفيديوهات (إعادة فحص المجلد)
+   */
+  refreshVideoList(): void {
+    try {
+      console.log('[VIDEO-SERVICE] 🔄 Refreshing video list...')
+      this.checkVideoFiles()
+      console.log('[VIDEO-SERVICE] ✅ Video list refreshed')
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] ❌ Error refreshing video list:', error)
+    }
+  }
+
+  /**
+   * الحصول على أحدث ملف فيديو (بناءً على تاريخ التعديل)
+   * Get the most recently modified video file
+   */
+  getMostRecentVideo(): string | null {
+    try {
+      const fs = require('fs')
+      const path = require('path')
+      const videoFiles = fs.readdirSync(this.videoBasePath)
+        .filter((file: string) => file.endsWith('.mp4'))
+
+      if (videoFiles.length === 0) {
+        return null
+      }
+
+      // Sort by modification time (most recent first)
+      const sortedFiles = videoFiles
+        .map((file: string) => {
+          const filePath = path.join(this.videoBasePath, file)
+          const stats = fs.statSync(filePath)
+          return {
+            name: file,
+            mtime: stats.mtime
+          }
+        })
+        .sort((a: any, b: any) => b.mtime - a.mtime)
+
+      const mostRecent = sortedFiles[0].name
+      console.log(`[VIDEO-SERVICE] Most recent video: ${mostRecent}`)
+      return mostRecent
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] Error getting most recent video:', error)
+      return null
+    }
+  }
+
+  /**
+   * تشغيل أحدث فيديو متوفر
+   * Play the most recently modified video
+   */
+  async playMostRecentVideo(): Promise<boolean> {
+    const recentVideo = this.getMostRecentVideo()
+    if (!recentVideo) {
+      console.error('[VIDEO-SERVICE] ❌ No recent videos available')
+      return false
+    }
+
+    console.log(`[VIDEO-SERVICE] 🎬 Playing most recent video: ${recentVideo}`)
+    return await this.playMp4Loop(recentVideo)
   }
 }
 

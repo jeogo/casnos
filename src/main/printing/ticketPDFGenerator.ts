@@ -131,7 +131,6 @@ export class TicketPDFGenerator {
 }
 
 // Export convenience functions for easy integration
-// Export convenience functions for easy integration
 export async function generateTicketPDF(
   ticketNumber: string,
   serviceName: string,

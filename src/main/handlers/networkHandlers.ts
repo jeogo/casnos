@@ -2,6 +2,7 @@
 import { ipcMain } from 'electron'
 import dgram from 'dgram'
 import os from 'os'
+import crypto from 'crypto'
 
 // متغيرات الشبكة العامة
 let discoveredServerIp: string | null = null
@@ -143,6 +144,44 @@ function getLocalIPAddress(): string {
   }
 }
 
+// دالة للحصول على معرف الجهاز الفريد
+function getMachineIdentifier(): string {
+  try {
+    // استخدام معلومات الجهاز لإنشاء معرف ثابت
+    const hostname = os.hostname()
+    const platform = os.platform()
+    const arch = os.arch()
+    const networkInterfaces = os.networkInterfaces()
+
+    // الحصول على عنوان MAC للشبكة الأولى
+    let macAddress = ''
+    for (const interfaceName in networkInterfaces) {
+      const interfaces = networkInterfaces[interfaceName]
+      if (interfaces) {
+        for (const interfaceInfo of interfaces) {
+          if (!interfaceInfo.internal && interfaceInfo.mac && interfaceInfo.mac !== '00:00:00:00:00:00') {
+            macAddress = interfaceInfo.mac
+            break
+          }
+        }
+        if (macAddress) break
+      }
+    }
+
+    // إنشاء hash ثابت من معلومات الجهاز
+    const machineData = `${hostname}-${platform}-${arch}-${macAddress}`
+    const hash = crypto.createHash('md5').update(machineData).digest('hex')
+
+    // إرجاع أول 8 أحرف من الـ hash
+    return hash.substring(0, 8).toUpperCase()
+
+  } catch (error) {
+    console.error('[NETWORK] Error generating machine ID:', error)
+    // fallback إلى timestamp إذا فشل
+    return Date.now().toString(36).toUpperCase()
+  }
+}
+
 export function setupNetworkHandlers() {
   // UDP Server Discovery - البحث عن الخادم
   ipcMain.handle('discover-server-udp', async () => {
@@ -154,16 +193,21 @@ export function setupNetworkHandlers() {
         if (!resolved) {
           resolved = true
           udpSocket.close()
+          console.log('[UDP CLIENT] ⏰ Discovery timeout - no server found')
           resolve(null)
         }
       }, 5000)
 
-      udpSocket.on('message', (msg) => {
+      udpSocket.on('message', (msg, rinfo) => {
         if (resolved) return
 
         try {
           const message = JSON.parse(msg.toString())
-          if (message.type === 'discovery' && message.data?.server) {
+          console.log(`[UDP CLIENT] 📨 Received message from ${rinfo.address}:${rinfo.port}:`, message)
+
+          // التحقق من نوع الرسالة - يمكن أن تكون discovery أو server_broadcast
+          if ((message.type === 'discovery' && message.data?.server) ||
+              (message.type === 'server_broadcast' && message.data?.server)) {
             resolved = true
             clearTimeout(timeoutHandler)
             udpSocket.close()
@@ -173,24 +217,28 @@ export function setupNetworkHandlers() {
               port: message.data.server.port
             }
 
+            console.log('[UDP CLIENT] ✅ Server discovered:', serverInfo)
             updateNetworkServerInfo(serverInfo.ip, serverInfo.port)
             resolve(serverInfo)
           }
-        } catch {
-          // Ignore invalid messages
+        } catch (error) {
+          console.warn('[UDP CLIENT] ⚠️ Invalid message received:', error)
         }
       })
 
-      udpSocket.on('error', () => {
+      udpSocket.on('error', (error) => {
         if (!resolved) {
           resolved = true
           clearTimeout(timeoutHandler)
+          udpSocket.close()
+          console.error('[UDP CLIENT] ❌ Socket error:', error)
           resolve(null)
         }
       })
 
       udpSocket.bind(() => {
         udpSocket.setBroadcast(true)
+
         const discoveryMessage = {
           type: 'discovery',
           timestamp: Date.now()
@@ -202,8 +250,15 @@ export function setupNetworkHandlers() {
         console.log(`[UDP CLIENT] 📡 Smart broadcasting to ${broadcasts.length} addresses:`, broadcasts)
 
         broadcasts.forEach(broadcast => {
-          udpSocket.send(messageBuffer, 4000, broadcast)
+          try {
+            udpSocket.send(messageBuffer, 4000, broadcast)
+            console.log(`[UDP CLIENT] 📤 Sent discovery to ${broadcast}:4000`)
+          } catch (error) {
+            console.warn(`[UDP CLIENT] ⚠️ Failed to send to ${broadcast}:`, error)
+          }
         })
+
+        console.log('[UDP CLIENT] 🔍 Waiting for server responses...')
       })
     })
   })
@@ -233,6 +288,34 @@ export function setupNetworkHandlers() {
       return { success: true }
     }
     return { success: false, message: 'Invalid server info' }
+  })
+
+  // Get machine ID
+  ipcMain.handle('get-machine-id', async () => {
+    try {
+      const machineId = getMachineIdentifier()
+      return { machineId }
+    } catch (error) {
+      throw new Error('Cannot determine machine ID')
+    }
+  })
+
+  // Get network info (IP address)
+  ipcMain.handle('get-network-info', async () => {
+    try {
+      const networkInfo = detectNetworkInfo()
+      return {
+        ip: networkInfo.ip,
+        subnet: networkInfo.subnet,
+        broadcastAddress: networkInfo.broadcastAddress,
+        networkClass: networkInfo.networkClass
+      }
+    } catch (error) {
+      console.error('[NETWORK] Error getting network info:', error)
+      // Fallback to basic IP detection
+      const ip = getLocalIPAddress()
+      return { ip }
+    }
   })
 
   console.log('[HANDLERS] 🌐 Network handlers registered')

@@ -7,28 +7,64 @@ import icon from '../../../build/icon.png?asset'
 let windowWindow: BrowserWindow | null = null
 
 export function createWindowWindow(): BrowserWindow {
-  // إنشاء شاشة الشباك
+  // إنشاء شاشة الشباك - نافذة صغيرة قابلة للتحريك
   windowWindow = new BrowserWindow({
-    width: 1920,
-    height: 1080,
+    width: 480,
+    height: 600,
+    minWidth: 350,
+    minHeight: 400,
+    maxWidth: 600,
+    maxHeight: 800,
     show: false,
-    autoHideMenuBar: true,
-    title: 'CASNOS - Window Screen',
-    ...(process.platform === 'linux' ? { icon } : {}),
+    frame: true,
+    transparent: false,
+    alwaysOnTop: true,
+    resizable: true,
+    movable: true,
+    minimizable: true,
+    maximizable: false,
+    closable: true,
+    skipTaskbar: false,
+    hasShadow: true,
+    roundedCorners: true,
+    title: 'CASNOS - شاشة الشباك والخدمة',
+    icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      nodeIntegration: false,
+      contextIsolation: true
     }
   })
 
   windowWindow.on('ready-to-show', () => {
-    windowWindow?.maximize()
     windowWindow?.show()
+    // Position in top-right corner
+    const { screen } = require('electron')
+    const { width: screenWidth } = screen.getPrimaryDisplay().workAreaSize
+    windowWindow?.setPosition(screenWidth - 500, 50)
   })
 
   windowWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  // Handle window resize and position requests from renderer with smooth transitions
+  windowWindow.webContents.on('ipc-message', (_event, channel, ...args) => {
+    if (channel === 'window-resize') {
+      const { width, height } = args[0]
+      if (windowWindow) {
+        // Animate the resize smoothly
+        windowWindow.setSize(width, height, true)
+      }
+    } else if (channel === 'window-position') {
+      const { x, y } = args[0]
+      if (windowWindow) {
+        // Smooth position change
+        windowWindow.setPosition(Math.round(x), Math.round(y), true)
+      }
+    }
   })
 
   // تحميل شاشة الشباك
@@ -40,7 +76,7 @@ export function createWindowWindow(): BrowserWindow {
     })
   }
 
-  console.log('[WINDOW-WINDOW] 🪟 Window screen created successfully')
+  console.log('[WINDOW-WINDOW] 🪟 Floating window created successfully')
   return windowWindow
 }
 

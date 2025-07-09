@@ -114,7 +114,6 @@ class UDPServer {
 
       return Array.from(broadcasts)
     } catch (error) {
-      console.error('❌ Error generating network-aware broadcasts:', error)
       // fallback إلى عناوين شائعة
       return [
         '255.255.255.255',

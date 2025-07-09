@@ -17,11 +17,16 @@ export interface Ticket {
 
 export interface Window {
   id: number
+  service_id?: number
+  device_id?: string
   active: boolean
+  created_at?: string
+  updated_at?: string
 }
 
 export interface CreateTicketRequest {
   service_id: number
+  print_type?: 'local' | 'network'
 }
 
 // New interface for network printing
@@ -45,6 +50,8 @@ export interface CreateServiceRequest {
 }
 
 export interface CreateWindowRequest {
+  service_id?: number
+  device_id?: string
   active?: boolean
 }
 
@@ -61,6 +68,8 @@ export interface DatabaseTicket {
 }
 
 export interface DatabaseWindow {
+  service_id?: number
+  device_id?: string
   active?: boolean // Using shorter name to match DB schema
 }
 

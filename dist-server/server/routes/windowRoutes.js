@@ -1,0 +1,24 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const windowController_1 = require("../controllers/windowController");
+const router = express_1.default.Router();
+router.get('/', windowController_1.getAllWindows);
+router.get('/active', windowController_1.getActiveWindows);
+router.get('/service/:serviceId', windowController_1.getWindowsByService);
+router.get('/service/:serviceId/active', windowController_1.getActiveWindowsByService);
+router.post('/auto', windowController_1.createWindowWithAutoNumber);
+router.post('/register-device', windowController_1.registerDeviceWindow);
+router.get('/device/:deviceId', windowController_1.getWindowByDeviceId);
+router.put('/device/:deviceId/activate', windowController_1.activateDeviceWindow);
+router.put('/device/:deviceId/deactivate', windowController_1.deactivateDeviceWindow);
+router.get('/:id', windowController_1.getWindowById);
+router.post('/', windowController_1.createWindow);
+router.put('/:id', windowController_1.updateWindow);
+router.put('/:id/assign-service', windowController_1.assignServiceToWindow);
+router.put('/:id/remove-service', windowController_1.removeServiceFromWindow);
+router.delete('/:id', windowController_1.deleteWindow);
+exports.default = router;

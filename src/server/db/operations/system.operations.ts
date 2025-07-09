@@ -104,7 +104,7 @@ export const systemOperations = {
     const db = getDatabase()
 
     // Get table sizes
-    const tables = ['services', 'tickets', 'windows', 'employees', 'devices', 'device_printers', 'daily_resets']
+    const tables = ['services', 'tickets', 'windows', 'devices', 'device_printers', 'daily_resets']
     const stats: Record<string, number> = {}
 
     for (const table of tables) {

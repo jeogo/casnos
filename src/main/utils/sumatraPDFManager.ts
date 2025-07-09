@@ -7,6 +7,7 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
+import { ResourcePathManager } from './resourcePathManager';
 
 const execAsync = promisify(exec);
 
@@ -45,25 +46,20 @@ export class SumatraPDFManager {
    * Initialize SumatraPDF and settings paths
    */
   private initializePaths(): void {
-    const possibleSumatraPaths = [
-      // Production path (when app is packaged)
-      path.join(process.resourcesPath, 'assets', 'SumatraPDF.exe'),
-      // Development paths
-      path.join(process.cwd(), 'resources', 'assets', 'SumatraPDF.exe'),
-      path.join(__dirname, '../../../resources/assets/SumatraPDF.exe')
-    ];
+    try {
+      const resourceManager = ResourcePathManager.getInstance();
+      const sumatraPath = resourceManager.getSumatraPDFPath();
 
-    console.log('[SumatraPDF] 🔍 Searching for SumatraPDF.exe...');
-    for (const testPath of possibleSumatraPaths) {
-      if (fs.existsSync(testPath)) {
-        this.sumatraPath = path.resolve(testPath);
+      if (sumatraPath && fs.existsSync(sumatraPath)) {
+        this.sumatraPath = path.resolve(sumatraPath);
         console.log(`[SumatraPDF] ✅ Found at: ${this.sumatraPath}`);
-        break;
+      } else {
+        console.warn('[SumatraPDF] ❌ SumatraPDF not found - will use fallback printing');
+        this.sumatraPath = null;
       }
-    }
-
-    if (!this.sumatraPath) {
-      console.warn('[SumatraPDF] ❌ SumatraPDF not found - will use fallback printing');
+    } catch (error) {
+      console.error('[SumatraPDF] ❌ Error initializing paths:', error);
+      this.sumatraPath = null;
     }
   }
 

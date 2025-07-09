@@ -162,11 +162,9 @@ export class SmartPrintManager {
       };
 
     } catch (error) {
-      console.error(`[SmartPrint] ❌ Print command failed:`, error);
-
       return {
         success: false,
-        message: `❌ Print failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
+        message: `Print failed: ${error instanceof Error ? error.message : 'Unknown error'}`,
         method: 'failed'
       };
     }
@@ -203,7 +201,7 @@ export class SmartPrintManager {
           service_name: ticketData.service_name,
           created_at: ticketData.created_at,
           printer_id: ticketData.printer_id,
-          company_name: ticketData.company_name || 'نظام إدارة الطوابير',
+          company_name: "", // ✅ Always empty string as requested
           position: ticketData.position,
           print_source: ticketData.print_source
         });

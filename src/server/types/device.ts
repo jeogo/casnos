@@ -53,6 +53,7 @@ export interface CreateDeviceRequest {
   ip_address: string
   port?: number
   device_type: 'display' | 'customer' | 'window'
+  status?: 'online' | 'offline' | 'error'
   capabilities?: object
   metadata?: object
 }

@@ -1,0 +1,24 @@
+{
+  "watch": [
+    "src/server/**/*",
+    "src/main/utils/persistentStorage.ts"
+  ],
+  "ext": "ts,js,json",
+  "ignore": [
+    "src/renderer/**/*",
+    "src/preload/**/*",
+    "out/**/*",
+    "dist/**/*",
+    "build/**/*",
+    "node_modules/**/*",
+    "data/**/*",
+    "resources/**/*",
+    "*.md",
+    "*.log"
+  ],
+  "exec": "ts-node --project tsconfig.server.json src/server/server.ts",
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "delay": 1000
+}

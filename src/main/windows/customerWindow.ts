@@ -13,8 +13,8 @@ export function createCustomerWindow(): BrowserWindow {
     height: 1080,
     show: false,
     autoHideMenuBar: true,
-    title: 'CASNOS - Customer Screen',
-    ...(process.platform === 'linux' ? { icon } : {}),
+    title: 'CASNOS - شاشة العملاء والطلبات',
+    icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false

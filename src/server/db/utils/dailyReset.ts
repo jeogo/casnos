@@ -6,17 +6,13 @@ import type Database from 'better-sqlite3'
  */
 export function setupDailyReset(db: Database.Database): void {
   try {
-    console.log('🔄 Setting up daily reset system...')
-
     // Initialize daily reset tracking table if not exists
     initializeDailyResetTable(db)
 
     // Perform reset if needed
     performDailyResetIfNeeded(db)
-
-    console.log('✅ Daily reset system initialized')
   } catch (error) {
-    console.error('❌ Daily reset setup failed:', error)
+    console.error('Daily reset setup failed:', error)
     throw error
   }
 }

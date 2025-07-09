@@ -107,14 +107,20 @@ export function createWindowSchema(): void {
   const createWindowsTable = `
     CREATE TABLE IF NOT EXISTS windows (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
+      service_id INTEGER,
+      device_id TEXT,
       active BOOLEAN DEFAULT 1,
       created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-      updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+      updated_at TEXT DEFAULT CURRENT_TIMESTAMP,
+      FOREIGN KEY(service_id) REFERENCES services(id) ON DELETE SET NULL,
+      FOREIGN KEY(device_id) REFERENCES devices(device_id) ON DELETE SET NULL
     )
   `
 
   const createWindowIndexes = [
-    'CREATE INDEX IF NOT EXISTS idx_windows_active ON windows(active)'
+    'CREATE INDEX IF NOT EXISTS idx_windows_active ON windows(active)',
+    'CREATE INDEX IF NOT EXISTS idx_windows_service_id ON windows(service_id)',
+    'CREATE INDEX IF NOT EXISTS idx_windows_device_id ON windows(device_id)'
   ]
 
   db.exec(createWindowsTable)

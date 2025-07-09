@@ -1,7 +1,762 @@
-/* CASNOS - Arabic Queue Management System */
+/* CASNOS - نظام إدارة الطوابير الذكي */
+/* الصندوق الوطني للضمان الاجتماعي لغير الأجراء - وكالة المسيلة */
+
+/* استيراد نظام الألوان والتصميم الموحد */
+@import '../styles/brand-colors.css';
+
+/* استيراد الخطوط من مجلد الموارد */
+@import '../styles/fonts.css';
+
+/* استيراد إصلاح أخطاء الخطوط */
+@import '../styles/font-fix.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Arabic Font Support */
+/* إعداد النافذة العائمة بخلفية شفافة */
+body[data-screen="window"] {
+  background: transparent !important;
+  overflow: hidden;
+}
 
+html[data-screen="window"] {
+  background: transparent !important;
+}
+
+body[data-screen="window"] #root {
+  background: transparent !important;
+}
+
+/* الأنماط الأساسية مع دعم اللغة العربية */
+@layer base {
+  * {
+    font-family: var(--casnos-font-arabic);
+    box-sizing: border-box;
+  }
+
+  html {
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    direction: rtl;
+    text-align: right;
+    color: var(--casnos-text-primary);
+    background-color: var(--casnos-bg-primary);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    font-family: var(--casnos-font-arabic);
+  }
+
+  /* إصلاح المسافات المعكوسة في RTL */
+  .space-x-reverse > * + * {
+    margin-right: var(--tw-space-x-reverse) !important;
+    margin-left: calc(var(--tw-space-x) * calc(1 - var(--tw-space-x-reverse))) !important;
+  }
+
+  /* تحسين عرض النصوص العربية */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--casnos-font-arabic);
+    font-weight: var(--casnos-font-bold);
+    color: var(--casnos-text-primary);
+    line-height: 1.2;
+  }
+
+  /* تحسين الأزرار */
+  button {
+    font-family: var(--casnos-font-arabic);
+  }
+
+  /* تحسين الحقول */
+  input, textarea, select {
+    font-family: var(--casnos-font-arabic);
+    direction: rtl;
+    text-align: right;
+  }
+
+  /* تحسين الروابط */
+  a {
+    color: var(--casnos-primary);
+    text-decoration: none;
+    transition: var(--casnos-transition-colors);
+  }
+
+  a:hover {
+    color: var(--casnos-primary-600);
+  }
+}
+
+/* المكونات المخصصة والأنماط المتقدمة */
+@layer components {
+  /* =================================================================
+     الرسوم المتحركة المحسنة - Enhanced Animations
+     ================================================================= */
+
+  .animate-pulse-slow {
+    animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-slide-up {
+    animation: slideUp 0.6s ease-out forwards;
+  }
+
+  .animate-scale-in {
+    animation: scaleIn 0.8s ease-out forwards;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 1s ease-out forwards;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s ease-in-out infinite;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounceSubtle 2s ease-in-out infinite;
+  }
+
+  .animate-gradient {
+    animation: gradient 3s ease infinite;
+    background-size: 200% 200%;
+  }
+
+  .animate-spin-slow {
+    animation: spin 3s linear infinite;
+  }
+
+  .animate-pulse-primary {
+    animation: pulsePrimary 2s ease-in-out infinite;
+  }
+
+  /* =================================================================
+     الحدود المتدرجة - Gradient Borders
+     ================================================================= */
+
+  .gradient-border-primary {
+    background: linear-gradient(var(--casnos-white), var(--casnos-white)) padding-box,
+                var(--casnos-gradient-primary) border-box;
+    border: 2px solid transparent;
+    border-radius: var(--casnos-radius-xl);
+  }
+
+  .gradient-border-secondary {
+    background: linear-gradient(var(--casnos-white), var(--casnos-white)) padding-box,
+                linear-gradient(135deg, var(--casnos-gray-300), var(--casnos-gray-500)) border-box;
+    border: 2px solid transparent;
+    border-radius: var(--casnos-radius-xl);
+  }
+
+  /* =================================================================
+     أنماط الحالة - Status Styles
+     ================================================================= */
+
+  .status-online {
+    color: var(--casnos-success);
+  }
+
+  .status-offline {
+    color: var(--casnos-error);
+  }
+
+  .status-pending {
+    color: var(--casnos-warning);
+  }
+
+  .status-processing {
+    color: var(--casnos-info);
+  }
+
+  /* نقاط الحالة */
+  .status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 8px;
+  }
+
+  .status-dot-online {
+    background-color: var(--casnos-success);
+    box-shadow: 0 0 0 2px var(--casnos-success-light);
+  }
+
+  .status-dot-offline {
+    background-color: var(--casnos-error);
+    box-shadow: 0 0 0 2px var(--casnos-error-light);
+  }
+
+  .status-dot-pending {
+    background-color: var(--casnos-warning);
+    box-shadow: 0 0 0 2px var(--casnos-warning-light);
+  }
+
+  /* =================================================================
+     أنماط خاصة بالشاشات - Screen-Specific Styles
+     ================================================================= */
+
+  /* شاشة العرض - Display Screen */
+  .display-header {
+    background: var(--casnos-gradient-dark);
+    color: var(--casnos-text-on-dark);
+    padding: var(--casnos-spacing-lg);
+    border-radius: var(--casnos-radius-xl);
+    box-shadow: var(--casnos-shadow-lg);
+  }
+
+  .display-queue-card {
+    background: var(--casnos-white);
+    border-radius: var(--casnos-radius-2xl);
+    padding: var(--casnos-spacing-2xl);
+    box-shadow: var(--casnos-shadow-xl);
+    border: 1px solid var(--casnos-border-light);
+  }
+
+  .display-current-ticket {
+    font-size: var(--casnos-text-6xl);
+    font-weight: var(--casnos-font-black);
+    color: var(--casnos-primary);
+    text-shadow: 0 4px 8px rgba(105, 136, 230, 0.3);
+  }
+
+  /* شاشة العملاء - Customer Screen */
+  .customer-service-card {
+    background: var(--casnos-white);
+    border-radius: var(--casnos-radius-xl);
+    padding: var(--casnos-spacing-xl);
+    box-shadow: var(--casnos-shadow-md);
+    border: 2px solid var(--casnos-border-light);
+    transition: var(--casnos-transition-all);
+    cursor: pointer;
+  }
+
+  .customer-service-card:hover {
+    box-shadow: var(--casnos-shadow-primary);
+    border-color: var(--casnos-primary);
+    transform: translateY(-4px);
+  }
+
+  .customer-service-card.selected {
+    border-color: var(--casnos-primary);
+    box-shadow: var(--casnos-shadow-primary);
+  }
+
+  /* شاشة الموظف - Window Screen */
+  .window-ticket-display {
+    background: var(--casnos-gradient-primary);
+    color: var(--casnos-white);
+    border-radius: var(--casnos-radius-2xl);
+    padding: var(--casnos-spacing-2xl);
+    text-align: center;
+    box-shadow: var(--casnos-shadow-xl);
+  }
+
+  .window-next-button {
+    background: var(--casnos-gradient-primary);
+    color: var(--casnos-white);
+    border: none;
+    border-radius: var(--casnos-radius-xl);
+    padding: var(--casnos-spacing-lg) var(--casnos-spacing-2xl);
+    font-size: var(--casnos-text-lg);
+    font-weight: var(--casnos-font-semibold);
+    cursor: pointer;
+    transition: var(--casnos-transition-all);
+    box-shadow: var(--casnos-shadow-lg);
+  }
+
+  .window-next-button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--casnos-shadow-xl);
+  }
+
+  .window-next-button:active {
+    transform: translateY(0);
+  }
+
+  /* شاشة الإدارة - Admin Screen */
+  .admin-sidebar {
+    background: var(--casnos-white);
+    border-radius: var(--casnos-radius-xl);
+    box-shadow: var(--casnos-shadow-lg);
+    padding: var(--casnos-spacing-lg);
+  }
+
+  .admin-table {
+    background: var(--casnos-white);
+    border-radius: var(--casnos-radius-xl);
+    overflow: hidden;
+    box-shadow: var(--casnos-shadow-md);
+  }
+
+  .admin-table th {
+    background: var(--casnos-gray-50);
+    color: var(--casnos-text-primary);
+    font-weight: var(--casnos-font-semibold);
+    padding: var(--casnos-spacing-md);
+    text-align: right;
+  }
+
+  .admin-table td {
+    padding: var(--casnos-spacing-md);
+    border-bottom: 1px solid var(--casnos-border-light);
+  }
+
+  /* =================================================================
+     أنماط مساعدة - Utility Styles
+     ================================================================= */
+
+  .glass-effect {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .loading-spinner {
+    border: 3px solid var(--casnos-gray-200);
+    border-top: 3px solid var(--casnos-primary);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+  }
+
+  .text-gradient-primary {
+    background: var(--casnos-gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .scrollbar-hidden {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scrollbar-hidden::-webkit-scrollbar {
+    display: none;
+  }
+
+  .hover-lift {
+    transition: var(--casnos-transition-all);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--casnos-shadow-lg);
+  }
+}
+
+/* =================================================================
+   الرسوم المتحركة - Keyframe Animations
+   ================================================================= */
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(105, 136, 230, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(105, 136, 230, 0.8);
+  }
+}
+
+@keyframes slideUp {
+  0% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes bounceSubtle {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes pulsePrimary {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(105, 136, 230, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(105, 136, 230, 0);
+  }
+}
+
+/* =================================================================
+   الاستعلامات الإعلامية - Media Queries
+   ================================================================= */
+
+/* الشاشات الصغيرة - Mobile */
+@media (max-width: 640px) {
+  :root {
+    --casnos-text-xs: 0.625rem;     /* 10px */
+    --casnos-text-sm: 0.75rem;      /* 12px */
+    --casnos-text-base: 0.875rem;   /* 14px */
+    --casnos-text-lg: 1rem;         /* 16px */
+    --casnos-text-xl: 1.125rem;     /* 18px */
+    --casnos-text-2xl: 1.25rem;     /* 20px */
+    --casnos-text-3xl: 1.5rem;      /* 24px */
+    --casnos-text-4xl: 1.875rem;    /* 30px */
+    --casnos-text-5xl: 2.25rem;     /* 36px */
+    --casnos-text-6xl: 2.5rem;      /* 40px */
+  }
+
+  .casnos-card {
+    padding: var(--casnos-spacing-md);
+  }
+
+  .customer-service-card {
+    padding: var(--casnos-spacing-lg);
+  }
+
+  .display-current-ticket {
+    font-size: var(--casnos-text-4xl);
+  }
+}
+
+/* الشاشات المتوسطة - Tablet */
+@media (min-width: 641px) and (max-width: 1024px) {
+  :root {
+    --casnos-spacing-xl: 1.5rem;    /* 24px */
+    --casnos-spacing-2xl: 2rem;     /* 32px */
+    --casnos-spacing-3xl: 2.5rem;   /* 40px */
+  }
+}
+
+/* الشاشات الكبيرة - Desktop */
+@media (min-width: 1025px) {
+  .display-current-ticket {
+    font-size: var(--casnos-text-6xl);
+  }
+
+  .customer-service-card {
+    padding: var(--casnos-spacing-2xl);
+  }
+}
+
+/* الشاشات الكبيرة جداً - Large Desktop */
+@media (min-width: 1440px) {
+  :root {
+    --casnos-text-6xl: 4rem;        /* 64px */
+    --casnos-spacing-3xl: 5rem;     /* 80px */
+  }
+}
+
+/* =================================================================
+   الطباعة - Print Styles
+   ================================================================= */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  .casnos-card {
+    border: 1px solid #ccc;
+    page-break-inside: avoid;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* =================================================================
+   الوضع الداكن - Dark Mode Support
+   ================================================================= */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --casnos-bg-primary: var(--casnos-gray-900);
+    --casnos-bg-secondary: var(--casnos-gray-800);
+    --casnos-bg-muted: var(--casnos-gray-700);
+    --casnos-text-primary: var(--casnos-white);
+    --casnos-text-secondary: var(--casnos-gray-300);
+    --casnos-text-muted: var(--casnos-gray-400);
+    --casnos-border-light: var(--casnos-gray-600);
+    --casnos-border-medium: var(--casnos-gray-500);
+    --casnos-border-dark: var(--casnos-gray-400);
+  }
+
+  .casnos-card {
+    background: var(--casnos-gray-800);
+    border-color: var(--casnos-gray-600);
+  }
+
+  .admin-table th {
+    background: var(--casnos-gray-700);
+  }
+}
+
+/* =================================================================
+   تحسينات الأداء - Performance Optimizations
+   ================================================================= */
+
+/* تحسين الرسوم المتحركة */
+.animate-float,
+.animate-glow,
+.animate-shimmer,
+.animate-bounce-subtle,
+.animate-gradient {
+  will-change: transform;
+}
+
+/* تحسين الانتقالات */
+.hover-lift,
+.customer-service-card,
+.casnos-btn {
+  will-change: transform, box-shadow;
+}
+
+/* تحسين النصوص */
+.display-current-ticket,
+.text-gradient-primary {
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+/* =================================================================
+   إعدادات إمكانية الوصول - Accessibility Settings
+   ================================================================= */
+
+/* تحسين التركيز */
+*:focus {
+  outline: 2px solid var(--casnos-primary);
+  outline-offset: 2px;
+}
+
+/* تحسين الحركة للمستخدمين الحساسين */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* تحسين التباين العالي */
+@media (prefers-contrast: high) {
+  :root {
+    --casnos-border-light: var(--casnos-gray-600);
+    --casnos-border-medium: var(--casnos-gray-700);
+    --casnos-border-dark: var(--casnos-gray-800);
+  }
+}
+
+/* =================================================================
+   التحسينات الأخيرة - Final Optimizations
+   ================================================================= */
+
+/* إزالة الوميض عند التحميل */
+.no-flash {
+  opacity: 0;
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* تحسين السكرول */
+.smooth-scroll {
+  scroll-behavior: smooth;
+}
+
+/* تحسين الخطوط */
+.optimize-text {
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Window Screen - تحسينات خاصة بشاشة الشباك */
+@layer utilities {
+  /* تدرجات حديثة للخلفية */
+  .bg-window-gradient {
+    background: linear-gradient(135deg, #1e293b 0%, #1e40af 50%, #1e293b 100%);
+  }
+
+  /* تأثيرات بلور حديثة */
+  .backdrop-blur-window {
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* تأثيرات الظل المتقدمة */
+  .shadow-window {
+    box-shadow:
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 20px 40px -10px rgba(0, 0, 0, 0.2),
+      0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+
+  /* تأثيرات الأنيميشن */
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+
+  .animate-shimmer {
+    animation: shimmer 2s linear infinite;
+  }
+
+  .animate-scale-in {
+    animation: scale-in 0.8s ease-out;
+  }
+
+  .animate-slide-up {
+    animation: slide-up 0.6s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fade-in 1s ease-out;
+  }
+
+  .animate-bounce-subtle {
+    animation: bounce-subtle 2s infinite;
+  }
+
+  /* تأثيرات الحواف الدائرية الحديثة */
+  .rounded-window {
+    border-radius: 1rem;
+  }
+
+  .rounded-window-lg {
+    border-radius: 1.5rem;
+  }
+
+  /* تأثيرات الحدود الحديثة */
+  .border-window {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .border-window-hover {
+    border: 2px solid rgba(59, 130, 246, 0.5);
+  }
+}
+
+/* تعريف الأنيميشن */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
+@keyframes glow {
+  0% { box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+  100% { box-shadow: 0 0 30px rgba(59, 130, 246, 0.4); }
+}
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes scale-in {
+  0% { transform: scale(0.8); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes slide-up {
+  0% { transform: translateY(20px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes bounce-subtle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
+}

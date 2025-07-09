@@ -167,8 +167,6 @@ export const createDevice = async (req: Request, res: Response): Promise<void> =
     // Check if device already exists - if so, update it instead of creating
     const existingDevice = deviceOperations.getByDeviceId(deviceData.device_id)
     if (existingDevice) {
-
-
       // Update device status to online and last_seen
       const updatedDevice = deviceOperations.updateStatus(deviceData.device_id, 'online')
 
@@ -186,18 +184,34 @@ export const createDevice = async (req: Request, res: Response): Promise<void> =
       name: deviceData.name,
       ip_address: deviceData.ip_address,
       device_type: deviceData.device_type,
-      status: 'offline', // Default status
+      status: deviceData.status || 'offline', // Use provided status or default to offline
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString()
     }
 
-    const device = deviceOperations.create(deviceCreateData)
-
-    res.status(201).json({
-      success: true,
-      data: device,
-      message: 'Device created successfully'
-    })
+    try {
+      const device = deviceOperations.create(deviceCreateData)
+      res.status(201).json({
+        success: true,
+        data: device,
+        message: 'Device created successfully'
+      })
+    } catch (createError) {
+      // If creation fails due to unique constraint, check if device was created by another request
+      const deviceCheck = deviceOperations.getByDeviceId(deviceData.device_id)
+      if (deviceCheck) {
+        // Device was created by another request, update its status and return success
+        const updatedDevice = deviceOperations.updateStatus(deviceData.device_id, deviceData.status || 'online')
+        res.json({
+          success: true,
+          data: updatedDevice,
+          message: 'Device was created concurrently, status updated'
+        })
+      } else {
+        // Creation truly failed
+        throw createError
+      }
+    }
   } catch (error) {
     // logger removed
     res.status(500).json({
@@ -371,10 +385,11 @@ export const getAllDevicePrinters = async (req: Request, res: Response): Promise
       message: 'Device printers retrieved successfully'
     })
   } catch (error) {
-    // logger removed
+    console.error('[DEVICE-CONTROLLER] Error getting all device printers:', error)
     res.status(500).json({
       success: false,
-      message: 'Failed to retrieve device printers'
+      message: 'Failed to retrieve device printers',
+      error: error instanceof Error ? error.message : 'Unknown error'
     })
   }
 }
@@ -418,10 +433,18 @@ export const createDevicePrinter = async (req: Request, res: Response): Promise<
       return
     }
 
-    // Check if printer already exists for this device
-    const existingPrinter = devicePrinterOperations.getByPrinterId(printerData.printer_id)
+    // Check if printer already exists for this specific device (prevent duplicates per device)
+    const devicePrinters = devicePrinterOperations.getByDeviceId(deviceId)
+    const existingPrinter = devicePrinters.find(p =>
+      p.printer_id === printerData.printer_id ||
+      p.printer_name === printerData.printer_name
+    )
+
     if (existingPrinter) {
-      res.status(409).json({ success: false, message: 'Printer with this printer_id already exists' })
+      res.status(409).json({
+        success: false,
+        message: `Printer already exists for this device: ${existingPrinter.printer_name}`
+      })
       return
     }
 
@@ -480,24 +503,46 @@ export const updateDevicePrinter = async (req: Request, res: Response): Promise<
 
 export const deleteDevicePrinter = async (req: Request, res: Response): Promise<void> => {
   try {
+    console.log('[SERVER] Delete printer request:', {
+      params: req.params,
+      body: req.body,
+      method: req.method,
+      url: req.url
+    })
+
     const { id } = req.params
     if (!id) {
+      console.log('[SERVER] No printer ID provided')
       res.status(400).json({ success: false, message: 'Printer ID is required' })
       return
     }
+
     const printerId = parseInt(id, 10)
     if (isNaN(printerId)) {
+      console.log('[SERVER] Invalid printer ID:', id)
       res.status(400).json({ success: false, message: 'Invalid printer ID' })
       return
     }
+
+    console.log('[SERVER] Attempting to delete printer ID:', printerId)
     const deleted = devicePrinterOperations.delete(printerId)
+    console.log('[SERVER] Delete operation result:', deleted)
+
     if (!deleted) {
+      console.log('[SERVER] Printer not found or not deleted:', printerId)
       res.status(404).json({ success: false, message: 'Device printer not found' })
       return
     }
+
+    console.log('[SERVER] Printer deleted successfully:', printerId)
     res.json({ success: true, message: 'Device printer deleted successfully' })
   } catch (error) {
-    // logger removed
+    console.error('[SERVER] Delete printer error:', {
+      error,
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+      params: req.params
+    })
     res.status(500).json({ success: false, message: 'Failed to delete device printer' })
   }
 }

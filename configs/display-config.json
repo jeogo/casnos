@@ -1,0 +1,32 @@
+{
+  "version": "1.0.0",
+  "screenType": "display",
+  "embeddedServer": {
+    "enabled": true,
+    "port": 3001,
+    "host": "0.0.0.0",
+    "autoRestart": true,
+    "maxRestartAttempts": 3,
+    "restartDelay": 5000
+  },
+  "features": {
+    "audio": true,
+    "video": true,
+    "printing": true,
+    "udpDiscovery": true,
+    "realTimeUpdates": true,
+    "socketIO": true
+  },
+  "performance": {
+    "maxMemoryUsage": 256,
+    "garbageCollectionInterval": 30000,
+    "serverSyncInterval": 2000,
+    "enableDevTools": false
+  },
+  "paths": {
+    "serverExecutable": "server/server.exe",
+    "videoPath": "video/ads.mp4",
+    "voicePath": "voice/",
+    "fontsPath": "fonts/"
+  }
+}

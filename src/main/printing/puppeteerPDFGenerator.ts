@@ -40,7 +40,6 @@ export class PuppeteerPDFGenerator {
   private async initBrowser(): Promise<void> {
     if (!this.browser) {
       try {
-        console.log('[Puppeteer] Launching browser...');
         this.browser = await puppeteer.launch({
           headless: true,
           timeout: 60000, // 60 seconds timeout
@@ -63,9 +62,7 @@ export class PuppeteerPDFGenerator {
             '--run-all-compositor-stages-before-draw'
           ]
         });
-        console.log('[Puppeteer] ✅ Browser launched successfully');
       } catch (error) {
-        console.error('[Puppeteer] ❌ Failed to launch browser:', error);
         this.browser = null;
         throw error;
       }
@@ -77,6 +74,39 @@ export class PuppeteerPDFGenerator {
    * Generate PDF for ticket
    */
   async generateTicketPDF(ticketData: TicketData, outputPath?: string): Promise<string | null> {
+    const storageManager = PDFStorageManager.getInstance();
+
+    // Check if already being generated
+    if (storageManager.isGeneratingPdf(ticketData.ticket_number, ticketData.service_name)) {
+      console.log(`[Puppeteer] 🔄 PDF already being generated for ticket ${ticketData.ticket_number}`);
+
+      // Wait up to 5 seconds for the other generation to finish
+      let attempts = 0;
+      while (attempts < 50) {
+        const finalPath = outputPath || storageManager.getTicketPath(
+          ticketData.ticket_number,
+          ticketData.service_name
+        );
+
+        if (fs.existsSync(finalPath)) {
+          console.log(`[Puppeteer] ✅ Found existing PDF: ${finalPath}`);
+          return finalPath;
+        }
+
+        await new Promise(resolve => setTimeout(resolve, 100)); // Wait 100ms
+        attempts++;
+      }
+
+      console.error(`[Puppeteer] ❌ Timeout waiting for PDF generation`);
+      return null;
+    }
+
+    // Start tracking this generation
+    if (!storageManager.startPdfGeneration(ticketData.ticket_number, ticketData.service_name)) {
+      console.error(`[Puppeteer] ❌ Failed to acquire generation lock for ticket ${ticketData.ticket_number}`);
+      return null;
+    }
+
     try {
       await this.initBrowser();
       if (!this.browser) {
@@ -94,20 +124,12 @@ export class PuppeteerPDFGenerator {
       });
 
       const html = generateThermalTicketHTML(ticketData);
-      const storageManager = PDFStorageManager.getInstance();
 
       // Faster content loading - no wait for network resources
       await page.setContent(html, {
         waitUntil: 'domcontentloaded', // Faster than 'load'
         timeout: 10000 // Reduced timeout for speed
       });
-
-      // Optimized viewport - removed duplicate
-      // await page.setViewport({
-      //   width: 302,
-      //   height: 794,
-      //   deviceScaleFactor: 1 // Reduced for better performance
-      // });
 
       // Optimized font loading with timeout for faster generation
       try {
@@ -123,8 +145,7 @@ export class PuppeteerPDFGenerator {
       // Determine output path
       const finalPath = outputPath || storageManager.getTicketPath(
         ticketData.ticket_number,
-        ticketData.service_name,
-        ticketData.printer_id
+        ticketData.service_name
       );
 
       // Ensure directory exists
@@ -162,6 +183,9 @@ export class PuppeteerPDFGenerator {
     } catch (error) {
       console.error('[Puppeteer] Error generating PDF:', error);
       return null;
+    } finally {
+      // Always release the lock
+      storageManager.finishPdfGeneration(ticketData.ticket_number, ticketData.service_name);
     }
   }
 

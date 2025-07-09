@@ -1,14 +1,16 @@
 // 🎬 Video Handlers - معالجات الفيديو
-import { ipcMain } from 'electron'
+import { ipcMain, dialog } from 'electron'
 import videoPlayerService from '../video/videoPlayerService'
+import * as fs from 'fs'
+import * as path from 'path'
 
 export function setupVideoHandlers() {
   // 🎬 Video Service IPC Handlers
 
-  // تشغيل فيديو - Play video (unified handler)
+  // تشغيل فيديو - Play video (unified handler - محسن للاستخدام التلقائي)
   ipcMain.handle('video:play', async (_event, filePath?: string) => {
     try {
-      console.log(`[IPC-VIDEO] Playing MP4 video: ${filePath || 'sample-ad.mp4'}`)
+      console.log(`[IPC-VIDEO] Playing MP4 video: ${filePath || 'auto-detect'}`)
       const success = await videoPlayerService.playMp4Loop(filePath)
       return {
         success,
@@ -18,6 +20,43 @@ export function setupVideoHandlers() {
       console.error('[IPC-VIDEO] Error playing MP4 video:', error)
       return {
         success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  // تشغيل أول فيديو متوفر تلقائياً
+  ipcMain.handle('video:play-first-available', async () => {
+    try {
+      console.log('[IPC-VIDEO] Playing first available video')
+      const success = await videoPlayerService.playFirstAvailableVideo()
+      return {
+        success,
+        message: success ? 'First available video started successfully' : 'No videos available or playback failed'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error playing first available video:', error)
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  // الحصول على أول فيديو متوفر
+  ipcMain.handle('video:get-first-available', async () => {
+    try {
+      const firstVideo = videoPlayerService.getFirstAvailableVideo()
+      return {
+        success: true,
+        video: firstVideo,
+        message: firstVideo ? `First video: ${firstVideo}` : 'No videos available'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error getting first available video:', error)
+      return {
+        success: false,
+        video: null,
         message: error instanceof Error ? error.message : 'Unknown error'
       }
     }
@@ -237,6 +276,129 @@ export function setupVideoHandlers() {
       return {
         success: false,
         videos: []
+      }
+    }
+  })
+
+  // فتح نافذة اختيار ملف فيديو جديد
+  ipcMain.handle('video:select-new-video', async (_event) => {
+    try {
+      console.log('[IPC-VIDEO] Opening video file selection dialog')
+
+      const result = await dialog.showOpenDialog({
+        title: 'اختر ملف فيديو جديد - Select New Video File',
+        properties: ['openFile'],
+        filters: [
+          { name: 'Video Files', extensions: ['mp4', 'avi', 'mov', 'mkv', 'webm', 'wmv', 'flv', 'm4v'] },
+          { name: 'MP4 Files', extensions: ['mp4'] },
+          { name: 'All Files', extensions: ['*'] }
+        ]
+      })
+
+      if (result.canceled || !result.filePaths.length) {
+        return {
+          success: false,
+          message: 'No file selected'
+        }
+      }
+
+      const selectedFile = result.filePaths[0]
+      console.log(`[IPC-VIDEO] User selected video file: ${selectedFile}`)
+
+      return {
+        success: true,
+        filePath: selectedFile,
+        message: 'Video file selected successfully'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error opening video selection dialog:', error)
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  // نسخ الفيديو الجديد وتعيينه كافتراضي
+  ipcMain.handle('video:set-new-default-video', async (_event, sourceFilePath: string) => {
+    try {
+      console.log(`[IPC-VIDEO] Setting new default video: ${sourceFilePath}`)
+
+      // التحقق من وجود الملف المصدر
+      if (!fs.existsSync(sourceFilePath)) {
+        throw new Error('Source video file does not exist')
+      }
+
+      // الحصول على مجلد الفيديوهات من الخدمة
+      const videoFolder = videoPlayerService.getVideoFolder()
+      if (!videoFolder) {
+        throw new Error('Video folder not found')
+      }
+
+      // إنشاء اسم ملف جديد مع تجنب التضارب
+      const sourceExt = path.extname(sourceFilePath)
+      const timestamp = new Date().toISOString().replace(/[:.]/g, '-')
+      const newFileName = `default-video-${timestamp}${sourceExt}`
+      const destinationPath = path.join(videoFolder, newFileName)
+
+      // نسخ الملف
+      fs.copyFileSync(sourceFilePath, destinationPath)
+      console.log(`[IPC-VIDEO] Video copied to: ${destinationPath}`)
+
+      // تحديث قائمة الفيديوهات في الخدمة
+      videoPlayerService.refreshVideoList()
+
+      // تشغيل الفيديو الجديد (استخدام اسم الملف فقط وليس المسار الكامل)
+      const playResult = await videoPlayerService.playMp4Loop(newFileName)
+
+      return {
+        success: playResult,
+        filePath: destinationPath,
+        fileName: newFileName,
+        message: playResult ? 'New default video set and playing successfully' : 'Video copied but failed to play'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error setting new default video:', error)
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  // الحصول على أحدث فيديو متوفر
+  ipcMain.handle('video:get-most-recent', async () => {
+    try {
+      const mostRecentVideo = videoPlayerService.getMostRecentVideo()
+      return {
+        success: true,
+        video: mostRecentVideo,
+        message: mostRecentVideo ? `Most recent video: ${mostRecentVideo}` : 'No videos available'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error getting most recent video:', error)
+      return {
+        success: false,
+        video: null,
+        message: error instanceof Error ? error.message : 'Unknown error'
+      }
+    }
+  })
+
+  // تشغيل أحدث فيديو متوفر
+  ipcMain.handle('video:play-most-recent', async () => {
+    try {
+      console.log('[IPC-VIDEO] Playing most recent video')
+      const success = await videoPlayerService.playMostRecentVideo()
+      return {
+        success,
+        message: success ? 'Most recent video started successfully' : 'Failed to play most recent video'
+      }
+    } catch (error) {
+      console.error('[IPC-VIDEO] Error playing most recent video:', error)
+      return {
+        success: false,
+        message: error instanceof Error ? error.message : 'Unknown error'
       }
     }
   })

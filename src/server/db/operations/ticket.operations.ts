@@ -47,6 +47,16 @@ export const ticketOperations = {
     return stmt.all(serviceId) as Ticket[]
   },
 
+  getTicketsByPrintStatus: (printStatus: 'pending' | 'printing' | 'printed' | 'print_failed'): Ticket[] => {
+    const db = getDatabase()
+    const stmt = db.prepare(`
+      SELECT * FROM tickets
+      WHERE print_status = ?
+      ORDER BY created_at ASC
+    `)
+    return stmt.all(printStatus) as Ticket[]
+  },
+
   getCalledTickets: (): Ticket[] => {
     const db = getDatabase()
     const stmt = db.prepare(`

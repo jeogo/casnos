@@ -1,0 +1,10 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = require("express");
+const dailyResetController_1 = require("../controllers/dailyResetController");
+const router = (0, express_1.Router)();
+router.get('/status', dailyResetController_1.getDailyResetStatus);
+router.get('/statistics', dailyResetController_1.getDailyResetStatistics);
+router.post('/force', dailyResetController_1.forceDailyReset);
+router.put('/config', dailyResetController_1.updateDailyResetConfig);
+exports.default = router;

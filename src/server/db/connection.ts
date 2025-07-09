@@ -1,16 +1,21 @@
 import Database from 'better-sqlite3'
-import { join } from 'path'
 import { existsSync, mkdirSync } from 'fs'
+import { getCASNOSPaths } from '../../shared/pathUtils'
 
-const DB_DIR = join(process.cwd(), 'data')
-const DB_PATH = join(DB_DIR, 'queue.db')
+// Use AppData for database storage
+const paths = getCASNOSPaths()
+const DB_DIR = paths.dataPath
+const DB_PATH = paths.databasePath
 
 let db: Database.Database
 
-// Ensure data directory exists
+// Ensure data directory exists (extra safety check)
 if (!existsSync(DB_DIR)) {
   mkdirSync(DB_DIR, { recursive: true })
+  console.log(`[Database] ✅ Created data directory: ${DB_DIR}`)
 }
+
+console.log(`[Database] 📁 Using database path: ${DB_PATH}`)
 
 export function initializeConnection(): Database.Database {
   if (!db) {

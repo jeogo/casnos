@@ -1,0 +1,396 @@
+/* =================================================================
+   CASNOS - نظام الألوان والتصميم الموحد للعلامة التجارية
+   الصندوق الوطني للضمان الاجتماعي لغير الأجراء - وكالة المسيلة
+   ================================================================= */
+
+:root {
+  /* =================================================================
+     الألوان الأساسية - Primary Brand Colors
+     ================================================================= */
+
+  /* الأزرق - اللون الأساسي للعلامة التجارية */
+  --casnos-primary-50: #f0f4ff;
+  --casnos-primary-100: #e6efff;
+  --casnos-primary-200: #c3d4ff;
+  --casnos-primary-300: #a0b9ff;
+  --casnos-primary-400: #899eff;
+  --casnos-primary-500: #6988e6;  /* الأزرق الأساسي */
+  --casnos-primary-600: #4f6dd5;
+  --casnos-primary-700: #3f5ac4;
+  --casnos-primary-800: #334a9e;
+  --casnos-primary-900: #2a3d7c;
+  --casnos-primary: var(--casnos-primary-500);
+
+  /* =================================================================
+     الألوان المحايدة - Neutral Colors
+     ================================================================= */
+
+  /* الأبيض والرمادي للنصوص والخلفيات */
+  --casnos-white: #ffffff;
+  --casnos-white-soft: #f8f8f8;
+  --casnos-white-mute: #f2f2f2;
+
+  --casnos-gray-50: #f9fafb;
+  --casnos-gray-100: #f3f4f6;
+  --casnos-gray-200: #e5e7eb;
+  --casnos-gray-300: #d1d5db;
+  --casnos-gray-400: #9ca3af;
+  --casnos-gray-500: #6b7280;
+  --casnos-gray-600: #4b5563;
+  --casnos-gray-700: #374151;
+  --casnos-gray-800: #1f2937;
+  --casnos-gray-900: #111827;
+
+  --casnos-black: #000000;
+  --casnos-black-soft: #1a1a1a;
+
+  /* =================================================================
+     ألوان الحالة - Status Colors
+     ================================================================= */
+
+  /* الأخضر - النجاح */
+  --casnos-success-light: #81c784;
+  --casnos-success: #4caf50;
+  --casnos-success-dark: #388e3c;
+
+  /* الأحمر - الخطأ */
+  --casnos-error-light: #e57373;
+  --casnos-error: #f44336;
+  --casnos-error-dark: #d32f2f;
+
+  /* البرتقالي - التحذير */
+  --casnos-warning-light: #ffb74d;
+  --casnos-warning: #ff9800;
+  --casnos-warning-dark: #f57c00;
+
+  /* الأزرق الفاتح - المعلومات */
+  --casnos-info-light: #64b5f6;
+  --casnos-info: #2196f3;
+  --casnos-info-dark: #1976d2;
+
+  /* =================================================================
+     ألوان الخلفيات - Background Colors
+     ================================================================= */
+
+  /* خلفيات الشاشات */
+  --casnos-bg-primary: var(--casnos-white);
+  --casnos-bg-secondary: var(--casnos-gray-50);
+  --casnos-bg-muted: var(--casnos-gray-100);
+  --casnos-bg-dark: var(--casnos-gray-800);
+  --casnos-bg-darker: var(--casnos-gray-900);
+
+  /* =================================================================
+     ألوان النصوص - Text Colors
+     ================================================================= */
+
+  /* النصوص على الخلفيات الفاتحة */
+  --casnos-text-primary: var(--casnos-gray-900);
+  --casnos-text-secondary: var(--casnos-gray-600);
+  --casnos-text-muted: var(--casnos-gray-500);
+  --casnos-text-light: var(--casnos-gray-400);
+
+  /* النصوص على الخلفيات الداكنة */
+  --casnos-text-on-dark: var(--casnos-white);
+  --casnos-text-on-dark-secondary: var(--casnos-gray-200);
+  --casnos-text-on-dark-muted: var(--casnos-gray-400);
+
+  /* =================================================================
+     ألوان الحدود - Border Colors
+     ================================================================= */
+
+  --casnos-border-light: var(--casnos-gray-200);
+  --casnos-border-medium: var(--casnos-gray-300);
+  --casnos-border-dark: var(--casnos-gray-400);
+  --casnos-border-primary: var(--casnos-primary);
+
+  /* =================================================================
+     الظلال - Shadows
+     ================================================================= */
+
+  --casnos-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --casnos-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --casnos-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --casnos-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --casnos-shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  --casnos-shadow-primary: 0 10px 15px -3px rgba(105, 136, 230, 0.2), 0 4px 6px -2px rgba(105, 136, 230, 0.1);
+
+  /* =================================================================
+     الخطوط - Typography
+     ================================================================= */
+
+  /* مسارات الخطوط */
+  --casnos-font-arabic: 'Tajawal', 'Arial', 'Segoe UI', sans-serif;
+  --casnos-font-english: 'Inter', 'Segoe UI', 'Tahoma', sans-serif;
+  --casnos-font-mono: 'JetBrains Mono', 'SFMono-Regular', 'Consolas', monospace;
+
+  /* أحجام الخطوط */
+  --casnos-text-xs: 0.75rem;     /* 12px */
+  --casnos-text-sm: 0.875rem;    /* 14px */
+  --casnos-text-base: 1rem;      /* 16px */
+  --casnos-text-lg: 1.125rem;    /* 18px */
+  --casnos-text-xl: 1.25rem;     /* 20px */
+  --casnos-text-2xl: 1.5rem;     /* 24px */
+  --casnos-text-3xl: 1.875rem;   /* 30px */
+  --casnos-text-4xl: 2.25rem;    /* 36px */
+  --casnos-text-5xl: 3rem;       /* 48px */
+  --casnos-text-6xl: 3.75rem;    /* 60px */
+
+  /* وزن الخطوط */
+  --casnos-font-light: 300;
+  --casnos-font-normal: 400;
+  --casnos-font-medium: 500;
+  --casnos-font-semibold: 600;
+  --casnos-font-bold: 700;
+  --casnos-font-extrabold: 800;
+  --casnos-font-black: 900;
+
+  /* =================================================================
+     المسافات - Spacing
+     ================================================================= */
+
+  --casnos-spacing-xs: 0.5rem;   /* 8px */
+  --casnos-spacing-sm: 0.75rem;  /* 12px */
+  --casnos-spacing-md: 1rem;     /* 16px */
+  --casnos-spacing-lg: 1.5rem;   /* 24px */
+  --casnos-spacing-xl: 2rem;     /* 32px */
+  --casnos-spacing-2xl: 3rem;    /* 48px */
+  --casnos-spacing-3xl: 4rem;    /* 64px */
+
+  /* =================================================================
+     الحدود المستديرة - Border Radius
+     ================================================================= */
+
+  --casnos-radius-sm: 0.25rem;   /* 4px */
+  --casnos-radius-md: 0.5rem;    /* 8px */
+  --casnos-radius-lg: 0.75rem;   /* 12px */
+  --casnos-radius-xl: 1rem;      /* 16px */
+  --casnos-radius-2xl: 1.5rem;   /* 24px */
+  --casnos-radius-full: 9999px;
+
+  /* =================================================================
+     الانتقالات - Transitions
+     ================================================================= */
+
+  --casnos-transition-fast: 150ms ease-in-out;
+  --casnos-transition-normal: 300ms ease-in-out;
+  --casnos-transition-slow: 500ms ease-in-out;
+  --casnos-transition-colors: color 150ms ease-in-out, background-color 150ms ease-in-out, border-color 150ms ease-in-out;
+  --casnos-transition-all: all 150ms ease-in-out;
+
+  /* =================================================================
+     التدرجات - Gradients
+     ================================================================= */
+
+  --casnos-gradient-primary: linear-gradient(135deg, var(--casnos-primary-500), var(--casnos-primary-700));
+  --casnos-gradient-bg: linear-gradient(135deg, var(--casnos-gray-50), var(--casnos-white));
+  --casnos-gradient-dark: linear-gradient(135deg, var(--casnos-gray-800), var(--casnos-gray-900));
+}
+
+/* =================================================================
+   أنماط الفئات المساعدة - Utility Classes
+   ================================================================= */
+
+/* الألوان الأساسية */
+.casnos-primary { color: var(--casnos-primary); }
+.casnos-bg-primary { background-color: var(--casnos-primary); }
+.casnos-border-primary { border-color: var(--casnos-primary); }
+
+/* ألوان الحالة */
+.casnos-success { color: var(--casnos-success); }
+.casnos-error { color: var(--casnos-error); }
+.casnos-warning { color: var(--casnos-warning); }
+.casnos-info { color: var(--casnos-info); }
+
+.casnos-bg-success { background-color: var(--casnos-success); }
+.casnos-bg-error { background-color: var(--casnos-error); }
+.casnos-bg-warning { background-color: var(--casnos-warning); }
+.casnos-bg-info { background-color: var(--casnos-info); }
+
+/* الخطوط */
+.casnos-font-arabic { font-family: var(--casnos-font-arabic); }
+.casnos-font-english { font-family: var(--casnos-font-english); }
+.casnos-font-mono { font-family: var(--casnos-font-mono); }
+
+/* الظلال */
+.casnos-shadow-sm { box-shadow: var(--casnos-shadow-sm); }
+.casnos-shadow-md { box-shadow: var(--casnos-shadow-md); }
+.casnos-shadow-lg { box-shadow: var(--casnos-shadow-lg); }
+.casnos-shadow-xl { box-shadow: var(--casnos-shadow-xl); }
+.casnos-shadow-primary { box-shadow: var(--casnos-shadow-primary); }
+
+/* التدرجات */
+.casnos-gradient-primary { background: var(--casnos-gradient-primary); }
+.casnos-gradient-bg { background: var(--casnos-gradient-bg); }
+.casnos-gradient-dark { background: var(--casnos-gradient-dark); }
+
+/* الانتقالات */
+.casnos-transition-fast { transition: var(--casnos-transition-fast); }
+.casnos-transition-normal { transition: var(--casnos-transition-normal); }
+.casnos-transition-slow { transition: var(--casnos-transition-slow); }
+.casnos-transition-colors { transition: var(--casnos-transition-colors); }
+.casnos-transition-all { transition: var(--casnos-transition-all); }
+
+/* =================================================================
+   أنماط خاصة بالشاشات - Screen Specific Styles
+   ================================================================= */
+
+/* شاشة العرض الكبيرة */
+.casnos-display-screen {
+  background: var(--casnos-bg-dark);
+  color: var(--casnos-text-on-dark);
+  font-family: var(--casnos-font-arabic);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* شاشة العملاء */
+.casnos-customer-screen {
+  background: var(--casnos-gradient-bg);
+  color: var(--casnos-text-primary);
+  font-family: var(--casnos-font-arabic);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* شاشة الموظف */
+.casnos-window-screen {
+  background: var(--casnos-bg-primary);
+  color: var(--casnos-text-primary);
+  font-family: var(--casnos-font-arabic);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* شاشة الإدارة */
+.casnos-admin-screen {
+  background: var(--casnos-bg-secondary);
+  color: var(--casnos-text-primary);
+  font-family: var(--casnos-font-arabic);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* =================================================================
+   أنماط العناصر المشتركة - Common Element Styles
+   ================================================================= */
+
+/* الأزرار */
+.casnos-btn {
+  padding: var(--casnos-spacing-sm) var(--casnos-spacing-lg);
+  border-radius: var(--casnos-radius-lg);
+  font-weight: var(--casnos-font-medium);
+  transition: var(--casnos-transition-colors);
+  border: 1px solid transparent;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--casnos-spacing-xs);
+  text-decoration: none;
+  font-family: var(--casnos-font-arabic);
+}
+
+.casnos-btn-primary {
+  background-color: var(--casnos-primary);
+  color: var(--casnos-white);
+  border-color: var(--casnos-primary);
+}
+
+.casnos-btn-primary:hover {
+  background-color: var(--casnos-primary-600);
+  border-color: var(--casnos-primary-600);
+}
+
+.casnos-btn-secondary {
+  background-color: var(--casnos-white);
+  color: var(--casnos-text-primary);
+  border-color: var(--casnos-border-medium);
+}
+
+.casnos-btn-secondary:hover {
+  background-color: var(--casnos-gray-50);
+  border-color: var(--casnos-border-dark);
+}
+
+/* البطاقات */
+.casnos-card {
+  background: var(--casnos-white);
+  border-radius: var(--casnos-radius-xl);
+  padding: var(--casnos-spacing-lg);
+  box-shadow: var(--casnos-shadow-md);
+  border: 1px solid var(--casnos-border-light);
+  transition: var(--casnos-transition-all);
+}
+
+.casnos-card:hover {
+  box-shadow: var(--casnos-shadow-lg);
+  transform: translateY(-2px);
+}
+
+/* النصوص */
+.casnos-heading {
+  font-family: var(--casnos-font-arabic);
+  font-weight: var(--casnos-font-bold);
+  color: var(--casnos-text-primary);
+  line-height: 1.2;
+}
+
+.casnos-text {
+  font-family: var(--casnos-font-arabic);
+  color: var(--casnos-text-secondary);
+  line-height: 1.5;
+}
+
+/* الحقول */
+.casnos-input {
+  padding: var(--casnos-spacing-sm) var(--casnos-spacing-md);
+  border: 1px solid var(--casnos-border-medium);
+  border-radius: var(--casnos-radius-lg);
+  font-family: var(--casnos-font-arabic);
+  color: var(--casnos-text-primary);
+  background-color: var(--casnos-white);
+  transition: var(--casnos-transition-colors);
+}
+
+.casnos-input:focus {
+  outline: none;
+  border-color: var(--casnos-primary);
+  box-shadow: 0 0 0 3px rgba(105, 136, 230, 0.1);
+}
+
+/* =================================================================
+   متغيرات خاصة بالشاشات - Screen Specific Variables
+   ================================================================= */
+
+/* متغيرات خاصة بشاشة العرض */
+.casnos-display-screen {
+  --screen-title-size: var(--casnos-text-4xl);
+  --screen-subtitle-size: var(--casnos-text-xl);
+  --queue-number-size: var(--casnos-text-6xl);
+  --service-name-size: var(--casnos-text-2xl);
+}
+
+/* متغيرات خاصة بشاشة العملاء */
+.casnos-customer-screen {
+  --service-card-padding: var(--casnos-spacing-xl);
+  --service-name-size: var(--casnos-text-xl);
+  --service-icon-size: var(--casnos-text-4xl);
+}
+
+/* متغيرات خاصة بشاشة الموظف */
+.casnos-window-screen {
+  --window-content-padding: var(--casnos-spacing-lg);
+  --current-ticket-size: var(--casnos-text-3xl);
+  --next-button-size: var(--casnos-text-lg);
+}
+
+/* متغيرات خاصة بشاشة الإدارة */
+.casnos-admin-screen {
+  --admin-sidebar-width: 16rem;
+  --admin-content-padding: var(--casnos-spacing-xl);
+  --admin-table-header-size: var(--casnos-text-sm);
+}

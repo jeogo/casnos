@@ -21,6 +21,10 @@ const router = Router()
 // Device Management Routes
 router.get('/', getAllDevices)
 router.get('/online', getOnlineDevices)
+
+// Device Printer Management Routes (قبل dynamic routes)
+router.get('/printers/all', getAllDevicePrinters)
+
 router.get('/type/:type', getDevicesByType)
 router.get('/:id', getDeviceById)
 router.get('/device-id/:deviceId', getDeviceByDeviceId)
@@ -30,8 +34,7 @@ router.put('/:id', updateDevice)
 router.patch('/:deviceId/status', updateDeviceStatus)
 router.delete('/:id', deleteDevice)
 
-// Device Printer Management Routes
-router.get('/printers/all', getAllDevicePrinters)
+// Device Printer Management Routes (باقي الـ routes)
 router.get('/:deviceId/printers', getDevicePrintersByDevice)
 router.post('/:deviceId/printers', createDevicePrinter)
 router.put('/printers/:id', updateDevicePrinter)

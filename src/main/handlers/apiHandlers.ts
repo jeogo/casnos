@@ -1,20 +1,22 @@
 // 🌐 API Handlers - معالجات API للاتصال بالخادم
 import { ipcMain } from 'electron'
-import { getNetworkServerInfo } from './networkHandlers'
+import { getNetworkServerInfo, updateNetworkServerInfo } from './networkHandlers'
 
 // Global server configuration
 let currentBaseURL: string = ''
 
 // Helper function to get base URL
 function getBaseURL(): string {
-  const serverInfo = getNetworkServerInfo()
-  if (serverInfo.ip && serverInfo.port) {
-    currentBaseURL = `http://${serverInfo.ip}:${serverInfo.port}`
-    return currentBaseURL
+  try {
+    const serverInfo = getNetworkServerInfo()
+    if (serverInfo.ip && serverInfo.port) {
+      currentBaseURL = `http://${serverInfo.ip}:${serverInfo.port}`
+      return currentBaseURL
+    }
+    throw new Error('No server info available')
+  } catch (error) {
+    throw new Error(`[API] No server discovered. Please ensure server is running and discoverable on network. Details: ${error instanceof Error ? error.message : 'Unknown error'}`)
   }
-
-  // No fallback - must have discovered server info
-  throw new Error('[API] No server discovered. Please ensure server is running and discoverable on network.')
 }
 
 // Helper function for fetch with error handling
@@ -48,11 +50,16 @@ export function setupAPIHandlers() {
   console.log('[HANDLERS] 🌐 Setting up API handlers...')
 
   // 🎫 Tickets API Handlers
-  ipcMain.handle('api:create-ticket', async (_event, serviceId: number) => {
+  ipcMain.handle('api:create-ticket', async (_event, serviceId: number, printType?: 'local' | 'network') => {
     try {
+      const requestBody: any = { service_id: serviceId }
+      if (printType) {
+        requestBody.print_type = printType
+      }
+
       return await fetchAPI('/api/tickets', {
         method: 'POST',
-        body: JSON.stringify({ service_id: serviceId })
+        body: JSON.stringify(requestBody)
       })
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
@@ -170,6 +177,30 @@ export function setupAPIHandlers() {
     }
   })
 
+  // ✅ NEW: Call next ticket for specific window with service filtering
+  ipcMain.handle('api:call-next-for-window', async (_event, windowId: number, serviceId?: number, currentTicketId?: number) => {
+    try {
+      console.log('[API-HANDLER] 🎫 Call next ticket for window - RECEIVED:', { windowId, serviceId, currentTicketId })
+      const requestBody: any = { window_id: windowId }
+      if (serviceId) requestBody.service_id = serviceId
+      if (currentTicketId) requestBody.current_ticket_id = currentTicketId
+
+      console.log('[API-HANDLER] Making API request with body:', requestBody)
+
+      const apiResult = await fetchAPI('/api/tickets/call-next-for-window', {
+        method: 'POST',
+        body: JSON.stringify(requestBody)
+      })
+
+      console.log('[API-HANDLER] API response received:', apiResult)
+      return apiResult
+    } catch (error) {
+      console.error('[API-HANDLER] ❌ Error calling next ticket:', error)
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+  console.log('[API-HANDLER] ✅ api:call-next-for-window handler registered')
+
   ipcMain.handle('api:update-print-status', async (_event, ticketId: number, printStatus: string, errorMessage?: string) => {
     try {
       return await fetchAPI(`/api/tickets/${ticketId}/print-status`, {
@@ -258,10 +289,13 @@ export function setupAPIHandlers() {
     }
   })
 
-  ipcMain.handle('api:update-window', async (_event, windowId: number, active?: boolean) => {
+  ipcMain.handle('api:update-window', async (_event, windowId: number, serviceId?: number, active?: boolean) => {
     try {
       const updateData: any = {}
+      if (serviceId !== undefined) updateData.service_id = serviceId
       if (active !== undefined) updateData.active = active
+
+      console.log('[IPC-HANDLER] 🔄 Updating window:', windowId, 'with data:', updateData)
 
       return await fetchAPI(`/api/windows/${windowId}`, {
         method: 'PUT',
@@ -300,76 +334,61 @@ export function setupAPIHandlers() {
     }
   })
 
-  // 👥 Employees API Handlers
-  ipcMain.handle('api:get-employees', async () => {
+  ipcMain.handle('api:assign-service-to-window', async (_event, windowId: number, serviceId: number) => {
     try {
-      return await fetchAPI('/api/employees')
-    } catch (error) {
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
-    }
-  })
-
-  ipcMain.handle('api:get-active-employees', async () => {
-    try {
-      return await fetchAPI('/api/employees/active')
-    } catch (error) {
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
-    }
-  })
-
-  ipcMain.handle('api:get-employee-by-window', async (_event, windowNumber: string) => {
-    try {
-      return await fetchAPI(`/api/employees/window/${windowNumber}`)
-    } catch (error) {
-      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
-    }
-  })
-
-  ipcMain.handle('api:create-employee-window', async (_event, windowNumber: string, deviceId?: string, serviceId?: number) => {
-    try {
-      return await fetchAPI('/api/employees/window', {
-        method: 'POST',
-        body: JSON.stringify({ window_number: windowNumber, device_id: deviceId, service_id: serviceId })
+      return await fetchAPI(`/api/windows/${windowId}/assign-service`, {
+        method: 'PUT',
+        body: JSON.stringify({ service_id: serviceId })
       })
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   })
 
-  ipcMain.handle('api:assign-service-to-employee', async (_event, windowNumber: string, serviceId: number) => {
+  ipcMain.handle('api:remove-service-from-window', async (_event, windowId: number) => {
     try {
-      return await fetchAPI(`/api/employees/window/${windowNumber}/assign-service`, {
-        method: 'POST',
-        body: JSON.stringify({ serviceId })
+      return await fetchAPI(`/api/windows/${windowId}/remove-service`, {
+        method: 'PUT'
       })
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   })
 
-  ipcMain.handle('api:remove-service-from-employee', async (_event, windowNumber: string) => {
+  // 🪟 Window-Device API Handlers
+  ipcMain.handle('api:register-device-window', async (_event, deviceId: string, serviceId?: number) => {
     try {
-      return await fetchAPI(`/api/employees/window/${windowNumber}/service`, {
-        method: 'DELETE'
+      return await fetchAPI('/api/windows/register-device', {
+        method: 'POST',
+        body: JSON.stringify({ device_id: deviceId, service_id: serviceId })
       })
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   })
 
-  ipcMain.handle('api:get-next-window-number', async () => {
+  ipcMain.handle('api:get-window-by-device-id', async (_event, deviceId: string) => {
     try {
-      return await fetchAPI('/api/employees/next-window-number')
+      return await fetchAPI(`/api/windows/device/${deviceId}`)
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   })
 
-  ipcMain.handle('api:initialize-employee-session', async (_event, data: any) => {
+  ipcMain.handle('api:activate-device-window', async (_event, deviceId: string) => {
     try {
-      return await fetchAPI('/api/employees/initialize', {
-        method: 'POST',
-        body: JSON.stringify(data)
+      return await fetchAPI(`/api/windows/device/${deviceId}/activate`, {
+        method: 'PUT'
+      })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:deactivate-device-window', async (_event, deviceId: string) => {
+    try {
+      return await fetchAPI(`/api/windows/device/${deviceId}/deactivate`, {
+        method: 'PUT'
       })
     } catch (error) {
       return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
@@ -496,11 +515,123 @@ export function setupAPIHandlers() {
     }
   })
 
-  // 🔗 Connection Management
+  // �️ Device Printers API Handlers
+  ipcMain.handle('api:get-device-printers', async () => {
+    try {
+      console.log('[API] Fetching device printers from /api/devices/printers/all')
+      const result = await fetchAPI('/api/devices/printers/all')
+      console.log('[API] Device printers result:', result)
+      return result
+    } catch (error) {
+      console.error('[API] Error fetching device printers:', error)
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:get-device-printers-by-device', async (_event, deviceId: string) => {
+    try {
+      return await fetchAPI(`/api/devices/${deviceId}/printers`)
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:create-device-printer', async (_event, printerData: any) => {
+    try {
+      // Need to specify device ID for creation route
+      const deviceId = printerData.device_id || 'default'
+      return await fetchAPI(`/api/devices/${deviceId}/printers`, {
+        method: 'POST',
+        body: JSON.stringify(printerData)
+      })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:update-device-printer', async (_event, printerId: number, printerData: any) => {
+    try {
+      return await fetchAPI(`/api/devices/printers/${printerId}`, {
+        method: 'PUT',
+        body: JSON.stringify(printerData)
+      })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:delete-device-printer', async (_event, printerId: number) => {
+    try {
+      return await fetchAPI(`/api/devices/printers/${printerId}`, {
+        method: 'DELETE'
+      })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  // 🗑️ Direct database deletion handler (fallback)
+  ipcMain.handle('api:force-delete-printer', async (_event, printerId: number) => {
+    try {
+      console.log('[API] Force delete printer attempt:', printerId)
+
+      // Try multiple approaches
+      const results: Array<{method: string, success: boolean, result?: any, error?: string}> = []
+
+      // Method 1: Regular API call
+      try {
+        const apiResult = await fetchAPI(`/api/devices/printers/${printerId}`, {
+          method: 'DELETE'
+        })
+        results.push({ method: 'API', success: apiResult.success, result: apiResult })
+        if (apiResult.success) {
+          return { success: true, method: 'API', results }
+        }
+      } catch (apiError) {
+        results.push({ method: 'API', success: false, error: apiError instanceof Error ? apiError.message : String(apiError) })
+      }
+
+      // Method 2: Direct HTTP to localhost
+      try {
+        const baseURL = getBaseURL()
+        const response = await fetch(`${baseURL}/api/devices/printers/${printerId}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        const httpResult = await response.json()
+        results.push({ method: 'HTTP', success: httpResult.success, result: httpResult })
+        if (httpResult.success) {
+          return { success: true, method: 'HTTP', results }
+        }
+      } catch (httpError) {
+        results.push({ method: 'HTTP', success: false, error: httpError instanceof Error ? httpError.message : String(httpError) })
+      }
+
+      // Method 3: Alternative endpoint (try different port)
+      try {
+        const response = await fetch(`http://localhost:3001/api/devices/printers/${printerId}`, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' }
+        })
+        const altResult = await response.json()
+        results.push({ method: 'ALT_HTTP', success: altResult.success, result: altResult })
+        if (altResult.success) {
+          return { success: true, method: 'ALT_HTTP', results }
+        }
+      } catch (altError) {
+        results.push({ method: 'ALT_HTTP', success: false, error: altError instanceof Error ? altError.message : String(altError) })
+      }
+
+      return { success: false, error: 'All methods failed', results }
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  // �🔗 Connection Management
   ipcMain.handle('connect-to-server', async (_event, ip: string, port: number) => {
     try {
       // Update network server info
-      const { updateNetworkServerInfo } = require('./networkHandlers')
       updateNetworkServerInfo(ip, port)
 
       // Test connection
@@ -532,6 +663,42 @@ export function setupAPIHandlers() {
       success: true,
       connected: !!(serverInfo.ip && serverInfo.port),
       server: serverInfo
+    }
+  })
+
+  // 🔄 Daily Reset API Handlers
+  ipcMain.handle('api:get-daily-reset-status', async () => {
+    try {
+      return await fetchAPI('/api/reset/status')
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:get-daily-reset-statistics', async () => {
+    try {
+      return await fetchAPI('/api/reset/statistics')
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:force-daily-reset', async () => {
+    try {
+      return await fetchAPI('/api/reset/force', { method: 'POST' })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
+    }
+  })
+
+  ipcMain.handle('api:update-daily-reset-config', async (_event, config: any) => {
+    try {
+      return await fetchAPI('/api/reset/config', {
+        method: 'PUT',
+        body: JSON.stringify(config)
+      })
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' }
     }
   })
 

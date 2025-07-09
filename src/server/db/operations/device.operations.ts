@@ -219,8 +219,26 @@ export const devicePrinterOperations = {
 
   delete: (id: number): boolean => {
     const db = getDatabase()
+    console.log('[DB] Attempting to delete printer with ID:', id)
+
+    // First check if the printer exists
+    const checkStmt = db.prepare('SELECT id, printer_name FROM device_printers WHERE id = ?')
+    const existingPrinter = checkStmt.get(id)
+    console.log('[DB] Existing printer before deletion:', existingPrinter)
+
+    if (!existingPrinter) {
+      console.log('[DB] Printer not found with ID:', id)
+      return false
+    }
+
     const stmt = db.prepare('DELETE FROM device_printers WHERE id = ?')
     const result = stmt.run(id)
+    console.log('[DB] Delete operation result:', {
+      changes: result.changes,
+      lastInsertRowid: result.lastInsertRowid,
+      deleted: result.changes > 0
+    })
+
     return result.changes > 0
   }
 }

@@ -1,0 +1,28 @@
+{
+  "version": "1.0.0",
+  "screenType": "customer",
+  "embeddedServer": {
+    "enabled": false,
+    "port": 3001,
+    "host": "0.0.0.0",
+    "autoConnect": true
+  },
+  "features": {
+    "audio": false,
+    "video": false,
+    "printing": true,
+    "udpDiscovery": true,
+    "realTimeUpdates": false,
+    "socketIO": true
+  },
+  "performance": {
+    "maxMemoryUsage": 128,
+    "garbageCollectionInterval": 60000,
+    "serverSyncInterval": 5000,
+    "enableDevTools": false
+  },
+  "paths": {
+    "voicePath": "voice/",
+    "fontsPath": "fonts/"
+  }
+}

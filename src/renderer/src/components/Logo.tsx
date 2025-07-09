@@ -43,11 +43,9 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', position = 'le
       return new Promise((resolve) => {
         const img = new Image()
         img.onload = () => {
-          console.log(`[Logo] ✅ Logo loaded successfully from: ${path}`)
           resolve(true)
         }
-        img.onerror = (error) => {
-          console.log(`[Logo] ❌ Failed to load logo from: ${path}`, error)
+        img.onerror = () => {
           resolve(false)
         }
 
@@ -57,7 +55,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', position = 'le
         // Add timeout to prevent hanging
         setTimeout(() => {
           if (!img.complete || img.naturalWidth === 0) {
-            console.log(`[Logo] ⏰ Timeout loading logo from: ${path}`)
             resolve(false)
           }
         }, 3000) // Increased timeout to 3 seconds
@@ -65,26 +62,17 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', position = 'le
     }
 
     const findWorkingLogo = async () => {
-      console.log('[Logo] 🔍 Searching for logo file...')
-      console.log('[Logo] 🌐 Current location:', window.location.href)
-      console.log('[Logo] 📂 Base URL:', window.location.origin)
-
       for (let i = 0; i < possiblePaths.length; i++) {
         const path = possiblePaths[i]
-        console.log(`[Logo] 🔍 Testing path ${i + 1}/${possiblePaths.length}: ${path}`)
 
         const works = await testImagePath(path)
         if (works) {
-          console.log(`[Logo] 🎉 SUCCESS! Logo found at: ${path}`)
           setLogoSrc(path)
           setShowFallback(false)
           return
         }
       }
 
-      console.warn('[Logo] ⚠️ No working logo path found from all paths tested:')
-      console.warn('[Logo] 📋 Tested paths:', possiblePaths)
-      console.warn('[Logo] 🎨 Using fallback icon instead')
       setShowFallback(true)
     }
 
@@ -92,7 +80,6 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', position = 'le
   }, [])
 
   const handleImageError = () => {
-    console.warn('[Logo] ❌ Failed to load logo image, showing fallback')
     setShowFallback(true)
   }
 

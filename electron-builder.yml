@@ -1,5 +1,5 @@
-appId: com.electron.app
-productName: casnose
+appId: com.focusplus.casnos
+productName: CASNOS Queue Management
 directories:
   buildResources: build
 files:
@@ -12,7 +12,9 @@ files:
 asarUnpack:
   - resources/**
 win:
-  executableName: casnose
+  executableName: CASNOS
+  sign: false
+  signAndEditExecutable: false
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}

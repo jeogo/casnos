@@ -84,8 +84,6 @@ export function handleAdminEvents(socket: Socket): void {
       return;
     }
 
-    console.log('🔄 Admin requested system reset');
-
     // Broadcast system reset to all clients
     socket.broadcast.emit(SOCKET_EVENTS.SYSTEM_RESET, {
       message: 'System reset initiated by admin',

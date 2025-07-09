@@ -1,5 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
+import { getCASNOSPaths, getDatedTicketsPath, getTicketFilePath, getTempFilePath } from '../../shared/pathUtils';
 
 /**
  * مدير تخزين ملفات PDF للتذاكر
@@ -10,10 +11,13 @@ export class PDFStorageManager {
   private baseDir: string;
   private tempDir: string;
   private cleanupInterval: NodeJS.Timeout | null = null;
-    private constructor() {
-    // إنشاء مجلد مخصص للتذاكر في resources داخل المشروع
-    this.baseDir = path.join(process.cwd(), 'resources', 'tickets');
-    this.tempDir = path.join(this.baseDir, 'temp');
+  private activePdfGenerations: Set<string> = new Set(); // Track active PDF generations
+
+  private constructor() {
+    // Use AppData for PDF storage
+    const paths = getCASNOSPaths();
+    this.baseDir = paths.ticketsPath;
+    this.tempDir = paths.tempPath;
     this.ensureDirectoryExists();
 
     // بدء تنظيف تلقائي كل ساعة
@@ -31,31 +35,8 @@ export class PDFStorageManager {
    * Create ticket path with date organization
    * Format: service-name-number.pdf (no printer ID for local, include for network)
    */
-  getTicketPath(ticketNumber: string, serviceName?: string, printerId?: string): string {
-    const today = new Date();
-    const dateFolder = today.toISOString().split('T')[0]; // YYYY-MM-DD
-
-    const dailyDir = path.join(this.baseDir, dateFolder);
-    this.ensureDirectoryExists(dailyDir);
-
-    // Clean service name for filename (remove special characters)
-    const cleanServiceName = serviceName
-      ? serviceName.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '-').replace(/-+/g, '-')
-      : 'service';
-
-    // Determine if printer is network (include printer ID) or local (no printer ID)
-    const isNetworkPrinter = printerId && (
-      printerId.toLowerCase().includes('network') ||
-      printerId.toLowerCase().includes('server') ||
-      !printerId.toLowerCase().includes('local')
-    );
-
-    // Format: service-name-number.pdf or service-name-number-printerid.pdf
-    const fileName = isNetworkPrinter
-      ? `${cleanServiceName}-${ticketNumber}-${printerId}.pdf`
-      : `${cleanServiceName}-${ticketNumber}.pdf`;
-
-    return path.join(dailyDir, fileName);
+  getTicketPath(ticketNumber: string, serviceName?: string, _printerId?: string): string {
+    return getTicketFilePath(ticketNumber, serviceName);
   }
 
   /**
@@ -63,8 +44,7 @@ export class PDFStorageManager {
    * Path for temporary files
    */
   getTempPath(fileName: string): string {
-    this.ensureDirectoryExists(this.tempDir);
-    return path.join(this.tempDir, fileName);
+    return getTempFilePath(fileName);
   }
 
   /**
@@ -90,10 +70,7 @@ export class PDFStorageManager {
    * Get today's folder
    */
   getTodayFolder(): string {
-    const today = new Date().toISOString().split('T')[0];
-    const todayDir = path.join(this.baseDir, today);
-    this.ensureDirectoryExists(todayDir);
-    return todayDir;
+    return getDatedTicketsPath();
   }
     /**
    * بدء التنظيف التلقائي كل ساعة
@@ -105,11 +82,8 @@ export class PDFStorageManager {
 
     // جدولة التنظيف كل ساعة (3600000 ميلي ثانية)
     this.cleanupInterval = setInterval(() => {
-      console.log('[PDF Storage] Running scheduled cleanup...');
       this.cleanupOldFiles(1); // حذف الملفات الأقدم من ساعة واحدة
     }, 60 * 60 * 1000); // كل ساعة
-
-    console.log('[PDF Storage] Auto-cleanup started - will run every hour');
   }
   /**
    * إيقاف التنظيف التلقائي
@@ -242,6 +216,34 @@ export class PDFStorageManager {
       console.error('[PDF Storage] Error finding ticket files:', error);
       return [];
     }
+  }
+
+  /**
+   * Check if a PDF is currently being generated
+   */
+  isGeneratingPdf(ticketNumber: string, serviceName?: string): boolean {
+    const key = `${serviceName || ''}-${ticketNumber}`;
+    return this.activePdfGenerations.has(key);
+  }
+
+  /**
+   * Start tracking a PDF generation
+   */
+  startPdfGeneration(ticketNumber: string, serviceName?: string): boolean {
+    const key = `${serviceName || ''}-${ticketNumber}`;
+    if (this.activePdfGenerations.has(key)) {
+      return false; // Already being generated
+    }
+    this.activePdfGenerations.add(key);
+    return true;
+  }
+
+  /**
+   * Finish tracking a PDF generation
+   */
+  finishPdfGeneration(ticketNumber: string, serviceName?: string): void {
+    const key = `${serviceName || ''}-${ticketNumber}`;
+    this.activePdfGenerations.delete(key);
   }
 
   private ensureDirectoryExists(dir?: string): void {

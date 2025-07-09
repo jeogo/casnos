@@ -13,8 +13,8 @@ export function createDisplayWindow(): BrowserWindow {
     height: 1080,
     show: false,
     autoHideMenuBar: true,
-    title: 'CASNOS - Display Screen',
-    ...(process.platform === 'linux' ? { icon } : {}),
+    title: 'CASNOS - شاشة العرض الرئيسية',
+    icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
       sandbox: false

@@ -1,6 +1,6 @@
 import { Socket } from 'socket.io';
 import { SOCKET_EVENTS, SOCKET_ROOMS, DEVICE_TYPES } from '../socket.config';
-import { deviceOperations } from '../../db/operations';
+import { deviceOperations, windowOperations } from '../../db/operations';
 import { emitToAll, emitToRoom } from '../socket.instance';
 
 // Map to track connected devices
@@ -15,8 +15,6 @@ export function handleDeviceEvents(socket: Socket): void {
   // Handle device registration
   socket.on(SOCKET_EVENTS.DEVICE_REGISTER, async (deviceInfo) => {
     try {
-      console.log(`📱 Device registration attempt:`, deviceInfo);
-
       const deviceId = deviceInfo.device_id || deviceInfo.deviceId;
       const deviceType = deviceInfo.device_type || deviceInfo.deviceType;
       const name = deviceInfo.name;
@@ -77,6 +75,45 @@ export function handleDeviceEvents(socket: Socket): void {
           break;
       }
 
+      // 🔄 SYNC WINDOW STATUS: Activate window if device has one
+      try {
+        const deviceWindow = windowOperations.getByDeviceId(deviceId);
+        if (deviceWindow) {
+          // Activate the window for this device
+          windowOperations.activateForDevice(deviceId);
+          console.log(`[DEVICE-HANDLER] 🪟 Activated window ${deviceWindow.id} for device ${deviceId}`);
+
+          // Notify admin screens about window status change
+          emitToAll('window:status-updated', {
+            windowId: deviceWindow.id,
+            deviceId: deviceId,
+            active: true,
+            timestamp: new Date().toISOString()
+          });
+        } else if (deviceType === DEVICE_TYPES.WINDOW || deviceType === 'window' || deviceType === 'employee') {
+          // For window devices, create a window automatically
+          const newWindow = windowOperations.create({
+            device_id: deviceId,
+            active: true
+          });
+          console.log(`[DEVICE-HANDLER] 🪟 Created and activated window ${newWindow.id} for device ${deviceId}`);
+
+          // Notify admin screens about new window
+          emitToAll('window:created', {
+            window: {
+              ...newWindow,
+              label: `شباك ${newWindow.id}`
+            },
+            timestamp: new Date().toISOString()
+          });
+        }
+      } catch (windowError) {
+        console.error(`[DEVICE-HANDLER] ❌ Failed to sync window status for device ${deviceId}:`, windowError);
+      }
+
+      // تأكيد الغرف
+      const rooms = Array.from(socket.rooms);
+
       // Confirm registration
       socket.emit(SOCKET_EVENTS.DEVICE_REGISTERED, {
         success: true,
@@ -91,10 +128,7 @@ export function handleDeviceEvents(socket: Socket): void {
         timestamp: new Date().toISOString()
       });
 
-      console.log(`✅ Device registered: ${deviceId} (${deviceType})`);
-
     } catch (error) {
-      console.error('❌ Device registration error:', error);
       socket.emit(SOCKET_EVENTS.DEVICE_REGISTERED, {
         success: false,
         error: error instanceof Error ? error.message : 'Registration failed',
@@ -127,8 +161,6 @@ export function handleDeviceEvents(socket: Socket): void {
 
   // Handle disconnection cleanup
   socket.on(SOCKET_EVENTS.DISCONNECT, (reason) => {
-    console.log(`🔌 Device disconnected: ${socket.id} (${reason})`);
-
     // Find and clean up device
     for (const [deviceId, deviceInfo] of connectedDevices.entries()) {
       if (deviceInfo.socketId === socket.id) {
@@ -138,6 +170,26 @@ export function handleDeviceEvents(socket: Socket): void {
         // Update status in database
         deviceOperations.updateStatus(deviceId, 'offline');
 
+        // 🔄 SYNC WINDOW STATUS: Deactivate window if device has one
+        try {
+          const deviceWindow = windowOperations.getByDeviceId(deviceId);
+          if (deviceWindow) {
+            // Deactivate the window for this device
+            windowOperations.deactivateForDevice(deviceId);
+            console.log(`[DEVICE-HANDLER] 🪟 Deactivated window ${deviceWindow.id} for device ${deviceId}`);
+
+            // Notify admin screens about window status change
+            emitToAll('window:status-updated', {
+              windowId: deviceWindow.id,
+              deviceId: deviceId,
+              active: false,
+              timestamp: new Date().toISOString()
+            });
+          }
+        } catch (windowError) {
+          console.error(`[DEVICE-HANDLER] ❌ Failed to sync window status for device ${deviceId}:`, windowError);
+        }
+
         // Notify others about device disconnection
         emitToAll(SOCKET_EVENTS.DEVICE_DISCONNECTED, {
           deviceId,
@@ -146,7 +198,6 @@ export function handleDeviceEvents(socket: Socket): void {
           timestamp: new Date().toISOString()
         });
 
-        console.log(`📱 Device ${deviceId} marked offline`);
         break;
       }
     }
@@ -169,13 +220,31 @@ export function cleanupStaleDevices() {
 
   for (const [deviceId, deviceInfo] of connectedDevices.entries()) {
     if (now - deviceInfo.lastSeen > staleThreshold) {
-      console.log(`🧹 Cleaning up stale device: ${deviceId}`);
-
       // Remove from tracking
       connectedDevices.delete(deviceId);
 
       // Update database
       deviceOperations.updateStatus(deviceId, 'offline');
+
+      // 🔄 SYNC WINDOW STATUS: Deactivate window if device has one
+      try {
+        const deviceWindow = windowOperations.getByDeviceId(deviceId);
+        if (deviceWindow) {
+          // Deactivate the window for this device
+          windowOperations.deactivateForDevice(deviceId);
+          console.log(`[CLEANUP] 🪟 Deactivated window ${deviceWindow.id} for stale device ${deviceId}`);
+
+          // Notify admin screens about window status change
+          emitToAll('window:status-updated', {
+            windowId: deviceWindow.id,
+            deviceId: deviceId,
+            active: false,
+            timestamp: new Date().toISOString()
+          });
+        }
+      } catch (windowError) {
+        console.error(`[CLEANUP] ❌ Failed to sync window status for device ${deviceId}:`, windowError);
+      }
 
       // Notify clients
       emitToAll(SOCKET_EVENTS.DEVICE_STATUS, {

@@ -6,11 +6,7 @@ import { SOCKET_EVENTS } from './socket.config';
 import { ticketOperations } from '../db/operations';
 
 export function setupSocketHandlers(io: SocketIOServer): void {
-  console.log('🔌 Setting up Socket.IO handlers...');
-
   io.on(SOCKET_EVENTS.CONNECT, (socket) => {
-    console.log(`🔌 New client connected: ${socket.id}`);
-
     // Send initial data to newly connected client
     const initialData = {
       pendingTickets: ticketOperations.getPendingTickets(),
@@ -27,6 +23,23 @@ export function setupSocketHandlers(io: SocketIOServer): void {
     handleDeviceEvents(socket);
     handleAdminEvents(socket);
 
+    // Display Print Handler
+    socket.on(SOCKET_EVENTS.DISPLAY_PRINT_TICKET, (data) => {
+      const displaysRoom = io.sockets.adapter.rooms.get('displays');
+      const displayCount = displaysRoom ? displaysRoom.size : 0;
+
+      if (displayCount === 0) {
+        return;
+      }
+
+      // Forward to display screens
+      io.to('displays').emit(SOCKET_EVENTS.DISPLAY_PRINT_TICKET, {
+        ...data,
+        serverTimestamp: new Date().toISOString()
+      });
+
+    });
+
     // Handle ping/pong for connection monitoring
     socket.on('ping', (data = {}) => {
       socket.emit('pong', {
@@ -39,14 +52,12 @@ export function setupSocketHandlers(io: SocketIOServer): void {
 
     // Handle disconnection
     socket.on(SOCKET_EVENTS.DISCONNECT, (reason) => {
-      console.log(`🔌 Client disconnected: ${socket.id} (${reason})`);
+      cleanupStaleDevices();
     });
   });
 
   // Setup periodic tasks
   setupPeriodicTasks(io);
-
-  console.log('✅ Socket.IO handlers setup complete');
 }
 
 function setupPeriodicTasks(io: SocketIOServer): void {
@@ -76,6 +87,4 @@ function setupPeriodicTasks(io: SocketIOServer): void {
       timestamp: new Date().toISOString()
     });
   }, 60000);
-
-  console.log('⏰ Periodic tasks scheduled');
 }

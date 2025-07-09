@@ -11,20 +11,28 @@ export function initializeSocket(httpServer: HttpServer): SocketIOServer {
 
     // Setup connection monitoring
     io.on('connection', (socket) => {
-      // Log connection details
+      // Silent connection handling
       const clientIP = socket.handshake.address;
       const userAgent = socket.handshake.headers['user-agent'];
-      console.log(`🔌 Socket connected: ${socket.id} from ${clientIP}`);
+
+      // Only log in development
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`🔌 Socket connected: ${socket.id} from ${clientIP}`);
+      }
     });
 
     // Setup error handling
     io.engine.on('connection_error', (err) => {
-      console.error('❌ Socket connection error:', err);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Socket connection error:', err);
+      }
     });
 
     const localIP = ip.address();
-    console.log(`🔌 Socket.IO server initialized on ${localIP}`);
-    console.log(`📡 Accepting connections from LAN devices`);
+    if (process.env.NODE_ENV === 'development') {
+      console.log(`🔌 Socket.IO server initialized on ${localIP}`);
+      console.log(`📡 Accepting connections from LAN devices`);
+    }
   }
   return io;
 }
@@ -42,9 +50,8 @@ export function emitToAll(event: string, data: any): void {
     };
 
     io.emit(event, enrichedData);
-    console.log(`📡 Broadcast: ${event} to ${io.sockets.sockets.size} clients`);
   } else {
-    console.warn('⚠️ Socket.IO not initialized - cannot emit to all');
+    // Silent handling - production mode
   }
 }
 
@@ -57,12 +64,8 @@ export function emitToRoom(room: string, event: string, data: any): void {
     };
 
     io.to(room).emit(event, enrichedData);
-
-    // Get room size for logging
-    const roomSize = io.sockets.adapter.rooms.get(room)?.size || 0;
-    console.log(`📡 Room emit: ${event} to "${room}" (${roomSize} clients)`);
   } else {
-    console.warn(`⚠️ Socket.IO not initialized - cannot emit to room: ${room}`);
+    // Silent handling
   }
 }
 
@@ -75,9 +78,8 @@ export function emitToDevice(deviceId: string, event: string, data: any): void {
     };
 
     io.to(`device:${deviceId}`).emit(event, enrichedData);
-    console.log(`📡 Device emit: ${event} to device:${deviceId}`);
   } else {
-    console.warn(`⚠️ Socket.IO not initialized - cannot emit to device: ${deviceId}`);
+    // Silent handling
   }
 }
 
@@ -90,9 +92,8 @@ export function broadcastToAll(event: string, data: any): void {
     };
 
     io.sockets.emit(event, enrichedData);
-    console.log(`📡 Broadcast: ${event} to all sockets`);
   } else {
-    console.warn('⚠️ Socket.IO not initialized - cannot broadcast');
+    // Silent handling
   }
 }
 
@@ -115,7 +116,6 @@ export function getConnectionStats() {
 
 export function closeSocket(): void {
   if (io) {
-    console.log('🔌 Closing Socket.IO server...');
     io.close();
     io = null;
   }

@@ -2,6 +2,7 @@
 import { ipcMain, BrowserWindow } from 'electron'
 import { io, Socket } from 'socket.io-client'
 import { getNetworkServerInfo } from './networkHandlers'
+import { persistentStorage } from '../utils/persistentStorage'
 
 // Global socket instance
 let globalSocket: Socket | null = null
@@ -68,6 +69,10 @@ function connectSocket(serverUrl?: string, deviceInfo?: any): Promise<boolean> {
         // Register device if info provided
         if (storedDeviceInfo) {
           globalSocket?.emit('device:register', storedDeviceInfo)
+
+          // 🔄 PERSISTENT STORAGE: Save connection status
+          const serverInfo = { ip: serverUrl?.split(':')[1]?.replace('//', '') || 'localhost', port: 3000, connected: true };
+          persistentStorage.saveConnectionData(storedDeviceInfo.device_id, serverInfo, storedDeviceInfo);
         }
 
         // Emit connection status to renderers
@@ -130,11 +135,9 @@ function connectSocket(serverUrl?: string, deviceInfo?: any): Promise<boolean> {
         'print:status-updated',
         'display:ticket-called',
         'emergency:alert',
-        'employee:created',
-        'employee:service-assigned',
-        'employee:service-removed',
         'window:assignment-update',
-        'system-reset'
+        'system-reset',
+        'system:reset'
       ]
 
       events.forEach(event => {
@@ -249,8 +252,7 @@ export function setupSocketHandlers() {
           ticketId,
           oldStatus: 'pending',
           newStatus: 'called',
-          windowId: windowNumber,
-          employeeId: storedDeviceInfo?.device_id
+          windowId: windowNumber
         })
 
         return result
@@ -277,8 +279,7 @@ export function setupSocketHandlers() {
           ticketId,
           oldStatus: 'called',
           newStatus: 'served',
-          windowId: windowNumber,
-          employeeId: storedDeviceInfo?.device_id
+          windowId: windowNumber
         })
 
         return result
@@ -361,6 +362,70 @@ export function setupSocketHandlers() {
   })
 
   console.log('[HANDLERS] ✅ Socket handlers registered successfully')
+
+  // 🔄 PERSISTENT STORAGE: Add recovery and state management handlers
+  ipcMain.handle('persistent:save-screen-data', async (_event, screenType: string, deviceId: string, data: any) => {
+    try {
+      persistentStorage.saveScreenData(screenType as any, deviceId, data);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:get-screen-data', async (_event, screenType: string, deviceId: string) => {
+    try {
+      const data = persistentStorage.getScreenData(screenType as any, deviceId);
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:recover-device-data', async (_event, deviceId: string) => {
+    try {
+      const data = persistentStorage.recoverDeviceData(deviceId);
+      return { success: true, data };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:save-queue-data', async (_event, deviceId: string, queueData: any) => {
+    try {
+      persistentStorage.saveQueueData(deviceId, queueData);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:save-window-data', async (_event, deviceId: string, windowData: any, selectedService: any) => {
+    try {
+      persistentStorage.saveWindowData(deviceId, windowData, selectedService);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:save-audio-queue', async (_event, deviceId: string, audioQueue: any[], currentAudioCall: any) => {
+    try {
+      persistentStorage.saveAudioQueue(deviceId, audioQueue, currentAudioCall);
+      return { success: true };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
+
+  ipcMain.handle('persistent:get-storage-stats', async () => {
+    try {
+      const stats = persistentStorage.getStorageStats();
+      return { success: true, stats };
+    } catch (error) {
+      return { success: false, error: error instanceof Error ? error.message : 'Unknown error' };
+    }
+  });
 }
 
 // Export socket instance for other modules

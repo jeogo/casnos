@@ -1,0 +1,309 @@
+/* =================================================================
+   CASNOS - نظام الخطوط الموحد
+   الصندوق الوطني للضمان الاجتماعي لغير الأجراء - وكالة المسيلة
+   ================================================================= */
+
+/* تحميل الخطوط من مجلد الموارد - TTF Only (Fixed) */
+@font-face {
+  font-family: 'CASNOS-Arabic';
+  src: url('../../../resources/fonts/NotoSansArabic-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-Arabic';
+  src: url('../../../resources/fonts/NotoSansArabic-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-Arabic';
+  src: url('../../../resources/fonts/NotoSansArabic-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-Arabic';
+  src: url('../../../resources/fonts/NotoSansArabic-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-English';
+  src: url('../../../resources/fonts/Inter-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-English';
+  src: url('../../../resources/fonts/Inter-Medium.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-English';
+  src: url('../../../resources/fonts/Inter-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'CASNOS-English';
+  src: url('../../../resources/fonts/Inter-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* =================================================================
+   متغيرات الخطوط
+   ================================================================= */
+
+:root {
+  /* عائلات الخطوط مع البدائل المحسنة */
+  --casnos-font-arabic: 'CASNOS-Arabic', 'Noto Sans Arabic', 'Segoe UI', 'Tahoma', 'Arial Unicode MS', 'Arial', sans-serif;
+  --casnos-font-english: 'CASNOS-English', 'Inter', 'Segoe UI', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Roboto', 'Arial', sans-serif;
+  --casnos-font-mixed: 'CASNOS-Arabic', 'CASNOS-English', 'Segoe UI', 'Tahoma', 'system-ui', 'Arial', sans-serif;
+  --casnos-font-mono: 'JetBrains Mono', 'SF Mono', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', monospace;
+
+  /* أحجام الخطوط */
+  --casnos-text-xs: 0.75rem;     /* 12px */
+  --casnos-text-sm: 0.875rem;    /* 14px */
+  --casnos-text-base: 1rem;      /* 16px */
+  --casnos-text-lg: 1.125rem;    /* 18px */
+  --casnos-text-xl: 1.25rem;     /* 20px */
+  --casnos-text-2xl: 1.5rem;     /* 24px */
+  --casnos-text-3xl: 1.875rem;   /* 30px */
+  --casnos-text-4xl: 2.25rem;    /* 36px */
+  --casnos-text-5xl: 3rem;       /* 48px */
+  --casnos-text-6xl: 3.75rem;    /* 60px */
+  --casnos-text-7xl: 4.5rem;     /* 72px */
+  --casnos-text-8xl: 6rem;       /* 96px */
+  --casnos-text-9xl: 8rem;       /* 128px */
+
+  /* أوزان الخطوط */
+  --casnos-font-light: 300;
+  --casnos-font-normal: 400;
+  --casnos-font-medium: 500;
+  --casnos-font-semibold: 600;
+  --casnos-font-bold: 700;
+  --casnos-font-extrabold: 800;
+  --casnos-font-black: 900;
+
+  /* ارتفاع الخطوط */
+  --casnos-leading-none: 1;
+  --casnos-leading-tight: 1.25;
+  --casnos-leading-snug: 1.375;
+  --casnos-leading-normal: 1.5;
+  --casnos-leading-relaxed: 1.625;
+  --casnos-leading-loose: 2;
+
+  /* تباعد الأحرف */
+  --casnos-tracking-tighter: -0.05em;
+  --casnos-tracking-tight: -0.025em;
+  --casnos-tracking-normal: 0;
+  --casnos-tracking-wide: 0.025em;
+  --casnos-tracking-wider: 0.05em;
+  --casnos-tracking-widest: 0.1em;
+}
+
+/* =================================================================
+   فئات الخطوط الأساسية
+   ================================================================= */
+
+/* عائلات الخطوط */
+.casnos-font-arabic {
+  font-family: var(--casnos-font-arabic);
+}
+
+.casnos-font-english {
+  font-family: var(--casnos-font-english);
+}
+
+.casnos-font-mixed {
+  font-family: var(--casnos-font-mixed);
+}
+
+.casnos-font-mono {
+  font-family: var(--casnos-font-mono);
+}
+
+/* أحجام الخطوط */
+.casnos-text-xs { font-size: var(--casnos-text-xs); }
+.casnos-text-sm { font-size: var(--casnos-text-sm); }
+.casnos-text-base { font-size: var(--casnos-text-base); }
+.casnos-text-lg { font-size: var(--casnos-text-lg); }
+.casnos-text-xl { font-size: var(--casnos-text-xl); }
+.casnos-text-2xl { font-size: var(--casnos-text-2xl); }
+.casnos-text-3xl { font-size: var(--casnos-text-3xl); }
+.casnos-text-4xl { font-size: var(--casnos-text-4xl); }
+.casnos-text-5xl { font-size: var(--casnos-text-5xl); }
+.casnos-text-6xl { font-size: var(--casnos-text-6xl); }
+.casnos-text-7xl { font-size: var(--casnos-text-7xl); }
+.casnos-text-8xl { font-size: var(--casnos-text-8xl); }
+.casnos-text-9xl { font-size: var(--casnos-text-9xl); }
+
+/* أوزان الخطوط */
+.casnos-font-light { font-weight: var(--casnos-font-light); }
+.casnos-font-normal { font-weight: var(--casnos-font-normal); }
+.casnos-font-medium { font-weight: var(--casnos-font-medium); }
+.casnos-font-semibold { font-weight: var(--casnos-font-semibold); }
+.casnos-font-bold { font-weight: var(--casnos-font-bold); }
+.casnos-font-extrabold { font-weight: var(--casnos-font-extrabold); }
+.casnos-font-black { font-weight: var(--casnos-font-black); }
+
+/* ارتفاع الخطوط */
+.casnos-leading-none { line-height: var(--casnos-leading-none); }
+.casnos-leading-tight { line-height: var(--casnos-leading-tight); }
+.casnos-leading-snug { line-height: var(--casnos-leading-snug); }
+.casnos-leading-normal { line-height: var(--casnos-leading-normal); }
+.casnos-leading-relaxed { line-height: var(--casnos-leading-relaxed); }
+.casnos-leading-loose { line-height: var(--casnos-leading-loose); }
+
+/* تباعد الأحرف */
+.casnos-tracking-tighter { letter-spacing: var(--casnos-tracking-tighter); }
+.casnos-tracking-tight { letter-spacing: var(--casnos-tracking-tight); }
+.casnos-tracking-normal { letter-spacing: var(--casnos-tracking-normal); }
+.casnos-tracking-wide { letter-spacing: var(--casnos-tracking-wide); }
+.casnos-tracking-wider { letter-spacing: var(--casnos-tracking-wider); }
+.casnos-tracking-widest { letter-spacing: var(--casnos-tracking-widest); }
+
+/* =================================================================
+   فئات الخطوط المتخصصة
+   ================================================================= */
+
+/* عناوين الشاشات */
+.casnos-heading-primary {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-4xl);
+  font-weight: var(--casnos-font-bold);
+  line-height: var(--casnos-leading-tight);
+  letter-spacing: var(--casnos-tracking-tight);
+}
+
+.casnos-heading-secondary {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-2xl);
+  font-weight: var(--casnos-font-semibold);
+  line-height: var(--casnos-leading-snug);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+.casnos-heading-tertiary {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-xl);
+  font-weight: var(--casnos-font-medium);
+  line-height: var(--casnos-leading-normal);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+/* نصوص الأزرار */
+.casnos-button-text {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-base);
+  font-weight: var(--casnos-font-medium);
+  line-height: var(--casnos-leading-normal);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+/* نصوص العناصر */
+.casnos-body-text {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-base);
+  font-weight: var(--casnos-font-normal);
+  line-height: var(--casnos-leading-normal);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+/* نصوص التفاصيل */
+.casnos-detail-text {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-sm);
+  font-weight: var(--casnos-font-normal);
+  line-height: var(--casnos-leading-normal);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+/* نصوص الحالة */
+.casnos-caption-text {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-xs);
+  font-weight: var(--casnos-font-normal);
+  line-height: var(--casnos-leading-normal);
+  letter-spacing: var(--casnos-tracking-wide);
+}
+
+/* عرض التذاكر */
+.casnos-ticket-number {
+  font-family: var(--casnos-font-english);
+  font-size: var(--casnos-text-8xl);
+  font-weight: var(--casnos-font-black);
+  line-height: var(--casnos-leading-none);
+  letter-spacing: var(--casnos-tracking-wider);
+}
+
+.casnos-ticket-service {
+  font-family: var(--casnos-font-arabic);
+  font-size: var(--casnos-text-3xl);
+  font-weight: var(--casnos-font-bold);
+  line-height: var(--casnos-leading-tight);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+.casnos-ticket-window {
+  font-family: var(--casnos-font-mixed);
+  font-size: var(--casnos-text-4xl);
+  font-weight: var(--casnos-font-bold);
+  line-height: var(--casnos-leading-tight);
+  letter-spacing: var(--casnos-tracking-normal);
+}
+
+/* =================================================================
+   تحسينات الخطوط
+   ================================================================= */
+
+/* تحسين عرض الخطوط العربية */
+.casnos-arabic-optimized {
+  font-family: var(--casnos-font-arabic);
+  font-feature-settings: 'liga' on, 'kern' on;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* تحسين عرض الخطوط الإنجليزية */
+.casnos-english-optimized {
+  font-family: var(--casnos-font-english);
+  font-feature-settings: 'liga' on, 'kern' on;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* تحسين عرض الخطوط المختلطة */
+.casnos-mixed-optimized {
+  font-family: var(--casnos-font-mixed);
+  font-feature-settings: 'liga' on, 'kern' on;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* تحسين عرض الأرقام */
+.casnos-numbers-optimized {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' on;
+}

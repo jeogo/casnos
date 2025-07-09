@@ -64,14 +64,18 @@ const networkInfo = getNetworkInfo()
 try {
   // Initialize database
   initializeDatabase()
-  console.log('🗃️ Database initialized successfully')
-  console.log('🌐 Network Information:')
-  console.log(` - Server IP: ${networkInfo.ip}`)
-  console.log(' - Network Interfaces:')
-  networkInfo.addresses.forEach(addr => {
-    console.log(`   • ${addr.interface}: ${addr.address} (${addr.family})`);
-  });
-  console.log(` - Subnet: ${networkInfo.subnet.networkAddress}/${networkInfo.subnet.subnetMaskLength}`);
+
+  // Silent server startup - only show network info in development
+  if (process.env.NODE_ENV === 'development') {
+    console.log('🗃️ Database initialized successfully')
+    console.log('🌐 Network Information:')
+    console.log(` - Server IP: ${networkInfo.ip}`)
+    console.log(' - Network Interfaces:')
+    networkInfo.addresses.forEach(addr => {
+      console.log(`   • ${addr.interface}: ${addr.address} (${addr.family})`);
+    });
+    console.log(` - Subnet: ${networkInfo.subnet.networkAddress}/${networkInfo.subnet.subnetMaskLength}`);
+  }
 } catch (error) {
   console.error('Failed to initialize database:', error)
   process.exit(1)

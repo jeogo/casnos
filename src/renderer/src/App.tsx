@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import CustomerScreen from './screens/CustomerScreen';
 import DisplayScreen from './screens/DisplayScreen';
-import WindowScreen from './screens/WindowScreen';
 import AdminScreen from './screens/AdminScreen';
+import WindowScreen from './screens/WindowScreen';
 
 function App(): React.JSX.Element {
   const [activeScreen, setActiveScreen] = useState<'customer' | 'display' | 'window' | 'admin'>('customer');
@@ -14,7 +14,7 @@ function App(): React.JSX.Element {
 
     if (screenParam === 'display') {
       setActiveScreen('display');
-    } else if (screenParam === 'window' || screenParam === 'employee') {
+    } else if (screenParam === 'window') {
       setActiveScreen('window');
     } else if (screenParam === 'admin') {
       setActiveScreen('admin');

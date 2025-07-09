@@ -38,6 +38,28 @@ export const forceDailyReset = asyncHandler(async (req: Request, res: Response) 
 
     const duration = Date.now() - startTime
 
+    // Broadcast real-time system reset event to all connected clients
+    const { getSocketIO } = require('../socket/socket.instance')
+    const io = getSocketIO()
+
+    if (io) {
+      io.emit('system:reset', {
+        message: 'System has been reset by administrator / تم إعادة تعيين النظام من قبل المشرف',
+        resetTime: new Date().toISOString(),
+        duration: `${duration}ms`,
+        forced: true,
+        action: 'refresh-required',
+        components: {
+          tickets: true,
+          pdfs: true,
+          cache: true
+        },
+        timestamp: new Date().toISOString()
+      })
+
+      console.log('[ADMIN-RESET] 📡 Broadcasted system reset event to all clients')
+    }
+
     res.json({
       success: true,
       message: 'تمت إعادة التعيين اليومية بنجاح',

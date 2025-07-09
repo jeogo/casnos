@@ -47,6 +47,12 @@ export const SOCKET_EVENTS = {
   PRINT_STATUS: 'print:status-update',
   PRINT_COMPLETED: 'print:completed',
 
+  // 🆕 Simplified Display Print Event (النظام الجديد المبسط)
+  DISPLAY_PRINT_TICKET: 'display:print-ticket',
+
+  // ⚡ Real-time Print Events (النظام الفوري)
+  PRINT_PENDING_INSTANT: 'print:pending-instant',
+
   // System events
   SYSTEM_RESET: 'system:reset',
   INITIAL_DATA: 'initial-data',

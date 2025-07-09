@@ -3,7 +3,7 @@
 
 import { initializeConnection, getDatabase, closeConnection } from './connection'
 import { createAllSchemas } from './schemas'
-import { systemOperations } from './operations'
+import { systemOperations, serviceOperations } from './operations'
 
 // Export connection management
 export { getDatabase, closeConnection as closeDatabase }
@@ -29,7 +29,10 @@ export function initializeDatabase(): Promise<void> {
       // 2. Create all schemas
       createAllSchemas()
 
-      // 3. Perform daily reset if needed
+      // 3. Ensure default service exists
+      ensureDefaultService()
+
+      // 4. Perform daily reset if needed
       performDailyResetIfNeeded()
 
       console.log('✅ Database system initialized successfully')
@@ -76,6 +79,33 @@ function performDailyResetIfNeeded(): void {
   } catch (error) {
     console.error('❌ Daily reset failed:', error)
     // Don't throw - allow app to start even if reset fails
+  }
+}
+
+/**
+ * Ensure default service exists
+ * Creates "الشباك المشترك" service if no services exist
+ */
+function ensureDefaultService(): void {
+  try {
+    // Check if any services exist
+    const existingServices = serviceOperations.getAll()
+
+    if (existingServices.length === 0) {
+      console.log('🏢 No services found, creating default service...')
+
+      // Create default service
+      const defaultService = serviceOperations.create({
+        name: 'الشباك المشترك'
+      })
+
+      console.log('✅ Default service created:', defaultService.name)
+    } else {
+      console.log(`ℹ️ Found ${existingServices.length} existing service(s)`)
+    }
+  } catch (error) {
+    console.error('❌ Failed to ensure default service:', error)
+    // Don't throw - allow app to start even if default service creation fails
   }
 }
 
