@@ -1,0 +1,5634 @@
+[2025-07-11T16:40:50.921Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T16:40:50.923Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T16:40:50.923Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 127651840,
+    "heapTotal": 21655552,
+    "heapUsed": 18801296,
+    "external": 4119332,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:40:50.925Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "12",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:40:51.836Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "12",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-12.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:40:51.842Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-12",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-12.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:40:52.304Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-12",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:41:20.930Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:41:20.930Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:41:50.942Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:41:50.942Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:42:20.945Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:42:20.945Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:42:50.957Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:42:50.957Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:43:20.964Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:43:20.964Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:43:50.966Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:43:50.966Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:44:20.972Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:44:20.972Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:44:50.979Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:44:50.979Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:45:20.986Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:45:20.986Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:45:51.000Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:45:51.000Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:46:21.010Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:46:21.010Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:46:51.014Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:46:51.014Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:47:21.028Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:47:21.028Z",
+  "uptimeMinutes": "6.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:47:51.029Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:47:51.029Z",
+  "uptimeMinutes": "7.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:48:21.043Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:48:21.043Z",
+  "uptimeMinutes": "7.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:48:51.046Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:48:51.046Z",
+  "uptimeMinutes": "8.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:49:21.063Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:49:21.063Z",
+  "uptimeMinutes": "8.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:49:51.074Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:49:51.074Z",
+  "uptimeMinutes": "9.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:50:21.088Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:50:21.088Z",
+  "uptimeMinutes": "9.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:50:51.091Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:50:51.091Z",
+  "uptimeMinutes": "10.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:51:21.095Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:51:21.095Z",
+  "uptimeMinutes": "10.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:51:51.106Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:51:51.106Z",
+  "uptimeMinutes": "11.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:52:21.109Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:52:21.109Z",
+  "uptimeMinutes": "11.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:52:51.120Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:52:51.120Z",
+  "uptimeMinutes": "12.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:53:21.124Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:53:21.124Z",
+  "uptimeMinutes": "12.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:53:51.131Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:53:51.131Z",
+  "uptimeMinutes": "13.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:54:21.136Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:54:21.136Z",
+  "uptimeMinutes": "13.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:54:51.147Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:54:51.147Z",
+  "uptimeMinutes": "14.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:55:21.162Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:55:21.162Z",
+  "uptimeMinutes": "14.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:55:51.172Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:55:51.172Z",
+  "uptimeMinutes": "15.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:56:21.179Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:56:21.179Z",
+  "uptimeMinutes": "15.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:56:51.188Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:56:51.188Z",
+  "uptimeMinutes": "16.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:57:21.196Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:57:21.196Z",
+  "uptimeMinutes": "16.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:57:51.206Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:57:51.206Z",
+  "uptimeMinutes": "17.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:58:21.210Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:58:21.210Z",
+  "uptimeMinutes": "17.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:58:51.221Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:58:51.221Z",
+  "uptimeMinutes": "18.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:59:21.234Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:59:21.234Z",
+  "uptimeMinutes": "18.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T16:59:51.236Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T16:59:51.236Z",
+  "uptimeMinutes": "19.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:00:21.246Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:00:21.246Z",
+  "uptimeMinutes": "19.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:00:51.260Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:00:51.260Z",
+  "uptimeMinutes": "20.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:01:21.273Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:01:21.273Z",
+  "uptimeMinutes": "20.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:01:51.277Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:01:51.277Z",
+  "uptimeMinutes": "21.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:02:21.280Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:02:21.280Z",
+  "uptimeMinutes": "21.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:02:51.294Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:02:51.294Z",
+  "uptimeMinutes": "22.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:03:21.307Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:03:21.307Z",
+  "uptimeMinutes": "22.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:03:51.319Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:03:51.319Z",
+  "uptimeMinutes": "23.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:04:21.325Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:04:21.325Z",
+  "uptimeMinutes": "23.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:04:51.339Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:04:51.339Z",
+  "uptimeMinutes": "24.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:05:21.350Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:05:21.350Z",
+  "uptimeMinutes": "24.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:05:51.357Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:05:51.357Z",
+  "uptimeMinutes": "25.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:20.937Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:20.939Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T17:06:20.939Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 156418048,
+    "heapTotal": 30773248,
+    "heapUsed": 15812276,
+    "external": 3970099,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:20.940Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "28",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:21.366Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:06:21.366Z",
+  "uptimeMinutes": "25.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:23.768Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "28",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-28.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:23.814Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-28",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-28.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:25.233Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-28",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:29.401Z] [PDF] PDF Generation Attempt #2
+    Data: {
+  "ticketNumber": "29",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:30.915Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "29",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-29.pdf",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:30.942Z] [PRINT] Print Attempt #2
+    Data: {
+  "ticketNumber": "الشباك-المشترك-29",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-29.pdf",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:32.559Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-29",
+  "method": "SumatraPDF",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:37.053Z] [PDF] PDF Generation Attempt #3
+    Data: {
+  "ticketNumber": "30",
+  "totalAttempts": 3
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:38.733Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "30",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-30.pdf",
+  "successCount": 3,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:38.788Z] [PRINT] Print Attempt #3
+    Data: {
+  "ticketNumber": "الشباك-المشترك-30",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-30.pdf",
+  "totalAttempts": 3
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:40.996Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-30",
+  "method": "SumatraPDF",
+  "successCount": 3,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:41.839Z] [PDF] PDF Generation Attempt #4
+    Data: {
+  "ticketNumber": "31",
+  "totalAttempts": 4
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:43.970Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "31",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-31.pdf",
+  "successCount": 4,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:44.017Z] [PRINT] Print Attempt #4
+    Data: {
+  "ticketNumber": "الشباك-المشترك-31",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-31.pdf",
+  "totalAttempts": 4
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:46.336Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-31",
+  "method": "SumatraPDF",
+  "successCount": 4,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:50.942Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:06:50.942Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 4,
+    "pdfGenerationSuccesses": 4,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 4,
+    "printSuccesses": 4,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:06:51.382Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:06:51.382Z",
+  "uptimeMinutes": "26.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:20.947Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:07:20.947Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 4,
+    "pdfGenerationSuccesses": 4,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 4,
+    "printSuccesses": 4,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:21.388Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:07:21.388Z",
+  "uptimeMinutes": "26.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:48.130Z] [PDF] PDF Generation Attempt #5
+    Data: {
+  "ticketNumber": "32",
+  "totalAttempts": 5
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:50.165Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "32",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-32.pdf",
+  "successCount": 5,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:50.331Z] [PRINT] Print Attempt #5
+    Data: {
+  "ticketNumber": "الشباك-المشترك-32",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-32.pdf",
+  "totalAttempts": 5
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:50.950Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:07:50.950Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 5,
+    "pdfGenerationSuccesses": 5,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 5,
+    "printSuccesses": 4,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "80.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:51.388Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:07:51.388Z",
+  "uptimeMinutes": "27.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:07:53.142Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-32",
+  "method": "SumatraPDF",
+  "successCount": 5,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:13.340Z] [PDF] PDF Generation Attempt #6
+    Data: {
+  "ticketNumber": "33",
+  "totalAttempts": 6
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:13.810Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "33",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-33.pdf",
+  "successCount": 6,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:13.813Z] [PRINT] Print Attempt #6
+    Data: {
+  "ticketNumber": "الشباك-المشترك-33",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-33.pdf",
+  "totalAttempts": 6
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:14.190Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-33",
+  "method": "SumatraPDF",
+  "successCount": 6,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:18.756Z] [PDF] PDF Generation Attempt #7
+    Data: {
+  "ticketNumber": "34",
+  "totalAttempts": 7
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:19.432Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "34",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-34.pdf",
+  "successCount": 7,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:19.439Z] [PRINT] Print Attempt #7
+    Data: {
+  "ticketNumber": "الشباك-المشترك-34",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-34.pdf",
+  "totalAttempts": 7
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:20.013Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-34",
+  "method": "SumatraPDF",
+  "successCount": 7,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:20.954Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:08:20.954Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 7,
+    "pdfGenerationSuccesses": 7,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 7,
+    "printSuccesses": 7,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:21.401Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:08:21.401Z",
+  "uptimeMinutes": "27.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:34.105Z] [PDF] PDF Generation Attempt #8
+    Data: {
+  "ticketNumber": "36",
+  "totalAttempts": 8
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:36.025Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "36",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-36.pdf",
+  "successCount": 8,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:36.097Z] [PRINT] Print Attempt #8
+    Data: {
+  "ticketNumber": "الشباك-المشترك-36",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-36.pdf",
+  "totalAttempts": 8
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:38.023Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-36",
+  "method": "SumatraPDF",
+  "successCount": 8,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:43.234Z] [PDF] PDF Generation Attempt #9
+    Data: {
+  "ticketNumber": "37",
+  "totalAttempts": 9
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:48.278Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "37",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-37.pdf",
+  "successCount": 9,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:48.326Z] [PRINT] Print Attempt #9
+    Data: {
+  "ticketNumber": "الشباك-المشترك-37",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-37.pdf",
+  "totalAttempts": 9
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:49.925Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-37",
+  "method": "SumatraPDF",
+  "successCount": 9,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:50.964Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:08:50.964Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:51.405Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:08:51.405Z",
+  "uptimeMinutes": "28.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:08:58.643Z] [PDF] PDF Generation Attempt #10
+    Data: {
+  "ticketNumber": "38",
+  "totalAttempts": 10
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:09:00.513Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "38",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-38.pdf",
+  "successCount": 10,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:09:00.555Z] [PRINT] Print Attempt #10
+    Data: {
+  "ticketNumber": "الشباك-المشترك-38",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-38.pdf",
+  "totalAttempts": 10
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:09:02.530Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-38",
+  "method": "SumatraPDF",
+  "successCount": 10,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:09:20.972Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:09:20.971Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 10,
+    "pdfGenerationSuccesses": 10,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 10,
+    "printSuccesses": 10,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253580937
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:09:21.408Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:09:21.408Z",
+  "uptimeMinutes": "28.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752252050921
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:10:58.865Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T17:10:58.866Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T17:10:58.866Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 142098432,
+    "heapTotal": 30773248,
+    "heapUsed": 15639920,
+    "external": 3943195,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:10:58.867Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "42",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:11:00.125Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "42",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-42.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:11:00.134Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-42",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-42.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:11:00.518Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-42",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:11:28.868Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:11:28.868Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:11:58.880Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:11:58.880Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:12:28.893Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:12:28.893Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:12:58.897Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:12:58.897Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:10.499Z] [PDF] PDF Generation Attempt #2
+    Data: {
+  "ticketNumber": "46",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:11.456Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "46",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-46.pdf",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:11.476Z] [PRINT] Print Attempt #2
+    Data: {
+  "ticketNumber": "الشباك-المشترك-46",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-46.pdf",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:12.664Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-46",
+  "method": "SumatraPDF",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:28.897Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:13:28.897Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:13:58.913Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:13:58.913Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:14:28.918Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:14:28.918Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752253858865
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:44.902Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:44.904Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T17:15:44.904Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 143204352,
+    "heapTotal": 35999744,
+    "heapUsed": 23008096,
+    "external": 3978266,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:44.905Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "1",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:47.415Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:47.436Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:15:48.499Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:16:14.910Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:16:14.910Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:16:44.915Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:16:44.914Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:17:14.924Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:17:14.924Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:17:44.934Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:17:44.934Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:18:14.943Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:18:14.943Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:18:44.947Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:18:44.947Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:00.509Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:00.510Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T17:19:00.510Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 134848512,
+    "heapTotal": 15609856,
+    "heapUsed": 13403544,
+    "external": 3907046,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:00.513Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "6",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:04.655Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "6",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-6.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:04.721Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-6",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-6.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:06.624Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-6",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:14.963Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:19:14.963Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:30.527Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:19:30.527Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:19:44.972Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:19:44.972Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:20:00.535Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:20:00.535Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:20:14.974Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:20:14.974Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:20:30.537Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:20:30.537Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:20:44.984Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:20:44.984Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:21:00.550Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:21:00.550Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:21:14.988Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:21:14.988Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:21:30.558Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:21:30.558Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:21:44.996Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:21:44.996Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:22:00.570Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:22:00.570Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:22:14.999Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:22:14.999Z",
+  "uptimeMinutes": "6.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:22:30.583Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:22:30.583Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:22:45.007Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:22:45.007Z",
+  "uptimeMinutes": "7.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:23:00.594Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:23:00.594Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:23:15.007Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:23:15.007Z",
+  "uptimeMinutes": "7.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:23:30.598Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:23:30.598Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:23:45.014Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:23:45.014Z",
+  "uptimeMinutes": "8.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:24:00.606Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:24:00.606Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:24:15.023Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:24:15.023Z",
+  "uptimeMinutes": "8.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:24:30.613Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:24:30.612Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:24:45.030Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:24:45.030Z",
+  "uptimeMinutes": "9.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254144902
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T17:25:00.615Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T17:25:00.615Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752254340509
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:07.052Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:07.054Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:11:07.054Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 136577024,
+    "heapTotal": 35549184,
+    "heapUsed": 20129536,
+    "external": 4146430,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:07.056Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "13",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:09.186Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "13",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-13.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:09.197Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-13",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-13.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:09.803Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-13",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:16.349Z] [PDF] PDF Generation Attempt #2
+    Data: {
+  "ticketNumber": "14",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:16.852Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "14",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-14.pdf",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:16.871Z] [PRINT] Print Attempt #2
+    Data: {
+  "ticketNumber": "الشباك-المشترك-14",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-14.pdf",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:17.263Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-14",
+  "method": "SumatraPDF",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:21.719Z] [PDF] PDF Generation Attempt #3
+    Data: {
+  "ticketNumber": "15",
+  "totalAttempts": 3
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:22.249Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "15",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-15.pdf",
+  "successCount": 3,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:22.254Z] [PRINT] Print Attempt #3
+    Data: {
+  "ticketNumber": "الشباك-المشترك-15",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-15.pdf",
+  "totalAttempts": 3
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:22.673Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-15",
+  "method": "SumatraPDF",
+  "successCount": 3,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:31.900Z] [PDF] PDF Generation Attempt #4
+    Data: {
+  "ticketNumber": "17",
+  "totalAttempts": 4
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:32.419Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "17",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-17.pdf",
+  "successCount": 4,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:32.422Z] [PRINT] Print Attempt #4
+    Data: {
+  "ticketNumber": "الشباك-المشترك-17",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-17.pdf",
+  "totalAttempts": 4
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:32.795Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-17",
+  "method": "SumatraPDF",
+  "successCount": 4,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:37.065Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:11:37.065Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 4,
+    "pdfGenerationSuccesses": 4,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 4,
+    "printSuccesses": 4,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:47.722Z] [PDF] PDF Generation Attempt #5
+    Data: {
+  "ticketNumber": "20",
+  "totalAttempts": 5
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:48.275Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "20",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-20.pdf",
+  "successCount": 5,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:48.302Z] [PRINT] Print Attempt #5
+    Data: {
+  "ticketNumber": "الشباك-المشترك-20",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-20.pdf",
+  "totalAttempts": 5
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:11:48.714Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-20",
+  "method": "SumatraPDF",
+  "successCount": 5,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:07.068Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:12:07.068Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 5,
+    "pdfGenerationSuccesses": 5,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 5,
+    "printSuccesses": 5,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:14.978Z] [PDF] PDF Generation Attempt #6
+    Data: {
+  "ticketNumber": "21",
+  "totalAttempts": 6
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:15.972Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "21",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-21.pdf",
+  "successCount": 6,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:15.979Z] [PRINT] Print Attempt #6
+    Data: {
+  "ticketNumber": "الشباك-المشترك-21",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-21.pdf",
+  "totalAttempts": 6
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:16.639Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-21",
+  "method": "SumatraPDF",
+  "successCount": 6,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:19.699Z] [PDF] PDF Generation Attempt #7
+    Data: {
+  "ticketNumber": "22",
+  "totalAttempts": 7
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:20.390Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "22",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-22.pdf",
+  "successCount": 7,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:20.402Z] [PRINT] Print Attempt #7
+    Data: {
+  "ticketNumber": "الشباك-المشترك-22",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-22.pdf",
+  "totalAttempts": 7
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:21.010Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-22",
+  "method": "SumatraPDF",
+  "successCount": 7,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:24.351Z] [PDF] PDF Generation Attempt #8
+    Data: {
+  "ticketNumber": "23",
+  "totalAttempts": 8
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:24.936Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "23",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-23.pdf",
+  "successCount": 8,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:24.951Z] [PRINT] Print Attempt #8
+    Data: {
+  "ticketNumber": "الشباك-المشترك-23",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-23.pdf",
+  "totalAttempts": 8
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:25.658Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-23",
+  "method": "SumatraPDF",
+  "successCount": 8,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:12:37.070Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:12:37.070Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 8,
+    "pdfGenerationSuccesses": 8,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 8,
+    "printSuccesses": 8,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:07.078Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:13:07.078Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 8,
+    "pdfGenerationSuccesses": 8,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 8,
+    "printSuccesses": 8,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:37.083Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:13:37.083Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 8,
+    "pdfGenerationSuccesses": 8,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 8,
+    "printSuccesses": 8,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:48.008Z] [PDF] PDF Generation Attempt #9
+    Data: {
+  "ticketNumber": "24",
+  "totalAttempts": 9
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:48.529Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "24",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-24.pdf",
+  "successCount": 9,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:48.533Z] [PRINT] Print Attempt #9
+    Data: {
+  "ticketNumber": "الشباك-المشترك-24",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-24.pdf",
+  "totalAttempts": 9
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:48.990Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-24",
+  "method": "SumatraPDF",
+  "successCount": 9,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:56.224Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:56.226Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:13:56.226Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 141160448,
+    "heapTotal": 15609856,
+    "heapUsed": 13376992,
+    "external": 3915576,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:56.228Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "25",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:57.620Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "25",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-25.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:57.640Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-25",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-25.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:13:58.029Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-25",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:14:07.096Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:14:07.096Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:14:26.233Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:14:26.233Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:14:37.109Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:14:37.109Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:14:56.242Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:14:56.242Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:15:07.111Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:15:07.110Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:15:26.259Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:15:26.259Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:15:37.127Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:15:37.127Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:15:56.277Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:15:56.277Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:16:07.138Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:16:07.138Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:16:26.277Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:16:26.277Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:16:37.151Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:16:37.151Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:16:56.284Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:16:56.284Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:17:07.154Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:17:07.154Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:17:26.290Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:17:26.290Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:17:37.158Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:17:37.158Z",
+  "uptimeMinutes": "6.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:17:56.302Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:17:56.302Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:18:07.163Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:18:07.163Z",
+  "uptimeMinutes": "7.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:18:26.307Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:18:26.306Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:18:37.179Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:18:37.178Z",
+  "uptimeMinutes": "7.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:18:56.314Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:18:56.314Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:19:07.191Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:19:07.191Z",
+  "uptimeMinutes": "8.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:19:26.324Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:19:26.324Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:19:37.197Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:19:37.197Z",
+  "uptimeMinutes": "8.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:19:56.335Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:19:56.335Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:20:07.201Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:20:07.201Z",
+  "uptimeMinutes": "9.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:20:26.341Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:20:26.341Z",
+  "uptimeMinutes": "6.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:20:37.216Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:20:37.216Z",
+  "uptimeMinutes": "9.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:20:56.347Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:20:56.347Z",
+  "uptimeMinutes": "7.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:21:07.218Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:21:07.218Z",
+  "uptimeMinutes": "10.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:21:26.361Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:21:26.361Z",
+  "uptimeMinutes": "7.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:21:37.223Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:21:37.223Z",
+  "uptimeMinutes": "10.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:21:56.374Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:21:56.374Z",
+  "uptimeMinutes": "8.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:22:07.232Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:22:07.232Z",
+  "uptimeMinutes": "11.0",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:22:26.389Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:22:26.389Z",
+  "uptimeMinutes": "8.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257636224
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:22:37.248Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:22:37.248Z",
+  "uptimeMinutes": "11.5",
+  "stats": {
+    "pdfGenerationAttempts": 9,
+    "pdfGenerationSuccesses": 9,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 9,
+    "printSuccesses": 9,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752257467052
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:10.653Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:10.655Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:30:10.654Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 134266880,
+    "heapTotal": 20606976,
+    "heapUsed": 18770268,
+    "external": 3959408,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:10.656Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "6",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:12.244Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "6",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-6.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:12.258Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-6",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-6.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:13.325Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-6",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:15.391Z] [PDF] PDF Generation Attempt #2
+    Data: {
+  "ticketNumber": "7",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:15.832Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "7",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-7.pdf",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:15.836Z] [PRINT] Print Attempt #2
+    Data: {
+  "ticketNumber": "الشباك-المشترك-7",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-7.pdf",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:16.306Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-7",
+  "method": "SumatraPDF",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:30:40.669Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:30:40.669Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752258610653
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:31:10.674Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:31:10.674Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752258610653
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:31:40.679Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:31:40.679Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 2,
+    "pdfGenerationSuccesses": 2,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 2,
+    "printSuccesses": 2,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752258610653
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:18.759Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:18.761Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:43:18.761Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 140861440,
+    "heapTotal": 30478336,
+    "heapUsed": 15231424,
+    "external": 3910948,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:18.762Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "10",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:20.480Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "10",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-10.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:20.493Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-10",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-10.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:21.056Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-10",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:43:48.778Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:43:48.777Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752259398759
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:44:18.788Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:44:18.788Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752259398759
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:44:48.801Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:44:48.801Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752259398759
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:18.806Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:45:18.806Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752259398759
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:56.974Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:56.975Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:45:56.975Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 147308544,
+    "heapTotal": 30740480,
+    "heapUsed": 15338776,
+    "external": 3906218,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:56.976Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "1",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:58.331Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:58.346Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:45:58.989Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:12.964Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:12.965Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T18:46:12.965Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 146857984,
+    "heapTotal": 36261888,
+    "heapUsed": 23493568,
+    "external": 3983365,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:12.967Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "2",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:14.668Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "2",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-2.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:14.697Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-2",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-2.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:15.263Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-2",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:21.730Z] [PDF] PDF Generation Attempt #2
+    Data: {
+  "ticketNumber": "3",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:22.311Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "3",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-3.pdf",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:22.323Z] [PRINT] Print Attempt #2
+    Data: {
+  "ticketNumber": "الشباك-المشترك-3",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-3.pdf",
+  "totalAttempts": 2
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:23.112Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-3",
+  "method": "SumatraPDF",
+  "successCount": 2,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T18:46:26.991Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T18:46:26.991Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752259556973
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:39.256Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:39.257Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T19:33:39.257Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 132534272,
+    "heapTotal": 31526912,
+    "heapUsed": 17928260,
+    "external": 3933615,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:39.258Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "1",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:40.323Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:40.332Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-1.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:33:40.953Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-1",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:34:09.267Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:34:09.266Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:34:39.276Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:34:39.275Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:35:09.280Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:35:09.280Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:35:39.292Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:35:39.292Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:36:09.300Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:36:09.300Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:36:39.314Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:36:39.314Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:37:09.319Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:37:09.319Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:37:39.325Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:37:39.325Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262419255
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:23.047Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:23.048Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T19:40:23.048Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 123887616,
+    "heapTotal": 30740480,
+    "heapUsed": 16057360,
+    "external": 3922263,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:23.049Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "5",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:23.987Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "5",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-5.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:23.998Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-5",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-5.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:24.424Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-5",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:40:53.055Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:40:53.055Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:41:23.066Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:41:23.066Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:41:53.079Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:41:53.078Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:42:23.087Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:42:23.087Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:42:53.100Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:42:53.100Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:43:23.112Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:43:23.112Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:43:53.122Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:43:53.122Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:44:23.132Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:44:23.132Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:44:53.145Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:44:53.145Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:45:23.159Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:45:23.159Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752262823047
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:23.888Z] [SYSTEM] Production monitoring initialized
+
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:23.889Z] [SYSTEM] System Information
+    Data: {
+  "timestamp": "2025-07-11T19:57:23.889Z",
+  "nodeVersion": "v22.16.0",
+  "platform": "win32",
+  "arch": "x64",
+  "electronVersion": "35.7.0",
+  "environment": "development",
+  "isPackaged": false,
+  "resourcesPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\resources",
+  "execPath": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos\\node_modules\\electron\\dist\\electron.exe",
+  "cwd": "C:\\Users\\pc-jeogo\\Desktop\\FocusPlus\\casnos",
+  "memoryUsage": {
+    "rss": 118874112,
+    "heapTotal": 19279872,
+    "heapUsed": 15513824,
+    "external": 3932442,
+    "arrayBuffers": 0
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:23.890Z] [PDF] PDF Generation Attempt #1
+    Data: {
+  "ticketNumber": "2",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:24.808Z] [PDF] PDF Generation Success
+    Data: {
+  "ticketNumber": "2",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-2.pdf",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:24.815Z] [PRINT] Print Attempt #1
+    Data: {
+  "ticketNumber": "الشباك-المشترك-2",
+  "pdfPath": "C:\\Users\\pc-jeogo\\AppData\\Roaming\\casnose\\tickets\\2025-07-11\\الشباك-المشترك-2.pdf",
+  "totalAttempts": 1
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:25.248Z] [PRINT] Print Success
+    Data: {
+  "ticketNumber": "الشباك-المشترك-2",
+  "method": "SumatraPDF",
+  "successCount": 1,
+  "successRate": "100.0%"
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:57:53.907Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:57:53.907Z",
+  "uptimeMinutes": "0.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:58:23.916Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:58:23.916Z",
+  "uptimeMinutes": "1.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:58:53.924Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:58:53.924Z",
+  "uptimeMinutes": "1.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:59:23.926Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:59:23.926Z",
+  "uptimeMinutes": "2.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T19:59:53.936Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T19:59:53.936Z",
+  "uptimeMinutes": "2.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:00:23.946Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:00:23.946Z",
+  "uptimeMinutes": "3.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:00:53.961Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:00:53.961Z",
+  "uptimeMinutes": "3.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:01:23.973Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:01:23.973Z",
+  "uptimeMinutes": "4.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:01:53.982Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:01:53.982Z",
+  "uptimeMinutes": "4.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:02:23.995Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:02:23.995Z",
+  "uptimeMinutes": "5.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:02:54.004Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:02:54.004Z",
+  "uptimeMinutes": "5.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:03:24.010Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:03:24.010Z",
+  "uptimeMinutes": "6.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:03:54.015Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:03:54.015Z",
+  "uptimeMinutes": "6.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:04:24.027Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:04:24.027Z",
+  "uptimeMinutes": "7.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:04:54.041Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:04:54.041Z",
+  "uptimeMinutes": "7.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:05:24.053Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:05:24.053Z",
+  "uptimeMinutes": "8.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:05:54.060Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:05:54.060Z",
+  "uptimeMinutes": "8.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:06:24.067Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:06:24.067Z",
+  "uptimeMinutes": "9.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:06:54.080Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:06:54.080Z",
+  "uptimeMinutes": "9.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:07:24.084Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:07:24.084Z",
+  "uptimeMinutes": "10.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:07:54.089Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:07:54.089Z",
+  "uptimeMinutes": "10.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:08:24.097Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:08:24.097Z",
+  "uptimeMinutes": "11.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:08:54.102Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:08:54.102Z",
+  "uptimeMinutes": "11.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:09:24.109Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:09:24.109Z",
+  "uptimeMinutes": "12.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:09:54.122Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:09:54.121Z",
+  "uptimeMinutes": "12.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:10:24.133Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:10:24.132Z",
+  "uptimeMinutes": "13.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:10:54.142Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:10:54.142Z",
+  "uptimeMinutes": "13.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:11:24.157Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:11:24.157Z",
+  "uptimeMinutes": "14.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:11:54.169Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:11:54.169Z",
+  "uptimeMinutes": "14.5",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------
+[2025-07-11T20:12:24.170Z] [REPORT] Periodic Status Report
+    Data: {
+  "timestamp": "2025-07-11T20:12:24.170Z",
+  "uptimeMinutes": "15.0",
+  "stats": {
+    "pdfGenerationAttempts": 1,
+    "pdfGenerationSuccesses": 1,
+    "pdfGenerationFailures": 0,
+    "printAttempts": 1,
+    "printSuccesses": 1,
+    "printFailures": 0,
+    "chromiumErrors": 0,
+    "storageErrors": 0,
+    "sumatraErrors": 0,
+    "startTime": 1752263843888
+  },
+  "rates": {
+    "pdfSuccessRate": "100.0%",
+    "printSuccessRate": "100.0%"
+  }
+}
+--------------------------------------------------------------------------------

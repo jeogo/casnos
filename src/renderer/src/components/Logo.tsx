@@ -36,7 +36,10 @@ const Logo: React.FC<LogoProps> = ({ className = '', size = 'md', position = 'le
       './resources/logo.png',
       './resources/assets/logo.png',
       '../resources/logo.png',
-      '../resources/assets/logo.png'
+      '../resources/assets/logo.png',
+      // File protocol paths for production (no Node.js dependencies)
+      'file://./resources/assets/logo.png',
+      'file://./assets/logo.png'
     ]
 
     const testImagePath = async (path: string): Promise<boolean> => {

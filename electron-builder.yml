@@ -11,10 +11,12 @@ files:
   - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
 asarUnpack:
   - resources/**
+extraResources:
+  - from: "resources"
+    to: "resources"
+    filter: ["**/*"]
 win:
   executableName: CASNOS
-  sign: false
-  signAndEditExecutable: false
 nsis:
   artifactName: ${name}-${version}-setup.${ext}
   shortcutName: ${productName}
@@ -40,6 +42,8 @@ linux:
 appImage:
   artifactName: ${name}-${version}.${ext}
 npmRebuild: false
+buildDependenciesFromSource: false
+nodeGypRebuild: false
 publish:
   provider: generic
   url: https://example.com/auto-updates

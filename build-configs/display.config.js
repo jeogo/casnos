@@ -71,38 +71,23 @@ module.exports = {
     // ✅ FULL RESOURCES: Display needs everything including SumatraPDF for printing
   ],
 
-  // NSIS configuration (Windows)
-  nsis: {
-    oneClick: false,
-    allowToChangeInstallationDirectory: true,
-    createDesktopShortcut: true,
-    createStartMenuShortcut: true,
-    shortcutName: "CASNOS Display",
-    installerIcon: "build/icon.ico",
-    uninstallerIcon: "build/icon.ico",
-    installerHeader: "build/icon.png",
-    installerHeaderIcon: "build/icon.ico",
-    deleteAppDataOnUninstall: false,
-    displayLanguageSelector: false,
-    language: "1025", // Arabic
-    warningsAsErrors: false,
-    menuCategory: "CASNOS Queue Management"
-  },
-
-  // Windows specific
+  // Windows specific (portable only - avoids NSIS issues)
   win: {
     target: [
       {
-        target: "portable",  // Build portable executable
-        arch: ["x64", "ia32"]  // Support both 64-bit and 32-bit
+        target: "portable",  // ✅ Only portable - no installer
+        arch: ["x64"]
       }
     ],
     icon: "build/icon.ico",
-    requestedExecutionLevel: "asInvoker",
-    // Disable signing to prevent build errors
-    sign: false,
-    // Disable signature verification
-    signAndEditExecutable: false
+    requestedExecutionLevel: "requireAdministrator" // ✅ Run as Administrator for server operations
+  },
+
+  // ✅ Portable configuration
+  portable: {
+    artifactName: "${productName}-${version}-portable-64bit.${ext}",
+    unpackDirName: "CASNOS-Display",
+    requestExecutionLevel: "admin"  // ✅ Run as Admin in portable mode
   },
 
   // Startup configuration

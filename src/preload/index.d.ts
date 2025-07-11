@@ -55,16 +55,8 @@ videoPlay: (filePath?: string) => Promise<{ success: boolean; message: string }>
   videoPlayMostRecent: () => Promise<{ success: boolean; message: string }>;
   videoGetAvailableVideos: () => Promise<{ success: boolean; videos: string[] }>;
   videoSelectNewVideo: () => Promise<{ success: boolean; filePath?: string; message: string }>;
-  videoSetNewDefault: (sourceFilePath: string) => Promise<{ success: boolean; filePath?: string; fileName?: string; message: string }>;// Basic interfaces for ticket and print data
-  // � Video functionality (enhanced with auto-detection)
-  videoPlay: (filePath?: string) => Promise<{ success: boolean; message: string }>;
-  videoLoop: (filePath?: string) => Promise<{ success: boolean; message: string }>;
-  videoTest: () => Promise<{ success: boolean; message: string }>;
-  videoPlayFirstAvailable: () => Promise<{ success: boolean; message: string }>;
-  videoGetFirstAvailable: () => Promise<{ success: boolean; video: string | null; message: string }>;
-  videoGetMostRecent: () => Promise<{ success: boolean; video: string | null; message: string }>;
-  videoPlayMostRecent: () => Promise<{ success: boolean; message: string }>;
-  videoGetAvailableVideos: () => Promise<{ success: boolean; videos: string[] }>;
+  videoSetNewDefault: (sourceFilePath: string) => Promise<{ success: boolean; filePath?: string; fileName?: string; message: string }>;
+  videoGetDefault: () => Promise<{ success: boolean; video: string | null; message: string }>;
 
   // �📁 Resources
   getLogoPath: () => Promise<string | null>;

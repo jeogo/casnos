@@ -44,6 +44,7 @@ const api = {
   videoGetAvailableVideos: () => ipcRenderer.invoke('video:get-available-videos'),
   videoSelectNewVideo: () => ipcRenderer.invoke('video:select-new-video'),
   videoSetNewDefault: (sourceFilePath: string) => ipcRenderer.invoke('video:set-new-default-video', sourceFilePath),
+  videoGetDefault: () => ipcRenderer.invoke('video:get-default'),
 
   // 📁 Resources
   getLogoPath: () => ipcRenderer.invoke('get-logo-path'),

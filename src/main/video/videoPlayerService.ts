@@ -2,7 +2,6 @@
 import { BrowserWindow } from 'electron'
 import { join } from 'path'
 import { existsSync } from 'fs'
-import { ResourcePathManager } from '../utils/resourcePathManager'
 
 /**
  * خدمة مشغل الفيديو للإعلانات في شاشة العرض
@@ -15,11 +14,11 @@ export class VideoPlayerService {
   private currentVideo: string | null = null
   private videoQueue: string[] = []
   private isPlaying: boolean = false
+  private defaultVideoFile: string | null = null // إضافة للاحتفاظ بالفيديو الافتراضي المختار
 
   private constructor() {
-    // Use ResourcePathManager for video path
-    const resourceManager = ResourcePathManager.getInstance()
-    this.videoBasePath = resourceManager.getVideoPath()
+    // تحديد مسار ملفات الفيديو - تم تحديثه ليقرأ من مجلد video
+    this.videoBasePath = join(__dirname, '../../resources/video')
     this.checkVideoFiles()
   }
 
@@ -50,12 +49,32 @@ export class VideoPlayerService {
   }
 
   /**
-   * الحصول على أول ملف فيديو متوفر
+   * الحصول على أول ملف فيديو متوفر (يأخذ الفيديو الافتراضي المحفوظ في الاعتبار)
    */
   getFirstAvailableVideo(): string | null {
     try {
+      // أولاً، تحقق من وجود فيديو افتراضي محفوظ
+      const defaultVideo = this.getDefaultVideo()
+      if (defaultVideo) {
+        console.log(`[VIDEO-SERVICE] 📌 Using saved default video: ${defaultVideo}`)
+        return defaultVideo
+      }
+
+      // ثانياً، استخدم أحدث فيديو متوفر
+      const mostRecent = this.getMostRecentVideo()
+      if (mostRecent) {
+        console.log(`[VIDEO-SERVICE] 📅 Using most recent video: ${mostRecent}`)
+        return mostRecent
+      }
+
+      // ثالثاً، استخدم أول فيديو متوفر
       const availableVideos = this.getAvailableVideos()
-      return availableVideos.length > 0 ? availableVideos[0] : null
+      if (availableVideos.length > 0) {
+        console.log(`[VIDEO-SERVICE] 📁 Using first available video: ${availableVideos[0]}`)
+        return availableVideos[0]
+      }
+
+      return null
     } catch (error) {
       console.error('[VIDEO-SERVICE] ❌ Error getting first available video:', error)
       return null
@@ -114,7 +133,7 @@ export class VideoPlayerService {
       // إرسال أمر تشغيل حلقة مكتومة إلى شاشة العرض
       this.sendToDisplayScreen('play-mp4-loop', {
         videoPath: targetVideo,
-        videoUrl: `./resources/video/${targetVideo}`, // تحديث المسار
+        videoUrl: `./video/${targetVideo}`, // تحديث المسار ليناسب الـ renderer
         muted: true,
         volume: 0,
         autoplay: true,
@@ -165,7 +184,7 @@ export class VideoPlayerService {
 
       // إرسال قائمة التشغيل إلى شاشة العرض (مكتومة الصوت)
       this.sendToDisplayScreen('play-playlist', {
-        playlist: validFiles.map(file => `./resources/video/${file}`), // تحديث المسار
+        playlist: validFiles.map(file => `./video/${file}`), // تحديث المسار ليناسب الـ renderer
         currentIndex: 0,
         muted: true,
         volume: 0,
@@ -242,7 +261,7 @@ export class VideoPlayerService {
 
       this.sendToDisplayScreen('play-video-loop', {
         videoPath: videoFileName,
-        videoUrl: `./resources/video/${videoFileName}`, // تحديث المسار
+        videoUrl: `./video/${videoFileName}`, // تحديث المسار ليناسب الـ renderer
         loopCount: loopCount,
         muted: true,
         volume: 0,
@@ -412,6 +431,72 @@ export class VideoPlayerService {
 
     console.log(`[VIDEO-SERVICE] 🎬 Playing most recent video: ${recentVideo}`)
     return await this.playMp4Loop(recentVideo)
+  }
+
+  /**
+   * حفظ الفيديو الافتراضي المختار من المستخدم
+   * Save user's preferred default video
+   */
+  setDefaultVideo(videoFileName: string): void {
+    try {
+      const fs = require('fs')
+      const path = require('path')
+
+      // التحقق من وجود الفيديو
+      const videoPath = path.join(this.videoBasePath, videoFileName)
+      if (!fs.existsSync(videoPath)) {
+        console.error(`[VIDEO-SERVICE] ❌ Cannot set default video - file not found: ${videoPath}`)
+        return
+      }
+
+      this.defaultVideoFile = videoFileName
+
+      // حفظ الإعداد في ملف
+      const configPath = path.join(this.videoBasePath, 'video-config.json')
+      const config = { defaultVideo: videoFileName, lastUpdated: new Date().toISOString() }
+      fs.writeFileSync(configPath, JSON.stringify(config, null, 2))
+
+      console.log(`[VIDEO-SERVICE] ✅ Default video set to: ${videoFileName}`)
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] ❌ Error setting default video:', error)
+    }
+  }
+
+  /**
+   * الحصول على الفيديو الافتراضي المحفوظ
+   * Get saved default video
+   */
+  getDefaultVideo(): string | null {
+    try {
+      const path = require('path')
+      const fs = require('fs')
+
+      // قراءة من الذاكرة أولاً
+      if (this.defaultVideoFile) {
+        const videoPath = path.join(this.videoBasePath, this.defaultVideoFile)
+        if (fs.existsSync(videoPath)) {
+          return this.defaultVideoFile
+        }
+      }
+
+      // قراءة من ملف الإعدادات
+      const configPath = path.join(this.videoBasePath, 'video-config.json')
+      if (fs.existsSync(configPath)) {
+        const config = JSON.parse(fs.readFileSync(configPath, 'utf8'))
+        if (config.defaultVideo) {
+          const videoPath = path.join(this.videoBasePath, config.defaultVideo)
+          if (fs.existsSync(videoPath)) {
+            this.defaultVideoFile = config.defaultVideo
+            return config.defaultVideo
+          }
+        }
+      }
+
+      return null
+    } catch (error) {
+      console.error('[VIDEO-SERVICE] ❌ Error getting default video:', error)
+      return null
+    }
   }
 }
 

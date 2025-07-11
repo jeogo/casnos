@@ -1,10 +1,9 @@
 // 🖨️ Print Handlers - معالجات الطباعة
-import { ipcMain } from 'electron'
+import { ipcMain, app } from 'electron'
 import { SumatraPDFManager } from '../utils/sumatraPDFManager'
 import { TicketPDFGenerator } from '../printing/ticketPDFGenerator'
 import { getLocalPrinters } from '../printerUtils'
 import { getNetworkServerInfo } from './networkHandlers'
-import { ResourcePathManager } from '../utils/resourcePathManager'
 
 export function setupPrintHandlers() {
   // IPC handler to get local printers (from this PC, not server)
@@ -21,18 +20,52 @@ export function setupPrintHandlers() {
   // PDF Generation IPC Handlers
   ipcMain.handle('get-logo-path', async () => {
     try {
-      const resourceManager = ResourcePathManager.getInstance();
-      const logoPath = resourceManager.getLogoPath();
+      const path = require('path');
+      const fs = require('fs');
 
-      if (logoPath) {
+      // Determine if we're in development or production
+      const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+
+      let logoPath;
+
+      if (isDev) {
+        // Development mode: search in project resources folder
+        logoPath = path.join(__dirname, '../../resources/assets/logo.png');
+
+        // Alternative development paths
+        const altPaths = [
+          path.join(__dirname, '../../resources/logo.png'),
+          path.join(process.cwd(), 'resources/assets/logo.png'),
+          path.join(process.cwd(), 'resources/logo.png')
+        ];
+
+        if (!fs.existsSync(logoPath)) {
+          for (const altPath of altPaths) {
+            if (fs.existsSync(altPath)) {
+              logoPath = altPath;
+              break;
+            }
+          }
+        }
+      } else {
+        // Production mode: logo should be in resources folder
+        logoPath = path.join(process.resourcesPath, 'assets', 'logo.png');
+
+        // Fallback for production
+        if (!fs.existsSync(logoPath)) {
+          logoPath = path.join(process.resourcesPath, 'logo.png');
+        }
+      }
+
+      // Check if logo exists
+      if (fs.existsSync(logoPath)) {
         console.log('[IPC] Logo found at:', logoPath);
         return `file://${logoPath.replace(/\\/g, '/')}`;
       } else {
-        console.warn('[IPC] Logo not found');
+        console.warn('[IPC] Logo not found at path:', logoPath);
         return null;
       }
     } catch (error) {
-      console.error('[IPC] Error getting logo path:', error);
       return null;
     }
   });
@@ -95,6 +128,12 @@ export function setupPrintHandlers() {
         print_source: ticketData.print_source
       });
 
+      // ✅ Environment diagnostics
+      const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+      console.log(`[IPC] 🔍 Environment: ${isDev ? 'Development' : 'Production'}`);
+      console.log(`[IPC] 📁 app.isPackaged: ${app.isPackaged}`);
+      console.log(`[IPC] 📁 process.resourcesPath: ${process.resourcesPath || 'undefined'}`);
+
       // ✅ Ensure company_name is always empty string as requested
       const sanitizedTicketData = {
         ...ticketData,
@@ -110,39 +149,79 @@ export function setupPrintHandlers() {
         print_source: sanitizedTicketData.print_source
       });
 
-      // Generate PDF first
+      // Generate PDF first with enhanced error handling
+      console.log(`[IPC] 📄 Starting PDF generation...`);
       const generator = TicketPDFGenerator.getInstance();
       const pdfPath = await generator.generateFromTicketData(sanitizedTicketData);
 
       if (!pdfPath) {
+        console.error(`[IPC] ❌ PDF generation failed for ticket ${sanitizedTicketData.ticket_number}`);
         throw new Error('Failed to generate PDF for ticket');
       }
 
       console.log(`[IPC] ✅ PDF generated successfully: ${pdfPath}`);
 
-      // Print using SumatraPDF (silent printing)
+      // Enhanced PDF file verification
+      const fs = require('fs');
+      if (fs.existsSync(pdfPath)) {
+        const stats = fs.statSync(pdfPath);
+        console.log(`[IPC] 📁 PDF file verified - Size: ${stats.size} bytes`);
+
+        if (stats.size === 0) {
+          console.error(`[IPC] ❌ PDF file is empty: ${pdfPath}`);
+          throw new Error('Generated PDF file is empty');
+        }
+      } else {
+        console.error(`[IPC] ❌ PDF file not found: ${pdfPath}`);
+        throw new Error('PDF file was not created');
+      }
+
+      // Check SumatraPDF availability before printing
       const sumatraManager = SumatraPDFManager.getInstance();
+      const diagnostics = sumatraManager.getDiagnostics();
+
+      console.log(`[IPC] 🔍 SumatraPDF Diagnostics:`, diagnostics);
+
+      if (!diagnostics.isAvailable) {
+        console.error(`[IPC] ❌ SumatraPDF not available - Path: ${diagnostics.executablePath}`);
+        console.error(`[IPC] 📁 Executable exists: ${diagnostics.executableExists}`);
+        console.warn(`[IPC] ⚠️ SumatraPDF not available, printing may fail`);
+      }
+
+      // Print using SumatraPDF (silent printing)
+      console.log(`[IPC] 🖨️ Starting print process...`);
       const result = await sumatraManager.printPDF(pdfPath, printerName);
 
       console.log(`[IPC] 🖨️ Print command executed:`, result);
 
       return {
-        success: true,
-        message: 'Ticket printed successfully',
+        success: result.success,
+        message: result.success ? 'Ticket printed successfully' : result.message,
         pdfPath: pdfPath,
         printer: printerName,
-        printMethod: result.method
+        printMethod: result.method,
+        diagnostics: diagnostics
       };
 
     } catch (printError) {
-      console.error(`[IPC] ❌ Print execution failed: ${printError}`);
+      console.error(`[IPC] ❌ Print execution failed:`, printError);
+
+      // Get additional diagnostics on error
+      try {
+        const sumatraManager = SumatraPDFManager.getInstance();
+        const diagnostics = sumatraManager.getDiagnostics();
+        console.error(`[IPC] 🔍 Error diagnostics:`, diagnostics);
+      } catch (diagError) {
+        console.error(`[IPC] ❌ Failed to get diagnostics:`, diagError);
+      }
 
       // Even if printing fails, PDF is still generated
       return {
-        success: true,
-        message: 'PDF generated successfully, but printing failed. Check printer settings.',
+        success: false,
+        message: `Print failed: ${printError instanceof Error ? printError.message : 'Unknown error'}`,
         printer: printerName,
-        warning: 'Print failed but PDF saved'
+        error: 'PRINT_FAILED',
+        details: printError instanceof Error ? printError.stack : String(printError)
       };
     }
   });
@@ -472,6 +551,36 @@ export function setupPrintHandlers() {
         printers: []
       };
     }
+  });
+
+  // 🔍 Production diagnostics handler
+  ipcMain.handle('get-production-diagnostics', async () => {
+    try {
+      const { runProductionDiagnostics } = require('../utils/productionDiagnostics');
+      return {
+        success: true,
+        diagnostics: runProductionDiagnostics()
+      };
+    } catch (error) {
+      return {
+        success: false,
+        error: error instanceof Error ? error.message : 'Unknown error'
+      };
+    }
+  });
+
+  // 🔍 Environment info handler
+  ipcMain.handle('get-environment-info', async () => {
+    const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+    return {
+      environment: isDev ? 'development' : 'production',
+      isPackaged: app.isPackaged,
+      nodeEnv: process.env.NODE_ENV,
+      resourcesPath: process.resourcesPath,
+      cwd: process.cwd(),
+      appPath: app.getAppPath(),
+      userData: app.getPath('userData')
+    };
   });
 
   console.log('[HANDLERS] 🖨️ Print handlers registered successfully');

@@ -30,7 +30,7 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     audioHandlers: true, // For announcements
     windowHandlers: false, // Not needed
     serverSyncInterval: 2000, // Fast sync for real-time
-    enableDevTools: process.env.NODE_ENV === 'development',
+    enableDevTools: true, // Always enabled for debugging
     maxMemoryUsage: 256, // MB
     garbageCollectionInterval: 30000 // 30 seconds
   },
@@ -43,7 +43,7 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     audioHandlers: false, // Not needed
     windowHandlers: false, // Not needed
     serverSyncInterval: 5000, // Moderate sync
-    enableDevTools: process.env.NODE_ENV === 'development',
+    enableDevTools: true, // Always enabled for debugging
     maxMemoryUsage: 128, // MB - Lightweight
     garbageCollectionInterval: 60000 // 1 minute
   },
@@ -56,7 +56,7 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     audioHandlers: false, // Not needed
     windowHandlers: false, // Not needed
     serverSyncInterval: 3000, // Fast for ticket management
-    enableDevTools: process.env.NODE_ENV === 'development',
+    enableDevTools: true, // Always enabled for debugging
     maxMemoryUsage: 128, // MB - Lightweight
     garbageCollectionInterval: 45000 // 45 seconds
   },
@@ -69,7 +69,7 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     audioHandlers: false, // Not needed
     windowHandlers: true, // For window management
     serverSyncInterval: 5000, // Moderate sync for admin tasks
-    enableDevTools: process.env.NODE_ENV === 'development',
+    enableDevTools: true, // Always enabled for debugging
     maxMemoryUsage: 256, // MB - More memory for admin tasks
     garbageCollectionInterval: 60000 // 1 minute
   },
@@ -82,7 +82,7 @@ export const SCREEN_CONFIGS: Record<string, ScreenConfig> = {
     audioHandlers: true,
     windowHandlers: true,
     serverSyncInterval: 5000,
-    enableDevTools: process.env.NODE_ENV === 'development',
+    enableDevTools: true, // Always enabled for debugging
     maxMemoryUsage: 512, // MB - Higher for all services
     garbageCollectionInterval: 30000 // 30 seconds
   }

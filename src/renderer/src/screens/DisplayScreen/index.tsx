@@ -78,15 +78,26 @@ const DisplayScreen: React.FC = () => {
           '/resources/video/ads.mp4'
         ];
 
-        // Try to get video from API first (use most recent video)
+        // Try to get video from API first (priority: default > most recent > first available)
         try {
-          const apiResult = await Promise.race([
-            window.api.videoGetMostRecent(),
+          // 1. Try to get user's saved default video first
+          const defaultResult = await Promise.race([
+            window.api.videoGetDefault(),
             new Promise((_, reject) => setTimeout(() => reject(new Error('API timeout')), 1000))
           ]) as any;
 
-          if (apiResult?.success && apiResult.video) {
-            videoSources.unshift(`./video/${apiResult.video}`);
+          if (defaultResult?.success && defaultResult.video) {
+            videoSources.unshift(`./video/${defaultResult.video}`);
+          } else {
+            // 2. Fallback to most recent video
+            const apiResult = await Promise.race([
+              window.api.videoGetMostRecent(),
+              new Promise((_, reject) => setTimeout(() => reject(new Error('API timeout')), 1000))
+            ]) as any;
+
+            if (apiResult?.success && apiResult.video) {
+              videoSources.unshift(`./video/${apiResult.video}`);
+            }
           }
         } catch (apiError) {
           // Fallback to first available video
@@ -218,6 +229,7 @@ const DisplayScreen: React.FC = () => {
       isVideoReady,
       videoError,
       currentVideoUrl,
+      setCurrentVideoUrl,
       isVideoVisible,
       videoState: videoStateRef.current,
       startVideo,
@@ -453,10 +465,22 @@ const DisplayScreen: React.FC = () => {
       if (setResult?.success) {
         setVideoChangeStatus('تم تغيير الفيديو بنجاح! 🎉');
 
-        // Refresh the video player after a short delay
-        setTimeout(() => {
-          videoPlayer.initializeVideo();
-        }, 1000);
+        // Update video immediately with the new file
+        const video = videoRef.current;
+        if (video && setResult.fileName) {
+          try {
+            const newVideoUrl = `./video/${setResult.fileName}`;
+            video.src = newVideoUrl;
+            videoPlayer.setCurrentVideoUrl(newVideoUrl);
+            video.load();
+            await video.play();
+          } catch (videoError) {
+            // Fallback to initialization
+            setTimeout(() => {
+              videoPlayer.initializeVideo();
+            }, 500);
+          }
+        }
 
         // Close the dialog after 2 seconds
         setTimeout(() => {
@@ -746,8 +770,18 @@ const DisplayScreen: React.FC = () => {
         const isPaused = video.paused;
         const hasError = video.error;
 
-        if (hasError || isStalled || (isPaused && !videoPlayer.isVideoVisible)) {
+        // Also check if video source has changed but not updated
+        const currentSrc = video.src;
+        const expectedSrc = videoPlayer.currentVideoUrl;
+        const srcMismatch = currentSrc !== expectedSrc && expectedSrc;
+
+        if (hasError || isStalled || (isPaused && videoPlayer.isVideoVisible) || srcMismatch) {
           try {
+            // If source mismatch, update it first
+            if (srcMismatch) {
+              video.src = expectedSrc;
+              video.load();
+            }
             // Attempt to restart video
             await videoPlayer.startVideo();
           } catch (repairError) {
@@ -875,20 +909,29 @@ const DisplayScreen: React.FC = () => {
 
   // Enhanced pending ticket checker that runs immediately
   const checkPendingTicketsInstantly = useCallback(async () => {
+    console.log('🔍 Starting instant check for pending tickets...');
+
     try {
       // Get pending tickets from API
       const pendingResult = await window.api.getPendingTickets();
+      console.log('📊 Pending tickets result:', pendingResult);
 
       if (pendingResult?.success && pendingResult.data && pendingResult.data.length > 0) {
+        console.log(`📝 Found ${pendingResult.data.length} total pending tickets`);
+
         // Find tickets that need printing (print_status = 'pending')
         const ticketsNeedingPrint = pendingResult.data.filter((ticket: any) =>
           ticket.print_status === 'pending'
         );
 
+        console.log(`🖨️ Found ${ticketsNeedingPrint.length} tickets needing print`);
+
         if (ticketsNeedingPrint.length > 0) {
           // Print each ticket immediately with parallel processing for speed
           const printPromises = ticketsNeedingPrint.map(async (ticket, index) => {
             try {
+              console.log(`🎫 Processing ticket #${ticket.ticket_number} (${index + 1}/${ticketsNeedingPrint.length})`);
+
               // Add small staggered delay to prevent printer overload
               await new Promise(resolve => setTimeout(resolve, index * 100));
 
@@ -902,12 +945,14 @@ const DisplayScreen: React.FC = () => {
                   finalServiceName.length < 3) {
 
                 try {
+                  console.log(`🔍 Fetching service name for ticket #${ticket.ticket_number}`);
                   const serviceResponse = await window.api.getServiceById(ticket.service_id);
                   if (serviceResponse?.success && serviceResponse.data?.name) {
                     finalServiceName = serviceResponse.data.name;
+                    console.log(`✅ Service name fetched: ${finalServiceName}`);
                   }
                 } catch (serviceError) {
-                  // Silent fallback to provided name
+                  console.error('❌ Failed to fetch service name:', serviceError);
                 }
               }
 
@@ -923,32 +968,43 @@ const DisplayScreen: React.FC = () => {
                 print_source: 'instant-display'
               };
 
+              console.log(`🖨️ Starting print for ticket #${ticket.ticket_number}`);
+
               // Print ticket immediately
               const printResult = await window.api.printTicket(ticketData, 'default');
 
+              console.log(`📄 Print result for ticket #${ticket.ticket_number}:`, printResult);
+
               if (printResult && printResult.success) {
+                console.log(`✅ Print successful for ticket #${ticket.ticket_number}`);
                 // Update print status to printed
                 try {
                   await window.api.updatePrintStatus(ticket.id, 'printed');
+                  console.log(`✅ Status updated to 'printed' for ticket #${ticket.ticket_number}`);
                 } catch (statusError) {
-                  // Silent error handling
+                  console.error('❌ Failed to update print status:', statusError);
                 }
               } else {
+                console.error(`❌ Print failed for ticket #${ticket.ticket_number}`);
                 // Mark as failed
                 try {
                   await window.api.updatePrintStatus(ticket.id, 'print_failed');
+                  console.log(`⚠️ Status updated to 'print_failed' for ticket #${ticket.ticket_number}`);
                 } catch (statusError) {
-                  // Silent error handling
+                  console.error('❌ Failed to update print status to failed:', statusError);
                 }
               }
 
             } catch (printError) {
-              // Silent error handling
+              console.error(`❌ Error processing ticket #${ticket.ticket_number}:`, printError);
             }
           });
 
           // Wait for all prints to complete
           await Promise.allSettled(printPromises);
+          console.log('✅ All print operations completed');
+        } else {
+          console.log('ℹ️ No tickets need printing');
         }
 
         // Update queue data with fresh data
@@ -957,9 +1013,11 @@ const DisplayScreen: React.FC = () => {
           total: pendingResult.data.length,
           timestamp: new Date().toISOString()
         });
+      } else {
+        console.log('ℹ️ No pending tickets found');
       }
     } catch (error) {
-      // Silent error handling
+      console.error('❌ Error in instant ticket check:', error);
     }
   }, []);
 
@@ -983,21 +1041,28 @@ const DisplayScreen: React.FC = () => {
 
     // 🚀 NEW: Listen for ticket creation (HIGHEST PRIORITY)
     const unsubscribeTicketCreated = onEvent('ticket:created', (data: any) => {
+      console.log('🎫 TICKET CREATED EVENT:', data);
+
       // Update queue data immediately
-      if (data) {
+      if (data && data.ticket) {
+        console.log(`📝 Adding ticket #${data.ticket.ticket_number} to queue`);
         setQueueData(prev => ({
-          pending: [...prev.pending, data],
+          pending: [...prev.pending, data.ticket],
           total: prev.total + 1,
           timestamp: new Date().toISOString()
         }));
       }
 
       // Trigger IMMEDIATE print check for new tickets (highest priority)
+      console.log('🔄 Triggering instant print check...');
       checkPendingTicketsInstantly();
     });    // Listen for queue updates with instant print check (أولوية عالية)
     const unsubscribeQueueUpdate = onEvent('queue:updated', (data: any) => {
+      console.log('🔄 QUEUE UPDATE EVENT:', data);
+
       // ✅ IMMEDIATE QUEUE UPDATE: Always update queue regardless of audio state
       if (data.tickets) {
+        console.log(`📊 Updating queue with ${data.tickets.length} tickets`);
         setQueueData({
           pending: data.tickets,
           total: data.total || 0,
@@ -1006,6 +1071,7 @@ const DisplayScreen: React.FC = () => {
       }
 
       // Trigger instant print check
+      console.log('🔄 Queue updated - triggering instant print check...');
       triggerInstantCheck();
     });
 
@@ -1134,8 +1200,17 @@ const DisplayScreen: React.FC = () => {
 
     // ⚡ INSTANT PRINT LISTENER: Listen for tickets that need immediate printing
     const unsubscribeInstantPrint = onEvent('print:pending-instant', async (data: any) => {
+      console.log('🚀 INSTANT PRINT EVENT RECEIVED:', data);
+
       // ⚡ Instant print processing
       try {
+        // ✅ Immediate validation and logging
+        if (!data || !data.ticketData || !data.ticketData.id) {
+          console.error('❌ Invalid ticket data received:', data);
+          return;
+        }
+
+        console.log(`🎫 Processing instant print for ticket #${data.ticketData.ticket_number}`);
 
         // ✅ Ensure we have the full service name from the database
         let finalServiceName = data.ticketData.service_name;
@@ -1147,12 +1222,14 @@ const DisplayScreen: React.FC = () => {
             finalServiceName.length < 3) {
 
           try {
+            console.log(`🔍 Fetching service name for service_id: ${data.ticketData.service_id}`);
             const serviceResponse = await window.api.getServiceById(data.ticketData.service_id);
             if (serviceResponse?.success && serviceResponse.data?.name) {
               finalServiceName = serviceResponse.data.name;
+              console.log(`✅ Service name fetched: ${finalServiceName}`);
             }
           } catch (serviceError) {
-            // Silent fallback to provided name
+            console.error('❌ Failed to fetch service name:', serviceError);
           }
         }
 
@@ -1163,26 +1240,42 @@ const DisplayScreen: React.FC = () => {
           company_name: "" // ✅ Ensure empty company name
         };
 
+        console.log(`🖨️ Starting print process for ticket #${serverTicketData.ticket_number}`);
+
         // Print immediately using the finalized ticket data
         const printResult = await window.api.printTicket(serverTicketData, 'default');
 
+        console.log(`📄 Print result:`, printResult);
+
         if (printResult && printResult.success) {
+          console.log(`✅ Print successful for ticket #${serverTicketData.ticket_number}`);
           // ✅ تحديث حالة الطباعة في قاعدة البيانات عند نجاح الطباعة
           try {
             await window.api.updatePrintStatus(data.ticketData.id, 'printed');
+            console.log(`✅ Print status updated to 'printed' for ticket #${serverTicketData.ticket_number}`);
           } catch (statusError) {
-            // Silent error handling
+            console.error('❌ Failed to update print status:', statusError);
           }
         } else {
+          console.error(`❌ Print failed for ticket #${serverTicketData.ticket_number}:`, printResult);
           // ✅ Mark as print_failed to prevent backup system from re-trying
           try {
             await window.api.updatePrintStatus(data.ticketData.id, 'print_failed');
+            console.log(`⚠️ Print status updated to 'print_failed' for ticket #${serverTicketData.ticket_number}`);
           } catch (statusError) {
-            // Silent error handling
+            console.error('❌ Failed to update print status to failed:', statusError);
           }
         }
       } catch (error) {
-        // Silent error handling
+        console.error('❌ Error in instant print processing:', error);
+        // Try to mark as failed if we have ticket data
+        if (data?.ticketData?.id) {
+          try {
+            await window.api.updatePrintStatus(data.ticketData.id, 'print_failed');
+          } catch (statusError) {
+            console.error('❌ Failed to update print status after error:', statusError);
+          }
+        }
       }
     });
 
@@ -1267,6 +1360,52 @@ const DisplayScreen: React.FC = () => {
 
     const cleanupAudioListeners = setupAudioEventListeners();
 
+    // ==================== 🎬 VIDEO EVENT LISTENERS ====================
+    const setupVideoEventListeners = () => {
+      if (window.electron?.ipcRenderer) {
+        // Listen for video play commands from main process
+        window.electron.ipcRenderer.on('video:play-mp4-loop', async (_event, data) => {
+          try {
+            const video = videoRef.current;
+            if (!video) return;
+
+            // Update video source
+            const newSrc = data.videoUrl || `./video/${data.videoPath}`;
+            if (video.src !== newSrc) {
+              video.src = newSrc;
+              videoPlayer.setCurrentVideoUrl(newSrc);
+
+              // Reload and play the new video
+              video.load();
+              await video.play();
+            }
+          } catch (error) {
+            // Silent error handling
+          }
+        });
+
+        // Listen for video stop commands
+        window.electron.ipcRenderer.on('video:stop-video', async (_event, _data) => {
+          try {
+            const video = videoRef.current;
+            if (video) {
+              video.pause();
+            }
+          } catch (error) {
+            // Silent error handling
+          }
+        });
+
+        return () => {
+          window.electron?.ipcRenderer.removeAllListeners('video:play-mp4-loop');
+          window.electron?.ipcRenderer.removeAllListeners('video:stop-video');
+        };
+      }
+      return () => {};
+    };
+
+    const cleanupVideoListeners = setupVideoEventListeners();
+
     // System reset listener - refresh queue data when system is reset
     const unsubscribeSystemReset = onEvent('system:reset', async () => {
       try {
@@ -1309,6 +1448,7 @@ const DisplayScreen: React.FC = () => {
       unsubscribeSimplifiedPrint();
       unsubscribeSystemReset();
       cleanupAudioListeners();
+      cleanupVideoListeners();
     };
   }, [isConnected, onEvent, addAudioCallSafely]);
 

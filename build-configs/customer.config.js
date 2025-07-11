@@ -7,12 +7,16 @@ module.exports = {
   ...baseConfig,
 
   // Product information
-  productName: "CASNOS Customer Kiosk",
-  description: "نظام العملاء لإنشاء تذاكر",
+  productName: "CASNOS-Customer",
 
   // Build settings
   appId: "com.casnos.customer",
   artifactName: "${productName}-${version}-${os}-${arch}.${ext}",
+
+  // Extra metadata
+  extraMetadata: {
+    description: "Customer Ticket Creation System"
+  },
 
   // Directories
   directories: {
@@ -20,40 +24,27 @@ module.exports = {
     buildResources: "build"
   },
 
-  // Files to include (no server files, video, or voice)
+  // Files to include (no server files)
   files: [
     "out/**/*",
-    "resources/fonts/**/*",
-    "resources/assets/logo.png",
-    "resources/assets/SumatraPDF.exe",
-    "resources/assets/SumatraPDF-settings.txt",
+    "resources/**/*",
     "package.json",
-    "!dist-server/**/*", // exclude server files
-    "!resources/video/**/*", // exclude video files
-    "!resources/voice/**/*" // exclude voice files
+    "!dist-server/**/*" // exclude server files
   ],
 
-  // Extra resources (minimal for customer kiosk - no audio/video)
+  // Extra resources (minimal for customer kiosk - only fonts, assets, and logo)
   extraResources: [
     {
       from: "resources/fonts",
       to: "fonts"
     },
     {
+      from: "resources/assets",
+      to: "assets"
+    },
+    {
       from: "resources/assets/logo.png",
       to: "assets/logo.png"
-    },
-    {
-      from: "resources/assets/SumatraPDF.exe",
-      to: "assets/SumatraPDF.exe"
-    },
-    {
-      from: "resources/assets/SumatraPDF-settings.txt",
-      to: "assets/SumatraPDF-settings.txt"
-    },
-    {
-      from: "build/icon.png",
-      to: "icon.png"
     },
     {
       from: "configs/customer-config.json",
@@ -61,11 +52,29 @@ module.exports = {
     }
   ],
 
-  // NSIS configuration
-  nsis: {
-    ...baseConfig.nsis,
-    shortcutName: "CASNOS Customer"
+  // Portable configuration (no installation required)
+  portable: {
+    artifactName: "${productName}-${version}-portable-32bit.${ext}",
+    unpackDirName: "CASNOS-Customer",  // ✅ Fixed: Use actual name instead of variable
+    requestExecutionLevel: "admin" // ✅ Run portable version as Admin too
   },
+
+  // Windows specific (portable only - avoids NSIS issues)
+  win: {
+    target: [
+      {
+        target: "portable",  // ✅ Only portable - no installer
+        arch: ["ia32"] // ✅ 32-bit architecture for customer kiosks
+      }
+    ],
+    icon: "build/icon.ico",
+    requestedExecutionLevel: "requireAdministrator" // ✅ Run as Administrator for faster data access
+  },
+
+  // إعدادات إضافية لتجنب مشاكل Node-gyp
+  buildDependenciesFromSource: false,
+  nodeGypRebuild: false,
+  npmRebuild: false,
 
   // Startup configuration
   protocols: [

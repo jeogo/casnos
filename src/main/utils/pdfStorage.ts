@@ -1,6 +1,6 @@
 import * as path from 'path';
 import * as fs from 'fs';
-import { getCASNOSPaths, getDatedTicketsPath, getTicketFilePath, getTempFilePath } from '../../shared/pathUtils';
+import { getCASNOSPaths } from '../shared/pathUtils';
 
 /**
  * مدير تخزين ملفات PDF للتذاكر
@@ -8,20 +8,105 @@ import { getCASNOSPaths, getDatedTicketsPath, getTicketFilePath, getTempFilePath
  */
 export class PDFStorageManager {
   private static instance: PDFStorageManager;
-  private baseDir: string;
-  private tempDir: string;
+  private baseDir!: string;
+  private tempDir!: string;
   private cleanupInterval: NodeJS.Timeout | null = null;
   private activePdfGenerations: Set<string> = new Set(); // Track active PDF generations
 
   private constructor() {
-    // Use AppData for PDF storage
-    const paths = getCASNOSPaths();
-    this.baseDir = paths.ticketsPath;
-    this.tempDir = paths.tempPath;
-    this.ensureDirectoryExists();
+    try {
+      // ✅ Enhanced path resolution for production
+      this.initializeStoragePaths();
 
-    // بدء تنظيف تلقائي كل ساعة
-    this.startAutoCleanup();
+      console.log(`[PDF Storage] 📁 Base directory: ${this.baseDir}`);
+      console.log(`[PDF Storage] 📁 Temp directory: ${this.tempDir}`);
+      console.log(`[PDF Storage] 📁 Directory exists: ${fs.existsSync(this.baseDir)}`);
+
+      // Ensure directories exist with proper permissions
+      this.ensureDirectoryExists(this.baseDir);
+      this.ensureDirectoryExists(this.tempDir);
+
+      // Start automatic cleanup every hour
+      this.startAutoCleanup();
+
+    } catch (error) {
+      console.error('[PDF Storage] ❌ Failed to initialize PDF storage:', error);
+      throw error;
+    }
+  }
+
+  /**
+   * Initialize storage paths with production-ready logic
+   */
+  private initializeStoragePaths(): void {
+    try {
+      const { app } = require('electron');
+      const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
+
+      if (isDev) {
+        // Development: Use unified path system
+        const paths = getCASNOSPaths();
+        this.baseDir = paths.ticketsPath;
+        this.tempDir = paths.tempPath;
+        console.log('[PDF Storage] � Development mode: Using AppData paths');
+      } else {
+        // Production: Use app resources path with fallbacks
+        const possibleBasePaths: string[] = [];
+
+        if (process.resourcesPath) {
+          possibleBasePaths.push(
+            path.join(process.resourcesPath, 'tickets'),
+            path.join(process.resourcesPath, 'app.asar.unpacked', 'tickets'),
+            path.join(process.resourcesPath, '..', 'tickets')
+          );
+        }
+
+        // Additional fallback paths
+        possibleBasePaths.push(
+          path.join(process.cwd(), 'resources', 'tickets'),
+          path.join(path.dirname(process.execPath), 'resources', 'tickets'),
+          path.join(path.dirname(process.execPath), 'tickets')
+        );
+
+        // Find first writable path
+        for (const testPath of possibleBasePaths) {
+          try {
+            const testDir = path.dirname(testPath);
+            if (!fs.existsSync(testDir)) {
+              fs.mkdirSync(testDir, { recursive: true, mode: 0o755 });
+            }
+
+            // Test write permission
+            const testFile = path.join(testPath, '.write-test');
+            if (!fs.existsSync(testPath)) {
+              fs.mkdirSync(testPath, { recursive: true, mode: 0o755 });
+            }
+
+            fs.writeFileSync(testFile, 'test');
+            fs.unlinkSync(testFile);
+
+            this.baseDir = testPath;
+            this.tempDir = path.join(testPath, 'temp');
+            console.log(`[PDF Storage] 🏭 Production mode: Using ${this.baseDir}`);
+            return;
+          } catch (e) {
+            continue;
+          }
+        }
+
+        // Ultimate fallback to AppData
+        console.warn('[PDF Storage] ⚠️ All production paths failed, using AppData fallback');
+        const paths = getCASNOSPaths();
+        this.baseDir = paths.ticketsPath;
+        this.tempDir = paths.tempPath;
+      }
+    } catch (error) {
+      console.error('[PDF Storage] ❌ Path initialization failed:', error);
+      // Ultimate fallback
+      const fallbackDir = path.join(process.cwd(), 'data', 'tickets');
+      this.baseDir = fallbackDir;
+      this.tempDir = path.join(fallbackDir, 'temp');
+    }
   }
 
   static getInstance(): PDFStorageManager {
@@ -36,7 +121,22 @@ export class PDFStorageManager {
    * Format: service-name-number.pdf (no printer ID for local, include for network)
    */
   getTicketPath(ticketNumber: string, serviceName?: string, _printerId?: string): string {
-    return getTicketFilePath(ticketNumber, serviceName);
+    const today = new Date();
+    const dateFolder = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
+    const dailyDir = path.join(this.baseDir, dateFolder);
+    this.ensureDirectoryExists(dailyDir);
+
+    // Clean service name for filename (remove special characters)
+    const cleanServiceName = serviceName
+      ? serviceName.replace(/[^a-zA-Z0-9\u0600-\u06FF]/g, '-').replace(/-+/g, '-')
+      : 'service';
+
+    // Use consistent filename format for all tickets, based only on service name and ticket number
+    // This prevents duplicate PDFs when printing from different sources
+    const fileName = `${cleanServiceName}-${ticketNumber}.pdf`;
+
+    return path.join(dailyDir, fileName);
   }
 
   /**
@@ -44,7 +144,8 @@ export class PDFStorageManager {
    * Path for temporary files
    */
   getTempPath(fileName: string): string {
-    return getTempFilePath(fileName);
+    this.ensureDirectoryExists(this.tempDir);
+    return path.join(this.tempDir, fileName);
   }
 
   /**
@@ -70,7 +171,10 @@ export class PDFStorageManager {
    * Get today's folder
    */
   getTodayFolder(): string {
-    return getDatedTicketsPath();
+    const today = new Date().toISOString().split('T')[0];
+    const todayDir = path.join(this.baseDir, today);
+    this.ensureDirectoryExists(todayDir);
+    return todayDir;
   }
     /**
    * بدء التنظيف التلقائي كل ساعة

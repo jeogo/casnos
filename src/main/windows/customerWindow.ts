@@ -2,7 +2,9 @@
 import { BrowserWindow, shell } from 'electron'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
-import icon from '../../../build/icon.png?asset'
+
+// استبدال استيراد الأيقونة بمسار مطلق
+const icon = join(__dirname, '../../../build/icon.png');
 
 let customerWindow: BrowserWindow | null = null
 
@@ -17,7 +19,11 @@ export function createCustomerWindow(): BrowserWindow {
     icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      webSecurity: false, // Enable DevTools in production
+      devTools: true, // Explicitly enable DevTools
+      nodeIntegration: false,
+      contextIsolation: true
     }
   })
 
@@ -29,6 +35,26 @@ export function createCustomerWindow(): BrowserWindow {
   customerWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  // Add keyboard shortcuts for DevTools
+  customerWindow.webContents.on('before-input-event', (_event, input) => {
+    // F12 to toggle DevTools
+    if (input.key === 'F12') {
+      if (customerWindow?.webContents.isDevToolsOpened()) {
+        customerWindow.webContents.closeDevTools()
+      } else {
+        customerWindow?.webContents.openDevTools()
+      }
+    }
+    // Ctrl+Shift+I to toggle DevTools
+    if ((input.control || input.meta) && input.shift && input.key === 'I') {
+      if (customerWindow?.webContents.isDevToolsOpened()) {
+        customerWindow.webContents.closeDevTools()
+      } else {
+        customerWindow?.webContents.openDevTools()
+      }
+    }
   })
 
   // تحميل شاشة العملاء

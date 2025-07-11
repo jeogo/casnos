@@ -172,10 +172,8 @@ export function createOptimizedSingleWindow(type: WindowType): BrowserWindow | n
 
   const config = getScreenConfig(type)
 
-  // Apply performance optimizations before window creation
-  if (!config.enableDevTools) {
-    console.log(`[WINDOW-MANAGER] ⚡ DevTools disabled for ${type} screen (performance optimization)`)
-  }
+  // Log DevTools status for production debugging
+  console.log(`[WINDOW-MANAGER] 🔧 DevTools enabled for ${type} screen: ${config.enableDevTools}`)
 
   let window: BrowserWindow | null = null
 
@@ -197,11 +195,9 @@ export function createOptimizedSingleWindow(type: WindowType): BrowserWindow | n
       return null
   }
 
-  if (window && !config.enableDevTools) {
-    // Disable DevTools for better performance
-    window.webContents.on('devtools-opened', () => {
-      window.webContents.closeDevTools()
-    })
+  // DevTools are now always enabled in production for debugging
+  if (window && config.enableDevTools) {
+    console.log(`[WINDOW-MANAGER] 🔧 DevTools available for ${type} screen (F12 to open)`)
   }
 
   return window

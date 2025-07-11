@@ -2,7 +2,7 @@
 // مساعد كشف البيئة للمسارات الصحيحة
 
 import { app } from 'electron'
-import { ResourcePathManager } from './resourcePathManager'
+import { join } from 'path'
 
 /**
  * كشف ما إذا كنا في بيئة التطوير أم الإنتاج
@@ -15,19 +15,12 @@ export const isDevelopment = (): boolean => {
  * الحصول على مسار الموارد الصحيح حسب البيئة
  */
 export const getResourcePath = (resourceType: 'video' | 'voice' | 'fonts' | 'assets'): string => {
-  const resourceManager = ResourcePathManager.getInstance()
-
-  switch (resourceType) {
-    case 'assets':
-      return resourceManager.getAssetsPath()
-    case 'fonts':
-      return resourceManager.getFontsPath()
-    case 'video':
-      return resourceManager.getVideoPath()
-    case 'voice':
-      return resourceManager.getVoicePath()
-    default:
-      return resourceManager.getResourcesPath()
+  if (isDevelopment()) {
+    // Development: use project resources folder
+    return join(process.cwd(), 'resources', resourceType)
+  } else {
+    // Production: use app resources folder
+    return join(process.resourcesPath, resourceType)
   }
 }
 
@@ -65,8 +58,6 @@ export const logEnvironmentInfo = (): void => {
   console.log(`[ENV] - process.env.NODE_ENV: ${process.env.NODE_ENV}`)
   console.log(`[ENV] - app.isPackaged: ${app.isPackaged}`)
   console.log(`[ENV] - process.resourcesPath: ${process.resourcesPath}`)
-
-  const resourceManager = ResourcePathManager.getInstance()
-  console.log(`[ENV] - ResourcesPath: ${resourceManager.getResourcesPath()}`)
-  console.log(`[ENV] - AssetsPath: ${resourceManager.getAssetsPath()}`)
+  console.log(`[ENV] - process.cwd(): ${process.cwd()}`)
+  console.log(`[ENV] - __dirname: ${__dirname}`)
 }

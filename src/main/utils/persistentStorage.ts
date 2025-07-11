@@ -5,7 +5,8 @@
  */
 
 import * as fs from 'fs';
-import { getCASNOSPaths } from '../../shared/pathUtils';
+import * as path from 'path';
+import { getCASNOSPaths } from '../shared/pathUtils';
 
 // Types for persistent data
 interface PersistentScreenData {
@@ -58,15 +59,24 @@ export class PersistentStorageManager {
   private currentState: PersistentSystemState;
 
   private constructor() {
-    // Use AppData for persistent storage
-    const paths = getCASNOSPaths();
-    this.storageDir = paths.persistentPath;
-    this.stateFile = paths.persistentStorageFile;
+    // Use unified AppData storage approach
+    try {
+      const paths = getCASNOSPaths();
+      this.storageDir = paths.persistentPath;
+      this.stateFile = paths.persistentStorageFile;
+      console.log(`[PersistentStorage] 📁 Using unified path system: ${this.storageDir}`);
+    } catch (error) {
+      // Fallback to current directory
+      console.log('[PersistentStorage] 🔄 Using fallback directory...');
+      this.storageDir = path.join(process.cwd(), 'data', 'persistent');
+      this.stateFile = path.join(this.storageDir, 'system-state.json');
+      console.log(`[PersistentStorage] 📁 Fallback path: ${this.storageDir}`);
+    }
 
     this.ensureDirectoryExists();
     this.currentState = this.loadInitialState();
 
-    // بدء الحفظ التلقائي كل 5 ثوانٍ
+    // Start auto-save every 5 seconds
     this.startAutoSave();
   }
 

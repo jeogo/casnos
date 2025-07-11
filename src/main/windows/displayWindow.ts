@@ -2,7 +2,7 @@
 import { BrowserWindow, shell } from 'electron'
 import { join } from 'path'
 import { is } from '@electron-toolkit/utils'
-import icon from '../../../build/icon.png?asset'
+const icon = join(__dirname, '../../../build/icon.png');
 
 let displayWindow: BrowserWindow | null = null
 
@@ -17,7 +17,11 @@ export function createDisplayWindow(): BrowserWindow {
     icon: icon,
     webPreferences: {
       preload: join(__dirname, '../preload/index.js'),
-      sandbox: false
+      sandbox: false,
+      webSecurity: false, // Enable DevTools in production
+      devTools: true, // Explicitly enable DevTools
+      nodeIntegration: false,
+      contextIsolation: true
     }
   })
 
@@ -29,6 +33,26 @@ export function createDisplayWindow(): BrowserWindow {
   displayWindow.webContents.setWindowOpenHandler((details) => {
     shell.openExternal(details.url)
     return { action: 'deny' }
+  })
+
+  // Add keyboard shortcuts for DevTools
+  displayWindow.webContents.on('before-input-event', (_event, input) => {
+    // F12 to toggle DevTools
+    if (input.key === 'F12') {
+      if (displayWindow?.webContents.isDevToolsOpened()) {
+        displayWindow.webContents.closeDevTools()
+      } else {
+        displayWindow?.webContents.openDevTools()
+      }
+    }
+    // Ctrl+Shift+I to toggle DevTools
+    if ((input.control || input.meta) && input.shift && input.key === 'I') {
+      if (displayWindow?.webContents.isDevToolsOpened()) {
+        displayWindow.webContents.closeDevTools()
+      } else {
+        displayWindow?.webContents.openDevTools()
+      }
+    }
   })
 
   // تحميل شاشة العرض

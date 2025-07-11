@@ -348,8 +348,16 @@ export function setupVideoHandlers() {
       // تحديث قائمة الفيديوهات في الخدمة
       videoPlayerService.refreshVideoList()
 
+      // ✅ حفظ الفيديو الجديد كافتراضي
+      videoPlayerService.setDefaultVideo(newFileName)
+
       // تشغيل الفيديو الجديد (استخدام اسم الملف فقط وليس المسار الكامل)
       const playResult = await videoPlayerService.playMp4Loop(newFileName)
+
+      // إرسال إشعار للشاشة بأن الفيديو تم تغييره
+      if (playResult) {
+        console.log(`[IPC-VIDEO] New video successfully set and playing: ${newFileName}`)
+      }
 
       return {
         success: playResult,
@@ -385,19 +393,20 @@ export function setupVideoHandlers() {
     }
   })
 
-  // تشغيل أحدث فيديو متوفر
-  ipcMain.handle('video:play-most-recent', async () => {
+  // الحصول على الفيديو الافتراضي المحفوظ
+  ipcMain.handle('video:get-default', async () => {
     try {
-      console.log('[IPC-VIDEO] Playing most recent video')
-      const success = await videoPlayerService.playMostRecentVideo()
+      const defaultVideo = videoPlayerService.getDefaultVideo()
       return {
-        success,
-        message: success ? 'Most recent video started successfully' : 'Failed to play most recent video'
+        success: true,
+        video: defaultVideo,
+        message: defaultVideo ? `Default video: ${defaultVideo}` : 'No default video set'
       }
     } catch (error) {
-      console.error('[IPC-VIDEO] Error playing most recent video:', error)
+      console.error('[IPC-VIDEO] Error getting default video:', error)
       return {
         success: false,
+        video: null,
         message: error instanceof Error ? error.message : 'Unknown error'
       }
     }

@@ -14,15 +14,13 @@ const SCREENS = [
     mode: 'display',
     configFile: 'display.config.js',
     description: 'شاشة العرض مع الخادم المدمج',
-    includeServer: true,
-    priority: 1 // Build first (contains server)
+    priority: 1 // Build first (contains embedded server)
   },
   {
     name: 'Customer',
     mode: 'customer',
-    configFile: 'customer.config.js', 
+    configFile: 'customer.config.js',
     description: 'نظام العملاء لإنشاء التذاكر',
-    includeServer: false,
     priority: 2
   },
   {
@@ -30,7 +28,6 @@ const SCREENS = [
     mode: 'window',
     configFile: 'window.config.js',
     description: 'محطة شباك الخدمة',
-    includeServer: false,
     priority: 3
   },
   {
@@ -38,7 +35,6 @@ const SCREENS = [
     mode: 'admin',
     configFile: 'admin.config.js',
     description: 'لوحة الإدارة والتحكم',
-    includeServer: false,
     priority: 4
   }
 ];
@@ -62,7 +58,7 @@ function log(message, type = 'INFO') {
 function runCommand(command, options = {}) {
   return new Promise((resolve, reject) => {
     log(`Running: ${command}`, 'INFO');
-    
+
     try {
       execSync(command, {
         stdio: 'inherit',
@@ -78,14 +74,14 @@ function runCommand(command, options = {}) {
 async function buildScreen(screen) {
   try {
     log(`🏗️ Building ${screen.name} Screen (${screen.description})...`, 'STEP');
-    
+
     const configPath = path.join(rootDir, 'build-configs', screen.configFile);
-    
+
     // Verify config file exists
     if (!await fs.pathExists(configPath)) {
       throw new Error(`Config file not found: ${configPath}`);
     }
-    
+
     // Set environment variables
     const env = {
       ...process.env,
@@ -94,25 +90,19 @@ async function buildScreen(screen) {
     };
 
     // Build the main application
-    log(`� Building application for ${screen.name}...`, 'INFO');
+    log(`🏗️ Building application for ${screen.name}...`, 'INFO');
     await runCommand('npm run build', { env });
-    
-    // Build server if needed
-    if (screen.includeServer) {
-      log(`🌐 Building server for ${screen.name}...`, 'INFO');
-      await runCommand('npm run build:server', { env });
-    }
 
     // Build the executable with custom config
     log(`🔧 Creating executable for ${screen.name}...`, 'INFO');
     const builderCmd = `electron-builder --config "${configPath}"`;
     await runCommand(builderCmd, { env });
-    
+
     // Create README file
     await createReadmeFile(screen);
-    
+
     log(`✅ ${screen.name} built successfully!`, 'SUCCESS');
-    
+
   } catch (error) {
     log(`❌ Failed to build ${screen.name}: ${error.message}`, 'ERROR');
     throw error;
@@ -122,7 +112,7 @@ async function buildScreen(screen) {
 async function createReadmeFile(screen) {
   const distPath = path.join(distDir, screen.name);
   const readmePath = path.join(distPath, 'README.md');
-  
+
   const readmeContent = `# ${screen.name} Screen - CASNOS
 
 ## 📝 الوصف
@@ -142,7 +132,7 @@ ${screen.description}
 
 ### خطوات التشغيل
 1. قم بتشغيل الملف التنفيذي
-2. ${screen.includeServer 
+2. ${screen.includeServer
     ? 'سيبدأ الخادم تلقائياً مع التطبيق (قد يستغرق 5-10 ثوانٍ)'
     : 'تأكد من تشغيل CASNOS Display System أولاً (للخادم)'}
 3. اتبع التعليمات على الشاشة
@@ -174,7 +164,7 @@ ${screen.includeServer ? `
 للحصول على الدعم الفني، تواصل مع فريق التطوير.
 
 ---
-**تم الإنشاء:** ${new Date().toLocaleDateString('ar-SA')}  
+**تم الإنشاء:** ${new Date().toLocaleDateString('ar-SA')}
 **البناء التلقائي:** CASNOS Build System v1.0
 `;
 
@@ -184,7 +174,7 @@ ${screen.includeServer ? `
 
 async function createMasterReadme() {
   const masterReadmePath = path.join(distDir, 'README.md');
-  
+
   const content = `# 🎯 CASNOS - نظام إدارة طوابير الانتظار
 
 ## 📁 ملفات التوزيع
@@ -219,7 +209,7 @@ ${SCREENS.map(screen => `
 - كل تطبيق له ملف README منفصل بالتفاصيل
 
 ---
-**تاريخ البناء:** ${new Date().toLocaleDateString('ar-SA')}  
+**تاريخ البناء:** ${new Date().toLocaleDateString('ar-SA')}
 **الإصدار:** 1.0.0
 `;
 
@@ -230,7 +220,7 @@ ${SCREENS.map(screen => `
 async function buildAllScreens() {
   try {
     log('🚀 Starting CASNOS Multi-Screen Build Process...', 'STEP');
-    
+
     // Clean dist directory
     log('🧹 Cleaning previous builds...', 'INFO');
     await fs.remove(distDir);
@@ -238,31 +228,31 @@ async function buildAllScreens() {
 
     // Sort screens by priority (Display first)
     const sortedScreens = SCREENS.sort((a, b) => a.priority - b.priority);
-    
+
     // Build each screen
     for (const screen of sortedScreens) {
       await buildScreen(screen);
     }
-    
+
     // Create master README
     await createMasterReadme();
-    
+
     // Display final summary
     log('🎉 All screens built successfully!', 'SUCCESS');
     log('📁 Build output structure:', 'INFO');
-    
+
     SCREENS.forEach(screen => {
       log(`   📂 dist/${screen.name}/ - ${screen.description}`, 'INFO');
       if (screen.includeServer) {
         log(`      └── 🌐 Server included`, 'INFO');
       }
     });
-    
+
     log('\n📋 Next Steps:', 'STEP');
     log('1. Test Display Screen first (contains server)', 'INFO');
     log('2. Test other screens on same network', 'INFO');
     log('3. Deploy to target machines', 'INFO');
-    
+
   } catch (error) {
     log(`💥 Build process failed: ${error.message}`, 'ERROR');
     process.exit(1);

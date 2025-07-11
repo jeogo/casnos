@@ -1,6 +1,6 @@
 // Professional ticket template for 80mm thermal printer
+import * as path from 'path';
 import * as fs from 'fs';
-import { ResourcePathManager } from '../utils/resourcePathManager';
 
 export interface TicketData {
   ticket_number: string;
@@ -26,23 +26,28 @@ function loadLogoAsBase64(): string | null {
   logoAttempted = true;
 
   try {
-    const resourceManager = ResourcePathManager.getInstance();
-    const logoPath = resourceManager.getLogoPath();
+    // Optimized paths - most likely first
+    const possiblePaths = [
+      path.join(process.cwd(), 'resources/logo.png'),
+      path.join(__dirname, '../../resources/logo.png'),
+      path.join(process.cwd(), 'resources/assets/logo.png'),
+      path.join(__dirname, '../../resources/assets/logo.png')
+    ];
 
-    if (logoPath && fs.existsSync(logoPath)) {
-      const imageBuffer = fs.readFileSync(logoPath);
-      const base64 = imageBuffer.toString('base64');
-      // Note: CSS filters will handle B&W conversion for faster rendering
-      cachedLogo = `data:image/png;base64,${base64}`;
-      console.log(`[TicketTemplate] ✅ Logo loaded from: ${logoPath}`);
-      return cachedLogo;
+    for (const logoPath of possiblePaths) {
+      if (fs.existsSync(logoPath)) {
+        const imageBuffer = fs.readFileSync(logoPath);
+        const base64 = imageBuffer.toString('base64');
+        // Note: CSS filters will handle B&W conversion for faster rendering
+        cachedLogo = `data:image/png;base64,${base64}`;
+        // Logo cached from path - CSS will convert to ultra-light B&W
+        return cachedLogo;
+      }
     }
 
-    console.warn('[TicketTemplate] ⚠️ Logo not found at expected path');
     cachedLogo = null;
     return null;
   } catch (error) {
-    console.error('[TicketTemplate] ❌ Error loading logo:', error);
     cachedLogo = null;
     return null;
   }

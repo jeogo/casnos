@@ -2,7 +2,7 @@
 /**
  * 🎯 Build Single Screen Script
  * ينشئ شاشة واحدة فقط
- * 
+ *
  * Usage: node scripts/build-single.js [screen-name]
  * Example: node scripts/build-single.js display
  */
@@ -17,29 +17,25 @@ const AVAILABLE_SCREENS = {
     name: 'Display',
     mode: 'display',
     configFile: 'display.config.js',
-    description: 'شاشة العرض مع الخادم المدمج',
-    includeServer: true
+    description: 'شاشة العرض مع الخادم المدمج'
   },
   customer: {
     name: 'Customer',
     mode: 'customer',
     configFile: 'customer.config.js',
-    description: 'نظام العملاء لإنشاء التذاكر',
-    includeServer: false
+    description: 'نظام العملاء لإنشاء التذاكر'
   },
   window: {
     name: 'Window',
     mode: 'window',
     configFile: 'window.config.js',
-    description: 'محطة شباك الخدمة',
-    includeServer: false
+    description: 'محطة شباك الخدمة'
   },
   admin: {
     name: 'Admin',
     mode: 'admin',
     configFile: 'admin.config.js',
-    description: 'لوحة الإدارة والتحكم',
-    includeServer: false
+    description: 'لوحة الإدارة والتحكم'
   }
 };
 
@@ -63,7 +59,7 @@ function showUsage() {
 Usage: node scripts/build-single.js [screen-name]
 
 Available screens:
-${Object.entries(AVAILABLE_SCREENS).map(([key, screen]) => 
+${Object.entries(AVAILABLE_SCREENS).map(([key, screen]) =>
   `  ${key.padEnd(10)} - ${screen.description}`
 ).join('\n')}
 
@@ -77,25 +73,25 @@ Examples:
 
 async function buildSingleScreen(screenKey) {
   const screen = AVAILABLE_SCREENS[screenKey];
-  
+
   if (!screen) {
     log(`❌ Unknown screen: ${screenKey}`, 'ERROR');
     log(`Available screens: ${Object.keys(AVAILABLE_SCREENS).join(', ')}`, 'INFO');
     return false;
   }
-  
+
   try {
     log(`🎯 Building ${screen.name} Screen Only...`, 'STEP');
     log(`📝 Description: ${screen.description}`, 'INFO');
-    
+
     const rootDir = process.cwd();
     const configPath = path.join(rootDir, 'build-configs', screen.configFile);
-    
+
     // Verify config file exists
     if (!await fs.pathExists(configPath)) {
       throw new Error(`Config file not found: ${configPath}`);
     }
-    
+
     // Set environment variables
     const env = {
       ...process.env,
@@ -112,32 +108,26 @@ async function buildSingleScreen(screenKey) {
     // Build the main application
     log(`📦 Building application...`, 'INFO');
     execSync('npm run build', { stdio: 'inherit', env });
-    
-    // Build server if needed
-    if (screen.includeServer) {
-      log(`🌐 Building embedded server...`, 'INFO');
-      execSync('npm run build:server', { stdio: 'inherit', env });
-    }
 
     // Build the executable with custom config
     log(`🔧 Creating executable package...`, 'INFO');
-    const builderCmd = `electron-builder --config "${configPath}"`;
+    const builderCmd = `npx electron-builder --config "${configPath}"`;
     execSync(builderCmd, { stdio: 'inherit', env });
-    
+
     // Create README file
     await createReadmeFile(screen, distDir);
-    
+
     log(`✅ ${screen.name} screen built successfully!`, 'SUCCESS');
     log(`📁 Output location: dist/${screen.name}/`, 'INFO');
-    
+
     if (screen.includeServer) {
       log(`🌐 This build includes the server - run this first!`, 'WARNING');
     } else {
       log(`🔗 This build requires Display screen to be running for server connection`, 'WARNING');
     }
-    
+
     return true;
-    
+
   } catch (error) {
     log(`❌ Failed to build ${screen.name}: ${error.message}`, 'ERROR');
     return false;
@@ -146,7 +136,7 @@ async function buildSingleScreen(screenKey) {
 
 async function createReadmeFile(screen, distPath) {
   const readmePath = path.join(distPath, 'README.md');
-  
+
   const readmeContent = `# ${screen.name} Screen - CASNOS
 
 ## 📝 الوصف
@@ -166,7 +156,7 @@ ${screen.description}
 
 ### خطوات التشغيل
 1. قم بتشغيل الملف التنفيذي
-2. ${screen.includeServer 
+2. ${screen.includeServer
     ? 'سيبدأ الخادم تلقائياً مع التطبيق (قد يستغرق 5-10 ثوانٍ)'
     : 'تأكد من تشغيل CASNOS Display System أولاً (للخادم)'}
 3. اتبع التعليمات على الشاشة
@@ -187,7 +177,7 @@ ${screen.includeServer ? `
 للحصول على الدعم الفني، تواصل مع فريق التطوير.
 
 ---
-**البناء الفردي:** تم بناء هذه الشاشة منفصلة  
+**البناء الفردي:** تم بناء هذه الشاشة منفصلة
 **النسخة:** 1.0.0
 `;
 
@@ -198,17 +188,17 @@ ${screen.includeServer ? `
 // Main execution
 async function main() {
   const screenArg = process.argv[2];
-  
+
   if (!screenArg) {
     showUsage();
     process.exit(1);
   }
-  
+
   if (screenArg === '--help' || screenArg === '-h') {
     showUsage();
     process.exit(0);
   }
-  
+
   const success = await buildSingleScreen(screenArg.toLowerCase());
   process.exit(success ? 0 : 1);
 }

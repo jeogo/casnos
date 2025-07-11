@@ -253,19 +253,16 @@ const AdminScreen: React.FC = () => {
   const handleReset = async () => {
     setIsResetting(true)
     try {
-      const response = await fetch('/api/admin/reset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' }
-      })
+      const result = await window.api.resetSystem()
 
-      if (response.ok) {
-        const data = await response.json()
-        setResetStatus(data)
+      if (result?.success) {
+        setResetStatus(result)
         showNotification('success', 'تم إعادة تعيين النظام بنجاح')
       } else {
-        throw new Error('Reset failed')
+        throw new Error(result?.error || 'Reset failed')
       }
     } catch (error) {
+      console.error('Reset error:', error)
       showNotification('error', 'فشل في إعادة تعيين النظام')
     } finally {
       setIsResetting(false)
@@ -275,20 +272,16 @@ const AdminScreen: React.FC = () => {
   const handleForceReset = async () => {
     setIsResetting(true)
     try {
-      const response = await fetch('/api/admin/reset', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ force: true })
-      })
+      const result = await window.api.forceDailyReset()
 
-      if (response.ok) {
-        const data = await response.json()
-        setResetStatus(data)
+      if (result?.success) {
+        setResetStatus(result)
         showNotification('success', 'تم إعادة التعيين القسرية للنظام بنجاح')
       } else {
-        throw new Error('Force reset failed')
+        throw new Error(result?.error || 'Force reset failed')
       }
     } catch (error) {
+      console.error('Force reset error:', error)
       showNotification('error', 'فشل في الإعادة القسرية للنظام')
     } finally {
       setIsResetting(false)

@@ -3,7 +3,6 @@
 
 import { join } from 'path';
 import { readFileSync, existsSync } from 'fs';
-import { getCASNOSPaths } from '../../shared/pathUtils';
 
 export interface ScreenConfiguration {
   version: string;
@@ -57,9 +56,16 @@ export class ScreenDetectionManager {
    * الحصول على مسار ملف التكوين
    */
   private getConfigPath(screenType?: string): string {
-    const paths = getCASNOSPaths();
-    const configFileName = screenType ? `${screenType}-config.json` : 'display-config.json';
-    return join(paths.dataPath, configFileName);
+    const isDevelopment = process.env.NODE_ENV === 'development';
+
+    if (isDevelopment) {
+      // في Development - قراءة من مجلد configs
+      const configFileName = screenType ? `${screenType}-config.json` : 'display-config.json';
+      return join(process.cwd(), 'configs', configFileName);
+    } else {
+      // في Production - قراءة من resources
+      return join(process.resourcesPath, 'screen-config.json');
+    }
   }
 
   /**
@@ -74,9 +80,7 @@ export class ScreenDetectionManager {
 
     // 2. اسم المنتج من package.json
     try {
-      // In development, check the project package.json for now
-      // In production, this won't be needed as screen type is determined by executable name
-      const packagePath = join(__dirname, '../../../package.json');
+      const packagePath = join(process.cwd(), 'package.json');
       if (existsSync(packagePath)) {
         const packageData = JSON.parse(readFileSync(packagePath, 'utf8'));
         const productName = packageData.productName || packageData.name || '';

@@ -7,7 +7,8 @@ import * as path from 'path';
 import * as fs from 'fs';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import { ResourcePathManager } from './resourcePathManager';
+import { pdfLogger } from './productionPDFLogger';
+import ProductionMonitor from './productionMonitor';
 
 const execAsync = promisify(exec);
 
@@ -46,20 +47,111 @@ export class SumatraPDFManager {
    * Initialize SumatraPDF and settings paths
    */
   private initializePaths(): void {
-    try {
-      const resourceManager = ResourcePathManager.getInstance();
-      const sumatraPath = resourceManager.getSumatraPDFPath();
+    const { app } = require('electron');
+    const isDev = process.env.NODE_ENV === 'development' || !app.isPackaged;
 
-      if (sumatraPath && fs.existsSync(sumatraPath)) {
-        this.sumatraPath = path.resolve(sumatraPath);
-        console.log(`[SumatraPDF] ✅ Found at: ${this.sumatraPath}`);
-      } else {
-        console.warn('[SumatraPDF] ❌ SumatraPDF not found - will use fallback printing');
-        this.sumatraPath = null;
+    pdfLogger.log('INFO', 'SUMATRA', 'Starting SumatraPDF initialization', {
+      stage: 'INIT',
+      details: {
+        isDev,
+        isPackaged: app.isPackaged,
+        resourcesPath: process.resourcesPath || 'undefined',
+        cwd: process.cwd(),
+        dirname: __dirname
       }
-    } catch (error) {
-      console.error('[SumatraPDF] ❌ Error initializing paths:', error);
-      this.sumatraPath = null;
+    });
+
+    const possibleSumatraPaths: string[] = [];
+
+    if (isDev) {
+      // Development paths (prioritize current working directory)
+      possibleSumatraPaths.push(
+        path.join(process.cwd(), 'resources', 'assets', 'SumatraPDF.exe'),
+        path.join(__dirname, '../../resources/assets/SumatraPDF.exe'),
+        path.join(__dirname, '../../../resources/assets/SumatraPDF.exe'),
+        path.join(__dirname, '../../../../resources/assets/SumatraPDF.exe')
+      );
+    } else {
+      // Production paths - comprehensive search
+      // First check process.resourcesPath (main production path)
+      if (process.resourcesPath) {
+        possibleSumatraPaths.push(
+          path.join(process.resourcesPath, 'assets', 'SumatraPDF.exe'),
+          path.join(process.resourcesPath, 'SumatraPDF.exe'),
+          path.join(process.resourcesPath, 'app.asar.unpacked', 'resources', 'assets', 'SumatraPDF.exe'),
+          path.join(process.resourcesPath, 'app.asar.unpacked', 'assets', 'SumatraPDF.exe')
+        );
+      }
+
+      // Check relative to executable
+      possibleSumatraPaths.push(
+        path.join(process.cwd(), 'resources', 'assets', 'SumatraPDF.exe'),
+        path.join(process.cwd(), 'assets', 'SumatraPDF.exe'),
+        path.join(path.dirname(process.execPath), 'resources', 'assets', 'SumatraPDF.exe'),
+        path.join(path.dirname(process.execPath), 'assets', 'SumatraPDF.exe')
+      );
+
+      // Check relative to __dirname (in case of asar)
+      possibleSumatraPaths.push(
+        path.join(__dirname, '../../resources/assets/SumatraPDF.exe'),
+        path.join(__dirname, '../../../resources/assets/SumatraPDF.exe'),
+        path.join(__dirname, '../../../../resources/assets/SumatraPDF.exe'),
+        path.join(__dirname, '../../../../../resources/assets/SumatraPDF.exe')
+      );
+    }
+
+    pdfLogger.log('INFO', 'SUMATRA', `Searching for SumatraPDF.exe in ${possibleSumatraPaths.length} locations`, {
+      stage: 'INIT',
+      details: { paths: possibleSumatraPaths }
+    });
+
+    for (const testPath of possibleSumatraPaths) {
+      pdfLogger.log('DEBUG', 'SUMATRA', `Checking SumatraPDF path: ${testPath}`, {
+        stage: 'INIT'
+      });
+
+      if (fs.existsSync(testPath)) {
+        this.sumatraPath = path.resolve(testPath);
+        pdfLogger.log('INFO', 'SUMATRA', 'SumatraPDF executable found', {
+          stage: 'INIT',
+          details: { path: this.sumatraPath }
+        });
+        break;
+      }
+    }
+
+    if (!this.sumatraPath) {
+      pdfLogger.log('ERROR', 'SUMATRA', 'SumatraPDF executable not found in any location', {
+        stage: 'INIT',
+        details: { searchedPaths: possibleSumatraPaths }
+      });
+    }
+
+    // Initialize settings path
+    const settingsPaths: string[] = [];
+    if (this.sumatraPath) {
+      const sumatraDir = path.dirname(this.sumatraPath);
+      settingsPaths.push(
+        path.join(sumatraDir, 'SumatraPDF-settings.txt'),
+        path.join(sumatraDir, '..', 'SumatraPDF-settings.txt')
+      );
+    }
+
+    for (const settingsPath of settingsPaths) {
+      if (fs.existsSync(settingsPath)) {
+        this.settingsPath = path.resolve(settingsPath);
+        pdfLogger.log('INFO', 'SUMATRA', 'SumatraPDF settings file found', {
+          stage: 'INIT',
+          details: { path: this.settingsPath }
+        });
+        break;
+      }
+    }
+
+    if (!this.settingsPath && this.sumatraPath) {
+      pdfLogger.log('WARN', 'SUMATRA', 'SumatraPDF settings file not found - using defaults', {
+        stage: 'INIT'
+      });
     }
   }
 
@@ -88,9 +180,32 @@ export class SumatraPDFManager {
    * Print a PDF file using SumatraPDF
    */
   async printPDF(pdfPath: string, options: SumatraPrintOptions = {}): Promise<SumatraPrintResult> {
+    const monitor = ProductionMonitor.getInstance();
+
     try {
+      // Extract ticket number from PDF path for monitoring
+      const ticketNumber = path.basename(pdfPath, '.pdf');
+      monitor.recordPrintAttempt(ticketNumber, pdfPath);
+
+      pdfLogger.log('INFO', 'SUMATRA', 'Starting PDF print operation', {
+        stage: 'PRINT',
+        details: {
+          pdfPath,
+          printerName: options.printerName || 'default',
+          silent: options.silent,
+          timeout: options.timeout || 15000
+        }
+      });
+
       // Verify PDF file exists
       if (!fs.existsSync(pdfPath)) {
+        monitor.recordPrintFailure(ticketNumber, `PDF file not found: ${pdfPath}`);
+        monitor.recordStorageError('PDF file not found', { pdfPath });
+
+        pdfLogger.log('ERROR', 'SUMATRA', 'PDF file not found', {
+          stage: 'PRINT',
+          details: { pdfPath }
+        });
         return {
           success: false,
           message: `PDF file not found: ${pdfPath}`,
@@ -101,13 +216,22 @@ export class SumatraPDFManager {
 
       // Check if SumatraPDF is available
       if (!this.isAvailable()) {
-        console.log('[SumatraPDF] 🔄 SumatraPDF not available, trying Windows fallback...');
+        monitor.recordSumatraError('SumatraPDF not available', { sumatraPath: this.sumatraPath });
+
+        pdfLogger.log('WARN', 'SUMATRA', 'SumatraPDF not available, using Windows fallback', {
+          stage: 'PRINT',
+          details: { sumatraPath: this.sumatraPath }
+        });
         return await this.windowsFallback(pdfPath);
       }
 
       // Construct print command
       const command = this.buildPrintCommand(pdfPath, options);
-      console.log(`[SumatraPDF] 🚀 Executing command: ${command}`);
+
+      pdfLogger.log('INFO', 'SUMATRA', 'Executing print command', {
+        stage: 'PRINT',
+        details: { command }
+      });
 
       // Execute print command with enhanced error handling
       const timeout = options.timeout || 15000;
@@ -121,54 +245,91 @@ export class SumatraPDFManager {
 
         // Log output for debugging
         if (stdout && stdout.trim()) {
-          console.log(`[SumatraPDF] 📄 stdout: ${stdout.trim()}`);
+          pdfLogger.log('DEBUG', 'SUMATRA', 'Print command stdout', {
+            stage: 'PRINT',
+            details: { output: stdout.trim() }
+          });
         }
 
         // Check for warnings in stderr
         if (stderr && stderr.trim()) {
-          console.warn(`[SumatraPDF] ⚠️ Print warnings: ${stderr}`);
+          pdfLogger.log('WARN', 'SUMATRA', 'Print command warnings', {
+            stage: 'PRINT',
+            details: { warnings: stderr.trim() }
+          });
         }
 
         const printerName = options.printerName || 'default printer';
-        return {
+        const result = {
           success: true,
-          message: `🎫 Print job sent to ${printerName} via SumatraPDF`,
-          method: 'SumatraPDF',
+          message: `Print job sent to ${printerName} via SumatraPDF`,
+          method: 'SumatraPDF' as const,
           command
         };
 
+        // Record successful print
+        monitor.recordPrintSuccess(ticketNumber, 'SumatraPDF');
+
+        pdfLogger.logSumatraOperation(command, true);
+        return result;
+
       } catch (execError: any) {
-        console.error('[SumatraPDF] ❌ Print command execution failed:', execError);
+        pdfLogger.log('ERROR', 'SUMATRA', 'Print command execution failed', {
+          stage: 'PRINT',
+          details: {
+            command,
+            error: execError.message,
+            code: execError.code,
+            killed: execError.killed
+          }
+        });
 
         // Check for specific error types
         if (execError.code === 'ENOENT') {
+          monitor.recordPrintFailure(ticketNumber, 'SumatraPDF executable not found');
+          monitor.recordSumatraError('Executable not found', { code: execError.code });
+
           return {
             success: false,
-            message: '❌ SumatraPDF executable not found',
+            message: 'SumatraPDF executable not found',
             method: 'failed',
             error: 'EXECUTABLE_NOT_FOUND'
           };
         }
 
         if (execError.killed) {
+          monitor.recordPrintFailure(ticketNumber, 'Print command timed out');
+          monitor.recordSumatraError('Command timeout', { timeout: options.timeout || 15000 });
+
           return {
             success: false,
-            message: '❌ Print command timed out',
+            message: 'Print command timed out',
             method: 'failed',
             error: 'TIMEOUT'
           };
         }
 
+        // Record generic print failure before trying fallback
+        monitor.recordPrintFailure(ticketNumber, `SumatraPDF execution failed: ${execError.message}`);
+        monitor.recordSumatraError(execError.message, { code: execError.code });
+
         // Try Windows fallback for execution errors
-        console.log('[SumatraPDF] 🔄 Command failed, trying Windows fallback...');
+        pdfLogger.log('WARN', 'SUMATRA', 'Command failed, attempting Windows fallback', {
+          stage: 'PRINT'
+        });
         return await this.windowsFallback(pdfPath);
       }
 
     } catch (error) {
-      console.error('[SumatraPDF] ❌ Print process failed:', error);
+      pdfLogger.log('ERROR', 'SUMATRA', 'Print process failed', {
+        stage: 'PRINT',
+        error: error instanceof Error ? error.message : String(error)
+      });
 
       // Try Windows fallback as last resort
-      console.log('[SumatraPDF] 🔄 Attempting Windows fallback...');
+      pdfLogger.log('WARN', 'SUMATRA', 'Attempting Windows fallback as last resort', {
+        stage: 'PRINT'
+      });
       return await this.windowsFallback(pdfPath);
     }
   }
@@ -204,7 +365,16 @@ export class SumatraPDFManager {
     parts.push(`"${pdfFilePath}"`);
 
     const command = parts.join(' ');
-    console.log(`[SumatraPDF] 🔧 Built command: ${command}`);
+
+    pdfLogger.log('DEBUG', 'SUMATRA', 'Built print command', {
+      stage: 'PRINT',
+      details: {
+        command,
+        executablePath,
+        pdfFilePath,
+        printerName: options.printerName || 'default'
+      }
+    });
 
     return command;
   }
@@ -213,20 +383,42 @@ export class SumatraPDFManager {
    * Windows fallback - open PDF in default viewer for manual printing
    */
   private async windowsFallback(pdfPath: string): Promise<SumatraPrintResult> {
+    const monitor = ProductionMonitor.getInstance();
+    const ticketNumber = path.basename(pdfPath, '.pdf');
+
     try {
+      pdfLogger.log('INFO', 'SUMATRA', 'Using Windows fallback method', {
+        stage: 'PRINT',
+        details: { pdfPath }
+      });
+
       await execAsync(`start "" "${pdfPath}"`, { timeout: 5000 });
+
+      pdfLogger.log('INFO', 'SUMATRA', 'PDF opened in default viewer', {
+        stage: 'PRINT',
+        details: { method: 'Windows-Fallback' }
+      });
+
+      // Record successful fallback print
+      monitor.recordPrintSuccess(ticketNumber, 'Windows-Fallback');
 
       return {
         success: true,
-        message: '🖨️ PDF opened in default viewer - please print manually',
+        message: 'PDF opened in default viewer - please print manually',
         method: 'Windows-Fallback'
       };
     } catch (fallbackError) {
-      console.error('[SumatraPDF] ❌ Windows fallback failed:', fallbackError);
+      pdfLogger.log('ERROR', 'SUMATRA', 'Windows fallback failed', {
+        stage: 'PRINT',
+        error: fallbackError instanceof Error ? fallbackError.message : String(fallbackError)
+      });
+
+      // Record complete print failure
+      monitor.recordPrintFailure(ticketNumber, `All print methods failed: ${fallbackError instanceof Error ? fallbackError.message : 'Unknown error'}`);
 
       return {
         success: false,
-        message: `❌ All print methods failed: ${fallbackError instanceof Error ? fallbackError.message : 'Unknown error'}`,
+        message: `All print methods failed: ${fallbackError instanceof Error ? fallbackError.message : 'Unknown error'}`,
         method: 'failed',
         error: 'ALL_METHODS_FAILED'
       };

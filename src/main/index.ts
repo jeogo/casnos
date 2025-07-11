@@ -1,9 +1,6 @@
 import { app, BrowserWindow } from 'electron'
 import { electronApp, optimizer } from '@electron-toolkit/utils'
 
-// Initialize AppData structure first
-import { initializeCASNOSAppData } from '../shared/pathUtils'
-
 // Window management
 import { createAllWindows, createOptimizedSingleWindow, WindowType } from './windows'
 
@@ -20,6 +17,9 @@ import { embeddedServerManager } from './server/embeddedServerManager'
 // 🔗 Resource Protocol for video/audio serving
 import { registerResourceProtocol, registerHttpResourceProtocol } from './protocols/resourceProtocol'
 
+// 🔍 Production Diagnostics
+import { logProductionDiagnostics } from './utils/productionDiagnostics'
+
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
@@ -27,15 +27,15 @@ app.whenReady().then(async () => {
   // Set app user model id for windows
   electronApp.setAppUserModelId('com.electron')
 
-  // Initialize AppData structure first
-  initializeCASNOSAppData()
-
   // Default open or close DevTools by F12 in development
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
   try {
+    // 🔍 Run production diagnostics first
+    logProductionDiagnostics()
+
     // 🔗 IMPORTANT: Register resource protocols before creating windows
     registerResourceProtocol()
     registerHttpResourceProtocol()
@@ -87,7 +87,7 @@ app.whenReady().then(async () => {
 // explicitly with Cmd + Q.
 app.on('window-all-closed', async () => {
   // Cleanup server if running
-  await embeddedServerManager.cleanup()
+  await embeddedServerManager.stopServer()
 
   if (process.platform !== 'darwin') {
     app.quit()
@@ -96,7 +96,7 @@ app.on('window-all-closed', async () => {
 
 // Handle app quit - cleanup server
 app.on('before-quit', async () => {
-  await embeddedServerManager.cleanup()
+  await embeddedServerManager.stopServer()
 })
 
 // In this file you can include the rest of your app"s specific main process

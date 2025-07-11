@@ -41,35 +41,16 @@ module.exports = {
   // Compression
   compression: "normal",
 
-  // Base NSIS options
-  nsis: {
-    oneClick: false,
-    allowToChangeInstallationDirectory: true,
-    createDesktopShortcut: true,
-    createStartMenuShortcut: true,
-    installerIcon: "build/icon.ico",
-    uninstallerIcon: "build/icon.ico",
-    deleteAppDataOnUninstall: false,
-    displayLanguageSelector: false,
-    language: "1025", // Arabic
-    warningsAsErrors: false,
-    menuCategory: "CASNOS Queue Management"
-  },
-
-  // Base Windows configuration
+  // Base Windows configuration (portable only - avoids NSIS issues)
   win: {
     target: [
       {
-        target: "nsis",
+        target: "portable",  // ✅ Only portable - no installer
         arch: ["x64"]
       }
     ],
     icon: "build/icon.ico",
-    requestedExecutionLevel: "asInvoker",
-    // Disable signing to prevent build errors
-    sign: false,
-    // Disable signature verification
-    signAndEditExecutable: false
+    requestedExecutionLevel: "requireAdministrator" // ✅ Default to Administrator for all builds
   },
 
   // Base Mac configuration
@@ -101,18 +82,19 @@ module.exports = {
   // Publish configuration (for auto-updater)
   publish: null, // Disable auto-publish
 
-  // Build options
+  // Build options - تعطيل بناء Native Modules (حل مشكلة Visual Studio)
   buildDependenciesFromSource: false,
   nodeGypRebuild: false,
   npmRebuild: false,
 
-  // Disable signing and metadata modification to prevent build errors
-  afterSign: null,
-  afterAllArtifactBuild: null,
+  // إضافة إعدادات إضافية لتجنب مشاكل Native Modules
+  afterPack: async (context) => {
+    // تجنب إعادة بناء Native modules
+    console.log('✅ Skipping native modules rebuild for compatibility');
+  },
 
-  // Prevent rcedit issues
-  electronVersion: undefined, // Use default electron version
-
-  // Metadata configuration
-  buildVersion: "1.0.0"
+  // ✅ Portable configuration
+  portable: {
+    requestExecutionLevel: "admin"  // ✅ Run as Admin in portable mode
+  }
 };

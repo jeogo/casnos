@@ -7,12 +7,16 @@ module.exports = {
   ...baseConfig,
 
   // Product information
-  productName: "CASNOS Admin Panel",
-  description: "لوحة الإدارة والتحكم في النظام",
+  productName: "CASNOS-Admin",
 
   // Build settings
   appId: "com.casnos.admin",
   artifactName: "${productName}-${version}-${os}-${arch}.${ext}",
+
+  // Extra metadata
+  extraMetadata: {
+    description: "Administration and Control Panel"
+  },
 
   // Directories
   directories: {
@@ -20,52 +24,51 @@ module.exports = {
     buildResources: "build"
   },
 
-  // Files to include (no server files, video, or voice)
+  // Files to include (no server files)
   files: [
     "out/**/*",
-    "resources/fonts/**/*",
-    "resources/assets/logo.png",
-    "resources/assets/SumatraPDF.exe",
-    "resources/assets/SumatraPDF-settings.txt",
+    "resources/**/*",
     "package.json",
-    "!dist-server/**/*", // exclude server files
-    "!resources/video/**/*", // exclude video files
-    "!resources/voice/**/*" // exclude voice files
+    "!dist-server/**/*" // exclude server files
   ],
 
-  // Extra resources (essential resources for admin - no audio/video)
+  // Extra resources (minimal for admin - only fonts, assets, and logo)
   extraResources: [
     {
       from: "resources/fonts",
       to: "fonts"
     },
     {
+      from: "resources/assets",
+      to: "assets"
+    },
+    {
       from: "resources/assets/logo.png",
       to: "assets/logo.png"
-    },
-    {
-      from: "resources/assets/SumatraPDF.exe",
-      to: "assets/SumatraPDF.exe"
-    },
-    {
-      from: "resources/assets/SumatraPDF-settings.txt",
-      to: "assets/SumatraPDF-settings.txt"
-    },
-    {
-      from: "build/icon.png",
-      to: "icon.png"
     },
     {
       from: "configs/admin-config.json",
       to: "screen-config.json"
     }
   ],
-    // NSIS configuration
-  nsis: {
-    ...baseConfig.nsis,
-    shortcutName: "CASNOS Admin",
-    createDesktopShortcut: "always",
-    runAfterFinish: false // Don't auto-run admin panel
+
+  // Windows specific (portable only - avoids NSIS issues)
+  win: {
+    target: [
+      {
+        target: "portable",  // ✅ Only portable - no installer
+        arch: ["x64"]
+      }
+    ],
+    icon: "build/icon.ico",
+    requestedExecutionLevel: "requireAdministrator" // ✅ Run as Administrator for admin operations
+  },
+
+  // ✅ Portable configuration
+  portable: {
+    artifactName: "${productName}-${version}-portable-64bit.${ext}",
+    unpackDirName: "CASNOS-Admin",
+    requestExecutionLevel: "admin"  // ✅ Run as Admin in portable mode
   },
 
   // Startup configuration
