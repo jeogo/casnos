@@ -1854,10 +1854,10 @@ const DisplayScreen: React.FC = () => {
             {currentAudioCall && (
               <div className="absolute inset-0 w-full h-full flex items-center justify-center bg-gradient-to-br from-primary-900 to-primary-700 text-white p-4 sm:p-6 lg:p-8 animate-fade-in">
                 <div className="text-center space-y-4 sm:space-y-6 lg:space-y-8">
-                  <div className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl 2xl:text-8xl font-bold drop-shadow-lg">{currentAudioCall.ticket_number}</div>
-                  <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-arabic">{currentAudioCall.service_name}</div>
-                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-primary-300 drop-shadow-lg">{currentAudioCall.window_label}</div>
-                  <div className="text-sm sm:text-base lg:text-lg xl:text-2xl font-arabic opacity-90 max-w-4xl mx-auto leading-relaxed">
+                  <div className="text-8xl sm:text-9xl lg:text-[12rem] xl:text-[14rem] 2xl:text-[16rem] font-bold drop-shadow-lg tracking-wider">{currentAudioCall.ticket_number}</div>
+                  <div className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl 2xl:text-6xl font-arabic">{currentAudioCall.service_name}</div>
+                  <div className="text-6xl sm:text-7xl lg:text-8xl xl:text-9xl 2xl:text-[12rem] font-bold text-primary-300 drop-shadow-lg tracking-wide">{currentAudioCall.window_label}</div>
+                  <div className="text-lg sm:text-xl lg:text-2xl xl:text-3xl 2xl:text-4xl font-arabic opacity-90 max-w-4xl mx-auto leading-relaxed">
                     {currentAudioCall.message}
                   </div>
                 </div>
